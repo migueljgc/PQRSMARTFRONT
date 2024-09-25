@@ -65,7 +65,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/authenticate', {
+            const response = await axios.post('https://pqrsmart.onrender.com/api/auth/authenticate', {
                 user,
                 password,
             });
@@ -78,7 +78,7 @@ function Login() {
                 const { token, authorities } = response.data;
                 localStorage.setItem('tokenPQRSMART', token);
                 localStorage.setItem('userPQRSMART', JSON.stringify({ user, role: authorities[0] })); // Assuming single role
-                const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
+                const response1 = await axios.get('https://pqrsmart.onrender.com/api/auth/editar', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
