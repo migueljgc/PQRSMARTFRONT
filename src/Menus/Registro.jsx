@@ -29,7 +29,7 @@ const Registro = () => {
 
         const fetchIdentificationTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/identification_type/get');
+                const response = await axios.get('https://pqrsmart.onrender.com/api/identification_type/get');
                 console.log('Tipos de identificación obtenidos:', response.data);
                 setIdentificationTypes(response.data);
             } catch (error) {
@@ -39,7 +39,7 @@ const Registro = () => {
 
         const fetchPersonTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/person_type/get');
+                const response = await axios.get('https://pqrsmart.onrender.com/api/person_type/get');
                 console.log('Tipos de persona obtenidos:', response.data);
                 setPersonTypes(response.data);
             } catch (error) {
@@ -129,7 +129,7 @@ const Registro = () => {
             if (formData.contraseña === formData.confirmarContraseña) {
                 setError('Espere.......')
                 setShowPopup(true); // Mostrar popup
-                const userResponse = await axios.post('http://localhost:8080/api/auth/registerUser', {
+                const userResponse = await axios.post('https://pqrsmart.onrender.com/api/auth/registerUser', {
                     personType: { idPersonType: selectedPersonType.idPersonType },
                     name: formData.nombre,
                     lastName: formData.apellido,
