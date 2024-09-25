@@ -1,0 +1,121 @@
+.Registro {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.FormularioRegistro {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.Title {
+    font-family: 'Montserrat', sans-serif;
+    color: azure;
+    text-align: center; /* Centra el texto del título */
+    font-size: 60px;
+    display: flex;
+    font-weight: bold;
+    padding: 20px;
+  }
+
+.Campos {
+    /* Espacio entre el label y el input */
+    background: #f7faff;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 100%;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.labelsAndInputs {
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+
+.inputs, .Selects {
+    width: 50%;
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 8px;
+    font-size: 15px;
+    background: #cadae5;
+    margin-right: 10px;
+}
+.Buton{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 3px;
+
+}
+.Buton button{
+    background-color: #FF851B;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 16px;
+}
+
+.labelAndA{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 14px;  
+    margin-right: 40px;  
+    margin-left: 50px;
+}
+.A{
+    color: #000;
+    font-weight: bold;
+}
+
+
+
+.fifth {
+    border-color: #f6f3f3;
+    border-radius: 0;
+    color: #f6f3f3;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.errore {
+    width: 250px;
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: 350px;
+}
+
+.labelsAndInputs:hover .errore {
+    visibility: visible;
+    opacity: 1;
+}
+.errores {
+    width: 250px;
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: 350px;
+    margin-top: 10px;
+}
+

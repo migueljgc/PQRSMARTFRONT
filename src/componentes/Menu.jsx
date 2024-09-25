@@ -1,0 +1,171 @@
+import React from 'react';
+import '../componentes/Menu.css'
+import { useNavigate } from 'react-router-dom';
+import { FaPenClip } from "react-icons/fa6";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { ImExit } from "react-icons/im";
+import { RxDashboard } from "react-icons/rx";
+import { RiContactsBook2Line } from "react-icons/ri";
+import { IoHomeOutline } from "react-icons/io5";
+import { VscGraph } from "react-icons/vsc";
+
+
+export const Menu = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.setItem('loggetPQRSMART', 'false');
+    localStorage.setItem('tokenPQRSMART', '');
+    localStorage.setItem('userPQRSMART', JSON.stringify(''));
+    navigate('/Login');
+  };
+
+  const handleCreate = () => {
+    navigate('/Crear')
+  }
+  const handleConsultar = () => {
+    navigate('/Consultar')
+  }
+  return (
+    <div className="Menu">
+      <div className="logo">
+        <img src="/images/logo.png" alt="Logo" className='logos' />
+      </div>
+      <div className="opciones">
+        <div className="crearpqrs">
+          <nav>
+            <ul>
+              <li onClick={handleCreate}><FaPenClip className='icon' /> Crear PQRS</li>
+            </ul>
+          </nav>
+
+        </div>
+        <div className="consultarpqrs">
+          <nav>
+            <ul>
+              <li onClick={handleConsultar}><FaMagnifyingGlass className='icon' />   Consultar PQRS</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div className="salir">
+        <nav>
+          <ul>
+            <li onClick={handleLogout}><ImExit className='icon' /> Salir</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  )
+}
+
+export const MenuAdmin = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.setItem('loggetPQRSMART', 'false');
+    localStorage.setItem('tokenPQRSMART', '');
+    localStorage.setItem('userPQRSMART', JSON.stringify(''));
+    navigate('/Login');
+  };
+
+  const handleDashboar = () => {
+    navigate('/Dashboard')
+  }
+  const handleGestionUsuario = () => {
+    navigate('/GestionUsuario')
+  }
+  const handleGestionCategoria = () => {
+    navigate('/GestionCategoria')
+  }
+  const handleGestionDependencia = () => {
+    navigate('/GestionDependencia')
+  }
+  return (
+    <div className="Menu">
+
+      <div className="logo">
+        <img src="/images/logo.png" alt="Logo" className='logos' />
+      </div>
+
+      <div className="opciones">
+        <div className="dashboard">
+          <nav>
+            <ul>
+              <li onClick={handleDashboar}><VscGraph className='icon' /> Dashboard</li>
+            </ul>
+          </nav>
+        </div>
+        <div className="gestionuser">
+          <nav>
+            <ul>
+              <li onClick={handleGestionUsuario}><RiContactsBook2Line className='icon' /> Gestion Usuario</li>
+            </ul>
+          </nav>
+        </div>
+        <div className="gestioncate">
+          <nav>
+            <ul>
+              <li onClick={handleGestionCategoria}><RxDashboard className='icon' /> Gestion Categorias</li>
+            </ul>
+          </nav>
+        </div>
+        <div className="gestiondepe">
+          <nav>
+            <ul>
+              <li onClick={handleGestionDependencia}><IoHomeOutline className='icon' /> Gestion Dependencias</li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+      <div className="salir">
+        <nav>
+          <ul>
+            <li onClick={handleLogout}><ImExit className='icon' /> Salir</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  )
+}
+
+export const MenuSecre = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.setItem('loggetPQRSMART', 'false');
+    localStorage.setItem('tokenPQRSMART', '');
+    localStorage.setItem('userPQRSMART', JSON.stringify(''));
+    navigate('/Login');
+  };
+
+  const handleGestionarPQRS = () => {
+    navigate('/GestionarPQRS')
+  }
+
+  return (
+    <div className="Menu">
+      <div className="logo">
+        <img src="/images/logo.png" alt="Logo" className='logos' />
+      </div>
+      <div className="opciones">
+        <div className="crearpqrs">
+          <nav>
+            <ul>
+              <li onClick={handleGestionarPQRS}><FaPenClip className='icon' /> Gestionar PQRS</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div className="salir">
+        <nav>
+          <ul>
+            <li onClick={handleLogout}><ImExit className='icon' /> Salir</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  )
+}
