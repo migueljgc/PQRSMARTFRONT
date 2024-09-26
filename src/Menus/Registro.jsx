@@ -30,7 +30,7 @@ const Registro = () => {
         const fetchIdentificationTypes = async () => {
             try {
                 const response = await axios.get('https://pqrsmart.onrender.com/api/identification_type/get');
-                console.log('Tipos de identificación obtenidos:', response.data);
+                
                 setIdentificationTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de identificación de la base de datos', error);
@@ -40,7 +40,7 @@ const Registro = () => {
         const fetchPersonTypes = async () => {
             try {
                 const response = await axios.get('https://pqrsmart.onrender.com/api/person_type/get');
-                console.log('Tipos de persona obtenidos:', response.data);
+               
                 setPersonTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de persona de la base de datos', error);
@@ -122,7 +122,7 @@ const Registro = () => {
 
 
         try {
-            console.log('Datos del formulario a enviar:', formData);
+            
 
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
             const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
@@ -142,8 +142,7 @@ const Registro = () => {
                     number: parseInt(formData.numero)
                 });
 
-                console.log('Respuesta al guardar usuario:', userResponse.data);
-                console.log('Usuario registrado correctamente');
+                
                 setConfirmPasswordError('')
                 setPasswordError('')
                 handleReset();
@@ -152,9 +151,7 @@ const Registro = () => {
                 return;
 
             }
-            else {
-                alert('Contraseñas no coinciden')
-            }
+           
 
         } catch (error) {
             const status = error.response.data;
