@@ -64,9 +64,6 @@ const Crear = () => {
             const fechaActual = new Date();
             const fechaFormat = fechaActual.toISOString().slice(0, 10);
             setFecha(fechaFormat);
-            console.log(fechaFormat)
-            //setFormData(prevFormData => ({ ...prevFormData, date: fechaFormat }));
-            console.log(formData)
         };
         const fetchUser = async () => {
             const response1 = await axios.get('https://pqrsmart.onrender.com/api/auth/editar', {
@@ -75,7 +72,7 @@ const Crear = () => {
                 }
             });
             const user = (response1.data.user)
-            console.log(response1.data)
+            
             const username = user;
             if (username) {
                 setFormData(prevFormData => ({ ...prevFormData, user: username }));
@@ -157,15 +154,15 @@ const Crear = () => {
                 }
             });
             const user = response1.data.user
-            console.log(user)
+            
             const formDataToSend = new FormData();
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
-            console.log(formData)
+            
             const StateRequest = { idRequestState: 1 };
             if (archivo) {
                 formDataToSend.append('archivo', archivo);
-                console.log(archivo)
+                
             }
             formDataToSend.append('request', new Blob([JSON.stringify({
                 description: formData.description,
@@ -186,11 +183,9 @@ const Crear = () => {
                 }
             });
             
-            console.log(respuesta.data)
+           
             const responseData = respuesta.data;
             const numRadicado = responseData.radicado;
-            console.log('radicado: ',numRadicado)
-            console.log(respuesta)
             handleReset();
             setError('Solicitud Radicada Con Exito Su Numero De Radicado es: ' + numRadicado)
             setShowPopup(true); // Mostrar popup
