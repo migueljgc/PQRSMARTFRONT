@@ -58,7 +58,9 @@ export const Recovery = () => {
 
         } catch (error) {
             console.error('Error al solicitar restablecimiento de contraseña:', error);
-
+            setError("Error al solicitar restablecimiento de contraseña.");
+            setShowPopup(true); // Mostrar popup
+            return;
         }
     };
     if (isLogged) {
