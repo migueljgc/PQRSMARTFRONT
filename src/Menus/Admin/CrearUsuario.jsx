@@ -60,7 +60,7 @@ const CrearUsuario = () => {
 
         const fetchPersonTypes = async () => {
             try {
-                const response = await axios.get(https://pqrsmart.onrender.com/api/person_type/get');
+                const response = await axios.get('https://pqrsmart.onrender.com/api/person_type/get');
                 
                 setPersonTypes(response.data);
             } catch (error) {
