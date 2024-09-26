@@ -44,7 +44,7 @@ function Login() {
     const checkLoginStatus = () => {
         const logged = localStorage.getItem('loggetPQRSMART') === 'true';
         setIsLogged(logged);
-        console.log('loggetPQRSMART: ', logged);
+        
         if (logged) {
             const userData = JSON.parse(localStorage.getItem('userPQRSMART'));
             if (userData) {
@@ -69,11 +69,11 @@ function Login() {
                 user,
                 password,
             });
-            console.log(response)
+            
 
             if (response.status === 200) {
                 const responseData = response.data;
-                console.log(responseData)
+                
 
                 const { token, authorities } = response.data;
                 localStorage.setItem('tokenPQRSMART', token);
@@ -85,7 +85,7 @@ function Login() {
                 });
                 localStorage.removeItem('username');
                 const users = (response1.data.user)
-                console.log(users)
+                
                 localStorage.setItem('users', users);
                 if (authorities.includes('ADMIN')) {
                     window.location.href = '/HomePagesAdmin';
