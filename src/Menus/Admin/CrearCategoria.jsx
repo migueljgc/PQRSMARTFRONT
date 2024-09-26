@@ -3,9 +3,12 @@ import '../Admin/CrearCategoria.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
+import Popup from '../../componentes/Popup'
 
 const CrearCategoria = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         category: '',
         dependence: '',
@@ -13,9 +16,9 @@ const CrearCategoria = () => {
 
     const fetchDependence = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/dependence/get')
+            const response = await axios.get('https://pqrsmart.onrender.com/api/dependence/get')
             setData(response.data);
-            console.log(response.data)
+            
         } catch (error) {
             console.error('Error en la data: ', error);
         }
@@ -58,18 +61,19 @@ const CrearCategoria = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log('Datos del formulario a enviar:', formData);
+           
             const selectedDependencia = data.find(type => type.idDependence === parseInt(formData.dependence));
-            const categoryResponse = await axios.post('http://localhost:8080/api/category/save', {
+            const categoryResponse = await axios.post('https://pqrsmart.onrender.com/api/category/save', {
                 nameCategory: formData.category,
                 dependence: { idDependence: selectedDependencia ? selectedDependencia.idDependence : null },
                 state: {id: 1}
             });
-            console.log('Respuesta al guardar Categoria:', categoryResponse.data);
-            console.log('Categoria registrada correctamente');
-            alert('Categoria registrada correctamente')
+           
+            
             handleReset();
-
+            setError('Categoria registrada correctamente')
+            setShowPopup(true); // Mostrar popup
+            return;
 
         }
         catch (error) {
@@ -77,6 +81,9 @@ const CrearCategoria = () => {
         }
 
     }
+     const closePopup = () => {
+        setShowPopup(false);
+    };
     return (
         <div className='CrearCategoria'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -127,6 +134,7 @@ const CrearCategoria = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }
