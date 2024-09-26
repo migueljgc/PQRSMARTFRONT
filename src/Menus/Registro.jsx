@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import '../Menus/Registro.css'
 import axios from 'axios';
 import Popup from '../componentes/Popup'
+import { useNavigate } from 'react-router-dom';
 
 const Registro = () => {
     const [passwordError, setPasswordError] = useState('');
+    const navigate = useNavigate();
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [identificationTypes, setIdentificationTypes] = useState([]);
     const [personTypes, setPersonTypes] = useState([]);

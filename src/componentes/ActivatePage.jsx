@@ -62,7 +62,7 @@ export const ActivatePage = () => {
         <div>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             <div className="activate">
-                Verificando correo electrónico...
+                <p style={{ color: 'white' }}>Verificando correo electrónico...</p>
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
