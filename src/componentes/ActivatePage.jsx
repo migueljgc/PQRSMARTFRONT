@@ -13,7 +13,7 @@ export const ActivatePage = () => {
     useEffect(() => {
         const verifyEmail = async () => {
             try {
-                const response = await axios.get(https://pqrsmart.onrender.com/api/auth/verify-email', {
+                const response = await axios.get('https://pqrsmart.onrender.com/api/auth/verify-email', {
                     params: { token }
                 });
                 if (response.status === 200) {
