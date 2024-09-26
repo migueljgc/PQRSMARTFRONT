@@ -16,9 +16,8 @@ const GestionDependencia = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/dependence/get')
+            const response = await axios.get('https://pqrsmart.onrender.com/api/dependence/get')
             setData(response.data);
-            console.log(response.data)
         } catch (error) {
             console.error('Error en la data: ', error);
         }
@@ -52,7 +51,7 @@ const GestionDependencia = () => {
 
     const handleCancel = async (idDependence) => {
         try {
-            await axios.put(`http://localhost:8080/api/dependence/cancel/${idDependence}`);
+            await axios.put(`https://pqrsmart.onrender.com/api/dependence/cancel/${idDependence}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
         } catch (error) {

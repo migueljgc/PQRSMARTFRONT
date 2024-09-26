@@ -34,11 +34,11 @@ const GestionUsuario = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/Usuario/get',{
+            const response = await axios.get('https://pqrsmart.onrender.com/api/Usuario/get',{
                 'Authorization': `Bearer ${token}`
             })
             setData(response.data);
-            console.log(response.data)
+            
         } catch (error) {
             console.error('Error en la data: ', error);
         }
@@ -50,7 +50,7 @@ const GestionUsuario = () => {
 
     const handleCancel = async (id) => {
         try {
-            await axios.patch(`http://localhost:8080/api/Usuario/cancel/${id}`);
+            await axios.patch(`https://pqrsmart.onrender.com/api/Usuario/cancel/${id}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
         } catch (error) {
