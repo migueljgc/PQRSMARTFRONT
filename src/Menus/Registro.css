@@ -2,6 +2,7 @@
     font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: center;
+    overflow: hidden; /* Eliminar el scroll */
 }
 
 .FormularioRegistro {
@@ -117,5 +118,63 @@
     left: 50%;
     margin-left: 350px;
     margin-top: 10px;
+}
+
+
+/* Media Queries para pantallas pequeñas (teléfonos móviles) */
+@media (max-width: 768px) {
+    .FormularioRegistro {
+        padding: 20px;
+        flex-direction: column;
+        width: 100%;
+        /* Asegúrate de que ocupe todo el ancho en móviles */
+        align-items: center;
+        /* Centrar contenido horizontalmente */
+    }
+
+    .Title {
+        margin-top: -100px;
+        font-size: 30px;
+       
+    }
+
+    .labelsAndInputs {
+        font-size: 12px;
+        /* Reduce el tamaño de la fuente para inputs en móviles */
+    }
+
+    .Buton button{
+        padding: 0.6em 1.5em;
+        /* Ajusta el tamaño del botón */
+        font-size: 0.8rem;
+    }
+
+    .labelAndA {
+        font-size: 0.75em;
+    }
+    .Campos{
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .lFormularioRegistro {
+        padding: 15px;
+    }
+
+    .Title {
+        margin-top: -100px;
+        font-size: 30px;
+    }
+
+    .labelsAndInputs {
+        font-size: 11px;
+    }
+
+    .Buton button {
+        padding: 0.5em 1.2em;
+        font-size: 0.7rem;
+    }
+
 }
 
