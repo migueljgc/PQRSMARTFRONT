@@ -201,3 +201,76 @@ body {
     color: #fff;
     text-align: center;
 }
+
+
+
+/* Media Queries para pantallas pequeñas (teléfonos móviles) */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 20px;
+        flex-direction: column;
+        width: 100%;
+        /* Asegúrate de que ocupe todo el ancho en móviles */
+        align-items: center;
+        /* Centrar contenido horizontalmente */
+    }
+
+    .logo-section h1 {
+        font-size: 28px;
+        /* Ajusta el tamaño del logo */
+    }
+
+    .user-box input {
+        font-size: 14px;
+        /* Reduce el tamaño de la fuente para inputs en móviles */
+    }
+
+    .btn {
+        padding: 0.6em 1.5em;
+        /* Ajusta el tamaño del botón */
+        font-size: 0.8rem;
+    }
+
+    .CheckboxYRegistro {
+        font-size: 0.75em;
+    }
+
+    /* Centrar la línea vertical horizontalmente */
+    .vertical-line {
+        width: 500px;
+        /* Ajusta el ancho de la línea */
+        height: 2px;
+        /* Cambia a una línea horizontal */
+        margin-left: -110px;
+        /* Elimina el margen izquierdo */
+        margin-top: 60px;
+        /* Añade un margen superior */
+        align-self: center;
+        background-color: #34B0E3;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 15px;
+    }
+
+    .logo-section h1 {
+        font-size: 22px;
+    }
+
+    .user-box input {
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 0.5em 1.2em;
+        font-size: 0.7rem;
+    }
+
+    .vertical-line {
+        width: 350px;
+        /* Ajusta el ancho en pantallas muy pequeñas */
+    }
+}
+
