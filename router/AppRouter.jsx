@@ -17,6 +17,8 @@ import CrearUsuario from '../src/Menus/Admin/CrearUsuario';
 import GestionarPQRS from '../src/Menus/Secretario/GestionarPQRS';
 import Responder from '../src/Menus/Secretario/Responder';
 import { ActivatePage } from '../src/componentes/ActivatePage';
+import { Recovery } from '../src/componentes/Recovery';
+import { ResetPassword } from '../src/componentes/ResetPassword';
 
 
 export const AppRouter = () => {
@@ -24,12 +26,11 @@ export const AppRouter = () => {
     <Routes>
       <Route path="/" element={<Navbar />}>
         <Route index element={<Login />} />
-        <Route path="/HomePages" element={""} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Recuperacion" element={""} />
+        <Route path="/Recuperacion" element={<Recovery/>} />
         <Route path="/Registro" element={<Registro/>} />
         <Route path="/activate/:token" element={<ActivatePage/>} />
-        <Route path="/reset-password/:token" element={""} />
+        <Route path="/reset-password/:token" element={<ResetPassword/>} />
         <Route path="*" element={<Login />} />
 
         {/* Rutas protegidas */}
