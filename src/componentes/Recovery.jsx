@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import './Recovery.css';
 import axios from "axios";
 import Popup from '../componentes/Popup'
+import { useNavigate } from "react-router-dom";
 
 export const Recovery = () => {
-
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [isLogged, setIsLogged] = useState('');
     const [showPopup, setShowPopup] = useState(false);
