@@ -9,8 +9,28 @@ export const ActivatePage = () => {
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
+    const [isLogged, setIsLogged] = useState('');
+    const checkLoginStatus = () => {
+        const logged = localStorage.getItem('loggetPQRSMART') === 'true';
+        setIsLogged(logged);
+        
+        if (logged) {
+            const userData = JSON.parse(localStorage.getItem('userPQRSMART'));
+            if (userData) {
+                const { role } = userData;
+                if (role === 'ADMIN') {
+                    navigate('/HomePagesAdmin');
+                } else if (role === 'USER') {
+                    navigate('/HomePage');
+                } else if (role === 'SECRE') {
+                    navigate('/HomePagesSecre');
+                }
+            }
+        }
 
+    };
     useEffect(() => {
+        checkLoginStatus();
         const verifyEmail = async () => {
             try {
                 const response = await axios.get('https://pqrsmart.onrender.com/api/auth/verify-email', {
@@ -58,6 +78,9 @@ export const ActivatePage = () => {
     const closePopup = () => {
         setShowPopup(false);
     };
+    if (isLogged) {
+        return null; // o un spinner si quieres mostrar algo mientras se redirige
+    }
     return (
         <div>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
