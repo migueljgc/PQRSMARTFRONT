@@ -51,8 +51,8 @@ export const Recovery = () => {
 
     const handleResetRequest = async () => {
         try {
-            console.log(email)
-            const response = await axios.post('https://pqrsmart.onrender.com/forgot-password/envio', { email });
+            
+            const response = await axios.post('https://pqrsmart.onrender.com/forgot-password/email', { email });
             setError("Exito");
             setShowPopup(true); // Mostrar popup
             return;
