@@ -90,6 +90,7 @@ export const ResetPassword = () => {
             setError('Contraseña actualizada.');
             setShowPopup(true); // Mostrar popup
         } catch (error) {
+            console.error(error)
             setError('Error al restablecer contraseña:');
             setShowPopup(true); // Mostrar popup('Error al restablecer contraseña.');
             return;
