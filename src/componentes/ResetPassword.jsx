@@ -95,6 +95,9 @@ export const ResetPassword = () => {
             setShowPopup(true); // Mostrar popup('Error al restablecer contraseña.');
             return;
         }
+        setNewPassword('');
+        setConfirmPassword('')
+        navigate('/')
         return;
     };
     if (isLogged) {
