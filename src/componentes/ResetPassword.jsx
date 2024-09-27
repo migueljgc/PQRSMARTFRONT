@@ -86,7 +86,7 @@ export const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.post(`http://localhost:8080/forgot-password/reset/${token}`, { newPassword });
+            const response = await axios.post(`https://pqrsmart.onrender.com/forgot-password/reset/${token}`, { newPassword });
             setError('Contraseña actualizada.');
             setShowPopup(true); // Mostrar popup
         } catch (error) {
