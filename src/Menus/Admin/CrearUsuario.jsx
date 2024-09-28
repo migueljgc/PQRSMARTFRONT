@@ -51,7 +51,7 @@ const CrearUsuario = () => {
         const fetchIdentificationTypes = async () => {
             try {
                 const response = await axios.get('https://pqrsmart.onrender.com/api/identification_type/get');
-               
+
                 setIdentificationTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de identificación de la base de datos', error);
@@ -61,7 +61,7 @@ const CrearUsuario = () => {
         const fetchPersonTypes = async () => {
             try {
                 const response = await axios.get('https://pqrsmart.onrender.com/api/person_type/get');
-                
+
                 setPersonTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de persona de la base de datos', error);
@@ -70,14 +70,14 @@ const CrearUsuario = () => {
         const fetchDependence = async () => {
             try {
                 const response = await axios.get('https://pqrsmart.onrender.com/api/dependence/get')
-                
+
                 setDependence(response.data);
             } catch (error) {
                 console.error('Error al obtener el dependencias:', error);
             }
         };
 
-    
+
         fetchDependence();
         fetchIdentificationTypes();
         fetchPersonTypes();
@@ -138,7 +138,7 @@ const CrearUsuario = () => {
 
 
         try {
-           
+
 
             const selectedDepenceType = dependenceTypes.find(type => type.idDependence === parseInt(formData.dependencia));
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
@@ -153,7 +153,7 @@ const CrearUsuario = () => {
                     identificationNumber: parseInt(formData.identificacion),
                     user: formData.usuario,
                     password: formData.contraseña,
-                    dependence: { idDependence: selectedDepenceType.idDependence},
+                    dependence: { idDependence: selectedDepenceType.idDependence },
                     number: parseInt(formData.numero),
                     role: formData.rol,
                 });
@@ -165,7 +165,7 @@ const CrearUsuario = () => {
                 return;
 
             }
-            
+
 
         } catch (error) {
             const status = error.response.data;
@@ -197,19 +197,19 @@ const CrearUsuario = () => {
                 <MenuAdmin />
             </div>
             <div className="cuerpos">
-            <div className="headers">
+                <div className="headers">
                     <h1 className="title">CREAR USUARIO</h1>
                     <div className="user-menu">
-                        <UserinfoAmin/>
+                        <UserinfoAmin />
 
                     </div>
                 </div>
-                
+
                 <div className="form">
-                    <form className="solicitud-form" onSubmit={handleSubmit}>
-                        <div className="input-box2">
+                    <form className="crearusu" onSubmit={handleSubmit}>
+                        <div className="input-label">
                             <label >Tipo De Persona</label>
-                            <select 
+                            <select
                                 id="tipoPersona"
                                 name="tipoPersona"
                                 value={formData.tipoPersona}
@@ -223,9 +223,9 @@ const CrearUsuario = () => {
                                 ))}
                             </select>
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Tipo De Identificacion</label>
-                            <select 
+                            <select
                                 id="tipoIdentificacion"
                                 name="tipoIdentificacion"
                                 value={formData.tipoIdentificacion}
@@ -239,40 +239,34 @@ const CrearUsuario = () => {
                                 ))}
                             </select>
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Numero De Identificacion</label>
-                            <input 
+                            <input
                                 type="text"
                                 id="identificacion"
                                 name="identificacion"
                                 value={formData.identificacion}
-                                pattern="\d*"  // Acepta solo números
-                                maxLength={10}  // Limita a 10 dígitos
-                                onChange={(e) => {
-                                    if (/^\d*$/.test(e.target.value)) { // Solo permite números
-                                        setFormData({ ...formData, identificacion: e.target.value });
-                                    }
-                                }} required />
+                                onChange={handleChange} required />
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Nombres Completos</label>
-                            <input 
+                            <input
                                 type="text"
                                 id="nombre"
                                 name="nombre"
                                 value={formData.nombre}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Apellidos Completos</label>
-                            <input 
+                            <input
                                 type="text"
                                 id="apellido"
                                 name="apellido"
                                 value={formData.apellido}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Correo Electronico</label>
                             <input
                                 type="email"
@@ -281,33 +275,27 @@ const CrearUsuario = () => {
                                 value={formData.correo}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Telefono</label>
-                            <input 
+                            <input
                                 type="text"
                                 id="numero"
                                 name="numero"
                                 value={formData.numero}
-                                pattern="\d*"  // Acepta solo números
-                                maxLength={10}  // Limita a 10 dígitos
-                                onChange={(e) => {
-                                    if (/^\d*$/.test(e.target.value)) {
-                                        setFormData({ ...formData, numero: e.target.value });
-                                    }
-                                }} required />
+                                onChange={handleChange} required />
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Usuario</label>
-                            <input 
+                            <input
                                 type="text"
                                 id="usuario"
                                 name="usuario"
                                 value={formData.usuario}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Contraseña</label>
-                            <input 
+                            <input
                                 type="password"
                                 id="contraseña"
                                 name="contraseña"
@@ -316,9 +304,9 @@ const CrearUsuario = () => {
                             />
                             {passwordError && <div className='errore'> {passwordError}</div>}
                         </div>
-                        <div className="input-box2">
+                        <div className="input-label">
                             <label >Confirmar Contraseña</label>
-                            <input 
+                            <input
                                 type="password"
                                 id="confirmarContraseña"
                                 name="confirmarContraseña"
@@ -327,8 +315,8 @@ const CrearUsuario = () => {
                             />
                             {confirmPasswordError && <div className='errore'> {confirmPasswordError}</div>}
                         </div>
-                        <div className="input-box2">
-                        <label >Roles:</label><br />
+                        <div className="input-label">
+                            <label >Roles:</label><br />
                             <select
                                 id="rol"
                                 name="rol"
@@ -337,12 +325,12 @@ const CrearUsuario = () => {
                             >
                                 <option key="" value="">Seleccione el tipo</option>
                                 <option value="USER">USER</option>
-                                <option  value="ADMIN">ADMIN</option>
-                                <option  value="SECRE">SECRE</option>
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="SECRE">SECRE</option>
                             </select>
                         </div>
-                        <div className="input-box2">
-                        <label>Dependencia:</label><br />
+                        <div className="input-label">
+                            <label>Dependencia:</label><br />
                             <select
                                 id="dependencia"
                                 name="dependencia"
