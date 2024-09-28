@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../componentes/Menu.css'
 import { useNavigate } from 'react-router-dom';
 import { FaPenClip } from "react-icons/fa6";
@@ -7,57 +7,78 @@ import { ImExit } from "react-icons/im";
 import { RxDashboard } from "react-icons/rx";
 import { RiContactsBook2Line } from "react-icons/ri";
 import { IoHomeOutline } from "react-icons/io5";
-import { VscGraph } from "react-icons/vsc";
 
 
 export const Menu = () => {
-  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.setItem('loggetPQRSMART', 'false');
     localStorage.setItem('tokenPQRSMART', '');
     localStorage.setItem('userPQRSMART', JSON.stringify(''));
-    navigate('/Login');
   };
+  useEffect(() => {
+    const listElements = document.querySelectorAll('.list__button--click');
 
-  const handleCreate = () => {
-    navigate('/Crear')
-  }
-  const handleConsultar = () => {
-    navigate('/Consultar')
-  }
+    listElements.forEach((listElement) => {
+      listElement.addEventListener('click', () => {
+        listElement.classList.toggle('arrow');
+
+        let height = 0;
+        const menu = listElement.nextElementSibling;
+        if (menu.clientHeight === 0) {
+          height = menu.scrollHeight;
+        }
+
+        menu.style.height = `${height}px`;
+      });
+    });
+
+    // Cleanup function to remove event listeners when the component unmounts
+    return () => {
+      listElements.forEach((listElement) => {
+        listElement.removeEventListener('click', () => { });
+      });
+    };
+  }, []);
   return (
-    <div className="Menu">
-      <div className="logo">
-        <img src="/images/logo.png" alt="Logo" className='logos' />
-      </div>
-      <div className="opciones">
-        <div className="crearpqrs">
-          <nav>
-            <ul>
-              <li onClick={handleCreate}><FaPenClip className='icon' /> Crear PQRS</li>
-            </ul>
-          </nav>
+    <div>
+      <nav class="nav">
+        <ul class="list">
 
-        </div>
-        <div className="consultarpqrs">
-          <nav>
-            <ul>
-              <li onClick={handleConsultar}><FaMagnifyingGlass className='icon' />   Consultar PQRS</li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      <div className="salir">
-        <nav>
-          <ul>
-            <li onClick={handleLogout}><ImExit className='icon' /> Salir</li>
-          </ul>
-        </nav>
-      </div>
+          <li class="list__item">
+            <div class="list__button">
+              <img src="assets/dashboard.svg" class="list__img" />
+              <a href="/HomePage" class="nav__link">Inicio</a>
+            </div>
+          </li>
+
+          <li class="list__item">
+            <div class="list__button">
+              <FaPenClip />
+              <a href="/Crear" class="nav__link">Crear PQRS</a>
+            </div>
+          </li>
+
+
+          <li class="list__item">
+            <div class="list__button">
+              <FaMagnifyingGlass />
+              <a href="/Consultar" class="nav__link">Consultar PQRS</a>
+            </div>
+          </li>
+
+          <li class="list__item">
+            <div class="list__button">
+              <ImExit className='icon' />
+              <a href="/Login" class="nav__link" onClick={handleLogout}>Salir</a>
+            </div>
+          </li>
+
+        </ul>
+      </nav>
     </div>
-
-  )
+  );
 }
+
 
 export const MenuAdmin = () => {
   const navigate = useNavigate();
@@ -67,69 +88,119 @@ export const MenuAdmin = () => {
     localStorage.setItem('userPQRSMART', JSON.stringify(''));
     navigate('/Login');
   };
+  useEffect(() => {
+    const listElements = document.querySelectorAll('.list__button--click');
 
-  const handleDashboar = () => {
-    navigate('/Dashboard')
-  }
-  const handleGestionUsuario = () => {
-    navigate('/GestionUsuario')
-  }
-  const handleGestionCategoria = () => {
-    navigate('/GestionCategoria')
-  }
-  const handleGestionDependencia = () => {
-    navigate('/GestionDependencia')
-  }
+    listElements.forEach((listElement) => {
+      listElement.addEventListener('click', () => {
+        listElement.classList.toggle('arrow');
+
+        let height = 0;
+        const menu = listElement.nextElementSibling;
+        if (menu.clientHeight === 0) {
+          height = menu.scrollHeight;
+        }
+
+        menu.style.height = `${height}px`;
+      });
+    });
+
+    // Cleanup function to remove event listeners when the component unmounts
+    return () => {
+      listElements.forEach((listElement) => {
+        listElement.removeEventListener('click', () => { });
+      });
+    };
+  }, []);
   return (
-    <div className="Menu">
+    <div>
+      <nav class="nav">
+        <ul class="list">
 
-      <div className="logo">
-        <img src="/images/logo.png" alt="Logo" className='logos' />
-      </div>
+          <li class="list__item">
+            <div class="list__button">
+              <img src="assets/dashboard.svg" class="list__img" />
+              <a href="/HomePagesAdmin" class="nav__link">Inicio</a>
+            </div>
+          </li>
+          <li class="list__item">
+            <div class="list__button">
+              <img src="assets/stats.svg" class="list__img" />
+              <a href="/Dashboard" class="nav__link">Estadisticas</a>
+            </div>
+          </li>
 
-      <div className="opciones">
-        <div className="dashboard">
-          <nav>
-            <ul>
-              <li onClick={handleDashboar}><VscGraph className='icon' /> Dashboard</li>
-            </ul>
-          </nav>
-        </div>
-        <div className="gestionuser">
-          <nav>
-            <ul>
-              <li onClick={handleGestionUsuario}><RiContactsBook2Line className='icon' /> Gestion Usuario</li>
-            </ul>
-          </nav>
-        </div>
-        <div className="gestioncate">
-          <nav>
-            <ul>
-              <li onClick={handleGestionCategoria}><RxDashboard className='icon' /> Gestion Categorias</li>
-            </ul>
-          </nav>
-        </div>
-        <div className="gestiondepe">
-          <nav>
-            <ul>
-              <li onClick={handleGestionDependencia}><IoHomeOutline className='icon' /> Gestion Dependencias</li>
-            </ul>
-          </nav>
-        </div>
+          <li class="list__item list__item--click">
+            <div class="list__button list__button--click">
+              <RiContactsBook2Line />
+              <a href="#" class="nav__link">Gestion Usuario</a>
+              <img src="assets/arrow.svg" class="list__arrow" />
+            </div>
 
-      </div>
+            <ul class="list__show">
+              <li class="list__inside">
+                <a href="/VerUsuario" class="nav__link nav__link--inside">Ver Usuario</a>
+              </li>
 
-      <div className="salir">
-        <nav>
-          <ul>
-            <li onClick={handleLogout}><ImExit className='icon' /> Salir</li>
-          </ul>
-        </nav>
-      </div>
+              <li class="list__inside">
+                <a href="/CrearUsuario" class="nav__link nav__link--inside">Crear Usuario</a>
+              </li>
+            </ul>
+
+          </li>
+
+          <li class="list__item list__item--click">
+            <div class="list__button list__button--click">
+              <RxDashboard />
+              <a href="#" class="nav__link">Gestion Categorias</a>
+              <img src="assets/arrow.svg" class="list__arrow" />
+            </div>
+
+            <ul class="list__show">
+              <li class="list__inside">
+                <a href="/VerCategoria" class="nav__link nav__link--inside">Ver Categorias</a>
+              </li>
+
+              <li class="list__inside">
+                <a href="/CrearCategoria" class="nav__link nav__link--inside">Crear Categorias</a>
+              </li>
+            </ul>
+
+          </li>
+
+          <li class="list__item list__item--click">
+            <div class="list__button list__button--click">
+              <IoHomeOutline />
+              <a href="#" class="nav__link">Gestion Dependencias</a>
+              <img src="assets/arrow.svg" class="list__arrow" />
+            </div>
+
+            <ul class="list__show">
+              <li class="list__inside">
+                <a href="/VerDependencia" class="nav__link nav__link--inside">Ver Dependencias</a>
+              </li>
+
+              <li class="list__inside">
+                <a href="/CrearDependencias" class="nav__link nav__link--inside">Crear Dependencias</a>
+              </li>
+            </ul>
+
+          </li>
+          <li class="list__item">
+            <div class="list__button">
+              <ImExit className='icon' />
+              <a href="/Login" class="nav__link" onClick={handleLogout}>Salir</a>
+            </div>
+          </li>
+
+
+
+        </ul>
+      </nav>
     </div>
-
-  )
+  );
 }
+
 
 export const MenuSecre = () => {
   const navigate = useNavigate();
@@ -139,33 +210,62 @@ export const MenuSecre = () => {
     localStorage.setItem('userPQRSMART', JSON.stringify(''));
     navigate('/Login');
   };
+  useEffect(() => {
+    const listElements = document.querySelectorAll('.list__button--click');
 
-  const handleGestionarPQRS = () => {
-    navigate('/GestionarPQRS')
-  }
+    listElements.forEach((listElement) => {
+      listElement.addEventListener('click', () => {
+        listElement.classList.toggle('arrow');
 
+        let height = 0;
+        const menu = listElement.nextElementSibling;
+        if (menu.clientHeight === 0) {
+          height = menu.scrollHeight;
+        }
+
+        menu.style.height = `${height}px`;
+      });
+    });
+
+    // Cleanup function to remove event listeners when the component unmounts
+    return () => {
+      listElements.forEach((listElement) => {
+        listElement.removeEventListener('click', () => { });
+      });
+    };
+  }, []);
   return (
-    <div className="Menu">
-      <div className="logo">
-        <img src="/images/logo.png" alt="Logo" className='logos' />
-      </div>
-      <div className="opciones">
-        <div className="crearpqrs">
-          <nav>
-            <ul>
-              <li onClick={handleGestionarPQRS}><FaPenClip className='icon' /> Gestionar PQRS</li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      <div className="salir">
-        <nav>
-          <ul>
-            <li onClick={handleLogout}><ImExit className='icon' /> Salir</li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+    <div>
+      <nav class="nav">
+        <ul class="list">
 
-  )
+          <li class="list__item">
+            <div class="list__button">
+              <img src="assets/dashboard.svg" class="list__img" />
+              <a href="/HomePage" class="nav__link">Inicio</a>
+            </div>
+          </li>
+
+          <li class="list__item">
+            <div class="list__button">
+              <FaPenClip />
+              <a href="/GestionarPQRS" class="nav__link">Gestionar PQRS</a>
+            </div>
+          </li>
+
+          <li class="list__item">
+            <div class="list__button">
+              <ImExit className='icon' />
+              <a href="/Login" class="nav__link" onClick={handleLogout}>Salir</a>
+            </div>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  );
 }
+
+
+
+

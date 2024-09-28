@@ -1,100 +1,80 @@
-.Menu {
-    background-color: #ebeef3;
-    color: #000000;
-    padding: 10px;
-    box-sizing: border-box;
-    height: 100vh;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-.Menu {
-    display: grid;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 1.5fr 0.3fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 2px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "logo"
-        "opciones"
-        "salir";
-}
-
-.logo {
-    grid-area: logo;
-}
-.logos{
-    width: 80%; /* Cambia a la medida que prefieras */
-    height: auto; /* Mantiene la proporción de la imagen */
-}
-
-.opciones {
-    grid-area: opciones;
-    font-size: 18px;
-}
-
-.salir {
-    grid-area: salir;
-}
-
-.logo-placeholder {
-    width: 60px;
-    height: 60px;
-    background-color: #FFF;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-}
-
-.Menu nav ul {
-    list-style-type: none;
+*{
+    margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.Menu nav ul li {
-    padding: 8px 0;
+body{
+    background: #EAEBEF;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav{
+    width: 300px;
+}
+
+.nav__link{
+    color: #303440;
+    display: block;
+    padding: 15px 0;
+    text-decoration: none;
+}
+
+.nav__link--inside{
+    border-radius: 6px ;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.nav__link--inside:hover{
+    background: #F6F8FA;
+}
+
+.list{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 0 16px 16px 0;
+    background: #fff;
+}
+
+.list__item{
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.list__item--click{
     cursor: pointer;
+}
+
+.list__button{
+    display: flex;
     align-items: center;
-    text-align: start;
+    gap: 1em;
+    width: 70%;
+    margin: 0 auto;
 }
 
-.opciones .icon{
-    font-size: 25px;
-}
-/*
-@media screen and (max-width: 768px) {
-    .Menu {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .logo-placeholder {
-        margin: 0;
-    }
-
-    .Menu nav ul {
-        display: flex;
-    }
-
-    .Menu nav ul li {
-        padding: 0 10px;
-    }
+.arrow .list__arrow{
+    transform: rotate(90deg);
 }
 
-@media screen and (max-width: 480px) {
-    .Menu {
-        flex-direction: column;
-    }
+.list__arrow{
+    margin-left: auto;
+    transition: transform .3s;
+}
 
-    .Menu nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .Menu nav ul li {
-        padding: 5px 0;
-    }
-}*/
+.list__show{
+    width: 80%;
+    margin-left: auto;
+    border-left: 2px solid #303440;
+    list-style: none;
+    transition: height .4s;
+    height: 0;
+}
