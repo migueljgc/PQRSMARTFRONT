@@ -42,13 +42,13 @@ export const AppRouter = () => {
         <Route path="/Dashboard" element={
           <ProtectedRoute allowedRoles={['ADMIN']} element={<Dashboard />} />
         } />
-        <Route path="/GestionUsuario" element={
+        <Route path="/VerUsuario" element={
           <ProtectedRoute allowedRoles={['ADMIN']} element={<GestionUsuario />} />
         } />
-        <Route path="/GestionCategoria" element={
+        <Route path="/VerCategoria" element={
           <ProtectedRoute allowedRoles={['ADMIN']} element={<GestionCategoria />} />
         } />
-        <Route path="/GestionDependencia" element={
+        <Route path="/VerDependencia" element={
           <ProtectedRoute allowedRoles={['ADMIN']} element={<GestionDependencia />} />
         } />
         <Route path="/CrearUsuario" element={
