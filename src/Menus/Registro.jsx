@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 const Registro = () => {
     const [passwordError, setPasswordError] = useState('');
-    const navigate = useNavigate();
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [identificationTypes, setIdentificationTypes] = useState([]);
     const [personTypes, setPersonTypes] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
     const [isLogged, setIsLogged] = useState('');
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -26,7 +26,6 @@ const Registro = () => {
         tipoPersona: '',
         dependencia: 7,
     });
-
     const checkLoginStatus = () => {
         const logged = localStorage.getItem('loggetPQRSMART') === 'true';
         setIsLogged(logged);
@@ -46,13 +45,14 @@ const Registro = () => {
         }
 
     };
+
     useEffect(() => {
         document.title = "Registro"
         checkLoginStatus();
         const fetchIdentificationTypes = async () => {
             try {
-                const response = await axios.get('https://pqrsmart.onrender.com/api/identification_type/get');
-                
+                const response = await axios.get('http://localhost:8080/api/identification_type/get');
+                console.log('Tipos de identificación obtenidos:', response.data);
                 setIdentificationTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de identificación de la base de datos', error);
@@ -61,8 +61,8 @@ const Registro = () => {
 
         const fetchPersonTypes = async () => {
             try {
-                const response = await axios.get('https://pqrsmart.onrender.com/api/person_type/get');
-               
+                const response = await axios.get('http://localhost:8080/api/person_type/get');
+                console.log('Tipos de persona obtenidos:', response.data);
                 setPersonTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de persona de la base de datos', error);
@@ -144,14 +144,14 @@ const Registro = () => {
 
 
         try {
-            
+            console.log('Datos del formulario a enviar:', formData);
 
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
             const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
             if (formData.contraseña === formData.confirmarContraseña) {
                 setError('Espere.......')
                 setShowPopup(true); // Mostrar popup
-                const userResponse = await axios.post('https://pqrsmart.onrender.com/api/auth/registerUser', {
+                const userResponse = await axios.post('http://localhost:8080/api/auth/registerUser', {
                     personType: { idPersonType: selectedPersonType.idPersonType },
                     name: formData.nombre,
                     lastName: formData.apellido,
@@ -164,7 +164,8 @@ const Registro = () => {
                     number: parseInt(formData.numero)
                 });
 
-                
+                console.log('Respuesta al guardar usuario:', userResponse.data);
+                console.log('Usuario registrado correctamente');
                 setConfirmPasswordError('')
                 setPasswordError('')
                 handleReset();
@@ -173,7 +174,9 @@ const Registro = () => {
                 return;
 
             }
-           
+            else {
+                alert('Contraseñas no coinciden')
+            }
 
         } catch (error) {
             const status = error.response.data;
@@ -203,14 +206,13 @@ const Registro = () => {
         return null; // o un spinner si quieres mostrar algo mientras se redirige
     }
     return (
-        <div className='Registro'>
+        <div className='RegistroUser'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             <div className="FormularioRegistro">
-
                 <form className='forms' onSubmit={handleSubmit}>
-                    <title className="Title">
-                        Registrate
-                    </title>
+                    <div className="tituloRegistro">
+                        <h1>Registrate</h1>
+                    </div>
                     <div className="Campos">
                         <div className="labelsAndInputs">
                             <label >Tipo De Persona</label>

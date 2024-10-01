@@ -44,7 +44,7 @@ function Login() {
     const checkLoginStatus = () => {
         const logged = localStorage.getItem('loggetPQRSMART') === 'true';
         setIsLogged(logged);
-        
+        console.log('loggetPQRSMART: ', logged);
         if (logged) {
             const userData = JSON.parse(localStorage.getItem('userPQRSMART'));
             if (userData) {
@@ -69,11 +69,11 @@ function Login() {
                 user,
                 password,
             });
-            
+            console.log(response)
 
             if (response.status === 200) {
                 const responseData = response.data;
-                
+                console.log(responseData)
 
                 const { token, authorities } = response.data;
                 localStorage.setItem('tokenPQRSMART', token);
@@ -85,7 +85,7 @@ function Login() {
                 });
                 localStorage.removeItem('username');
                 const users = (response1.data.user)
-                
+                console.log(users)
                 localStorage.setItem('users', users);
                 if (authorities.includes('ADMIN')) {
                     window.location.href = '/HomePagesAdmin';
@@ -115,6 +115,9 @@ function Login() {
             } else if (status === 500) {
                 setError("Error en el servidor. Intente nuevamente más tarde.");
             }
+            else{
+                setError("Error en el servidor. Intente nuevamente más tarde.");
+            }
             setShowPopup(true); // Mostrar popup
             return;
         }
@@ -140,7 +143,7 @@ function Login() {
                     <div className="vertical-line"></div> {/* Línea vertical */}
                 </div>
                 <div className="form-section">
-                    <div className="title">
+                    <div className="titulologin">
                         <h1>Iniciar sesión</h1>
                     </div>
                     <form onSubmit={onLogin}>
