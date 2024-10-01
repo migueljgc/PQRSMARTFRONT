@@ -174,9 +174,6 @@ const Registro = () => {
                 return;
 
             }
-            else {
-                alert('Contraseñas no coinciden')
-            }
 
         } catch (error) {
             const status = error.response.data;
