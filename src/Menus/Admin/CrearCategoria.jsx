@@ -3,9 +3,12 @@ import '../Admin/CrearCategoria.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
+import Popup from '../../componentes/Popup'
 
 const CrearCategoria = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         category: '',
         dependence: '',
@@ -63,20 +66,27 @@ const CrearCategoria = () => {
             const categoryResponse = await axios.post('https://pqrsmartback-production.up.railway.app/api/category/save', {
                 nameCategory: formData.category,
                 dependence: { idDependence: selectedDependencia ? selectedDependencia.idDependence : null },
-                state: {id: 1}
+                state: { id: 1 }
             });
-            console.log('Respuesta al guardar Categoria:', categoryResponse.data);
-            console.log('Categoria registrada correctamente');
-            alert('Categoria registrada correctamente')
+
             handleReset();
+            setError('Categoria registrada correctamente.')
+            setShowPopup(true); // Mostrar popup
+            return;
 
 
         }
         catch (error) {
             console.error('Error al guardar información:', error);
+            setError('Error al guardar información.')
+            setShowPopup(true); // Mostrar popup
+            return;
         }
 
     }
+    const closePopup = () => {
+        setShowPopup(false);
+    };
     return (
         <div className='CrearCategoria'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -84,10 +94,10 @@ const CrearCategoria = () => {
                 <MenuAdmin />
             </div>
             <div className="cuerpos">
-            <div className="headers">
+                <div className="headers">
                     <h1 className="title">CREAR CATEGORIA</h1>
                     <div className="user-menu">
-                        <UserinfoAmin/>
+                        <UserinfoAmin />
 
                     </div>
                 </div>
@@ -96,7 +106,7 @@ const CrearCategoria = () => {
                         <div className="input-box">
                             <label className='category' htmlFor="category">Nombre De Categoria:</label><br />
                             <input
-                            className='category'
+                                className='category'
                                 type="category"
                                 id="category"
                                 name="category"
@@ -127,6 +137,7 @@ const CrearCategoria = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

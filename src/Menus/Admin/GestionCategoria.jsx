@@ -12,6 +12,8 @@ import Popup from '../../componentes/Popup'
 
 const GestionCategoria = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
@@ -56,8 +58,14 @@ const GestionCategoria = () => {
             await axios.put(`https://pqrsmartback-production.up.railway.app/api/category/cancel/${idCategory}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
+            setError('Categoria Desactivada.');
+            setShowPopup(true); // Mostrar popup
+            return;
         } catch (error) {
             console.error('Error al eliminar la dependencia: ', error);
+            setError('Error al guardar información.');
+            setShowPopup(true); // Mostrar popup
+            return;
         }
     };
     useEffect(() => {
@@ -99,6 +107,10 @@ const GestionCategoria = () => {
 
     ]
 
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
     return (
         <div className='GestionCategoria'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -133,6 +145,7 @@ const GestionCategoria = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

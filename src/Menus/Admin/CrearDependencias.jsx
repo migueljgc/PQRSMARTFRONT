@@ -3,9 +3,12 @@ import '../Admin/CrearDependencias.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
+import Popup from '../../componentes/Popup'
 
 const CrearDependencias = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         dependence: '',
     });
@@ -63,18 +66,24 @@ const CrearDependencias = () => {
                 state: {id: 1}
 
             });
-            console.log('Respuesta al guardar dependencia:', dependenceResponse.data);
-            console.log('dependencia registrada correctamente');
-            alert('dependencia registrada correctamente')
             handleReset();
             fetchData();
+            setError('Dependencia registrada correctamente.');
+            setShowPopup(true); // Mostrar popup
+            return;
 
         }
         catch (error) {
             console.error('Error al guardar información:', error);
+            setError('Error al guardar información.');
+            setShowPopup(true); // Mostrar popup
+            return;
         }
 
     }
+    const closePopup = () => {
+        setShowPopup(false);
+    };
 
     return (
         <div className='CrearDependencias'>
@@ -108,6 +117,7 @@ const CrearDependencias = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

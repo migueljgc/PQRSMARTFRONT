@@ -6,9 +6,12 @@ import DataTable from 'react-data-table-component';
 import { UserinfoUser } from '../../componentes/Userinfo'
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
+import Popup from '../../componentes/Popup'
 
 const Consultar = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredsData, setFilteredData] = useState([]); // Estado para los datos filtrados
 
@@ -63,8 +66,14 @@ const Consultar = () => {
             await axios.put(`https://pqrsmartback-production.up.railway.app/api/request/cancel/${idRequest}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
+            setError('PQRS Desactivada.');
+            setShowPopup(true); // Mostrar popup
+            return;
         } catch (error) {
             console.error('Error al cancelar la solicitud: ', error);
+            setError('Error al guardar información.');
+            setShowPopup(true); // Mostrar popup
+            return;
         }
     };
 
@@ -126,6 +135,10 @@ const Consultar = () => {
 
     ]
 
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
     return (
         <div className='consultarPqrs'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -162,6 +175,7 @@ const Consultar = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

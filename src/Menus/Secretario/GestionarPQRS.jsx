@@ -5,6 +5,7 @@ import { UserinfoSecre } from '../../componentes/Userinfo';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import Popup from '../../componentes/Popup'
 
 const GestionarPQRS = () => {
     const [data, setData] = useState([]);
@@ -12,6 +13,8 @@ const GestionarPQRS = () => {
     const navigate = useNavigate();
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
 
     const fetchData = async () => {
         try {
@@ -59,13 +62,13 @@ const GestionarPQRS = () => {
             
             // Actualizar la solicitud de PQRS seleccionada
             const response= await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get', selectedRow)
-            console.log('response: ', response)
-            console.log('Solicitud de PQRS actualizada:', response.data);
-            alert()
-                navigate('/Responder', { state: { data: selectedRow } });
+            
+            navigate('/Responder', { state: { data: selectedRow } });
                 
         } else {
-            alert('Por favor seleccione una fila');
+            setError('Por favor seleccione una fila')
+            setShowPopup(true); // Mostrar popup
+            return;
         }
     };
 
@@ -148,6 +151,11 @@ useEffect(() => {
 
 
     ];
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
     return (
         <div className='GestionarPQRS'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -188,6 +196,7 @@ useEffect(() => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

@@ -4,10 +4,12 @@ import { UserinfoSecre } from '../../componentes/Userinfo';
 import { MenuSecre } from '../../componentes/Menu';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { HiArrowCircleLeft } from 'react-icons/hi';
+import Popup from '../../componentes/Popup'
 
 const Responder = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
     const { state } = location;
@@ -115,6 +117,10 @@ const Responder = () => {
 
 
     }
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
     return (
         <div className='Responder'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -154,6 +160,7 @@ const Responder = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

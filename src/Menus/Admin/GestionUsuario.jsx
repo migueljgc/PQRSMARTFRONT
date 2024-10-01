@@ -7,10 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { UserinfoAmin } from '../../componentes/Userinfo';
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
+import Popup from '../../componentes/Popup'
 
 const GestionUsuario = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const token = localStorage.getItem('token');
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
@@ -53,8 +56,14 @@ const GestionUsuario = () => {
             await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/cancel/${id}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
+            setError('Usuario Bloqueado.');
+            setShowPopup(true); // Mostrar popup
+            return;
         } catch (error) {
             console.error('Error al desactivar el usuario: ', error);
+            setError('Error al guardar información.');
+            setShowPopup(true); // Mostrar popup
+            return;
         }
     };
 
@@ -118,6 +127,10 @@ const GestionUsuario = () => {
         },
 
     ]
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
     return (
         <div className='GestionUsuario'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -153,6 +166,7 @@ const GestionUsuario = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

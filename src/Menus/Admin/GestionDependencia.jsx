@@ -7,9 +7,12 @@ import axios from 'axios';
 import { UserinfoAmin } from '../../componentes/Userinfo';
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
+import Popup from '../../componentes/Popup'
 
 const GestionDependencia = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
@@ -55,8 +58,14 @@ const GestionDependencia = () => {
             await axios.put(`https://pqrsmartback-production.up.railway.app/api/dependence/cancel/${idDependence}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
+            setError('Dependencia Desactivada.');
+            setShowPopup(true); // Mostrar popup
+            return;
         } catch (error) {
             console.error('Error al eliminar la dependencia: ', error);
+            setError('Error al guardar información.');
+            setShowPopup(true); // Mostrar popup
+            return;
         }
     };
 
@@ -93,6 +102,9 @@ const GestionDependencia = () => {
         },
 
     ]
+    const closePopup = () => {
+        setShowPopup(false);
+    };
     return (
         <div className='GestionDependencia'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -126,6 +138,7 @@ const GestionDependencia = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

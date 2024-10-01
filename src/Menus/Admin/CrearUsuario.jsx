@@ -3,6 +3,7 @@ import '../Admin/CrearUsuario.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
+import Popup from '../../componentes/Popup'
 
 const CrearUsuario = () => {
     const [passwordError, setPasswordError] = useState('');
