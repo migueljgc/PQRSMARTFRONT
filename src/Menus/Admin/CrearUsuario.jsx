@@ -3,15 +3,12 @@ import '../Admin/CrearUsuario.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
-import Popup from '../../componentes/Popup'
 
 const CrearUsuario = () => {
     const [passwordError, setPasswordError] = useState('');
     const [dependenceTypes, setDependence] = useState([]);
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [identificationTypes, setIdentificationTypes] = useState([]);
-    const [showPopup, setShowPopup] = useState(false);
-    const [error, setError] = useState('');
     const [personTypes, setPersonTypes] = useState([]);
     const [formData, setFormData] = useState({
         nombre: '',
@@ -50,8 +47,8 @@ const CrearUsuario = () => {
 
         const fetchIdentificationTypes = async () => {
             try {
-                const response = await axios.get('https://pqrsmart.onrender.com/api/identification_type/get');
-
+                const response = await axios.get('http://localhost:8080/api/identification_type/get');
+                console.log('Tipos de identificación obtenidos:', response.data);
                 setIdentificationTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de identificación de la base de datos', error);
@@ -60,8 +57,8 @@ const CrearUsuario = () => {
 
         const fetchPersonTypes = async () => {
             try {
-                const response = await axios.get('https://pqrsmart.onrender.com/api/person_type/get');
-
+                const response = await axios.get('http://localhost:8080/api/person_type/get');
+                console.log('Tipos de persona obtenidos:', response.data);
                 setPersonTypes(response.data);
             } catch (error) {
                 console.error('Error al obtener tipos de persona de la base de datos', error);
@@ -69,15 +66,15 @@ const CrearUsuario = () => {
         };
         const fetchDependence = async () => {
             try {
-                const response = await axios.get('https://pqrsmart.onrender.com/api/dependence/get')
-
+                const response = await axios.get('http://localhost:8080/api/dependence/get')
+                console.log('Dependencias obtenidos:', response.data);
                 setDependence(response.data);
             } catch (error) {
                 console.error('Error al obtener el dependencias:', error);
             }
         };
 
-
+    
         fetchDependence();
         fetchIdentificationTypes();
         fetchPersonTypes();
@@ -119,8 +116,7 @@ const CrearUsuario = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setConfirmPasswordError('')
-        setPasswordError('')
+
         const isValidPassword = validatePassword(formData.contraseña);
         if (!isValidPassword) {
             setPasswordError('La contraseña debe tener mínimo 8 caracteres, al menos un número, un signo y una letra mayúscula.');
@@ -138,13 +134,13 @@ const CrearUsuario = () => {
 
 
         try {
-
+            console.log('Datos del formulario a enviar:', formData);
 
             const selectedDepenceType = dependenceTypes.find(type => type.idDependence === parseInt(formData.dependencia));
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
             const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
             if (formData.contraseña === formData.confirmarContraseña) {
-                const userResponse = await axios.post('https://pqrsmart.onrender.com/api/auth/register', {
+                const userResponse = await axios.post('http://localhost:8080/api/auth/register', {
                     personType: { idPersonType: selectedPersonType.idPersonType },
                     name: formData.nombre,
                     lastName: formData.apellido,
@@ -153,42 +149,26 @@ const CrearUsuario = () => {
                     identificationNumber: parseInt(formData.identificacion),
                     user: formData.usuario,
                     password: formData.contraseña,
-                    dependence: { idDependence: selectedDepenceType.idDependence },
+                    dependence: { idDependence: selectedDepenceType.idDependence},
                     number: parseInt(formData.numero),
                     role: formData.rol,
                 });
+                alert('Se ha enviado un mensaje de verificacion a su correo, si no le aparece verifique la carpeta de spam.');
+                console.log('Respuesta al guardar usuario:', userResponse.data);
+                console.log('Usuario registrado correctamente');
                 setConfirmPasswordError('')
                 setPasswordError('')
                 handleReset();
-                setError('Se ha enviado un mensaje de verificacion a su correo, si no le aparece verifique la carpeta de spam.')
-                setShowPopup(true); // Mostrar popup
-                return;
 
-            }
-
-
-        } catch (error) {
-            const status = error.response.data;
-            // Manejo de errores
-            if (status === 'El correo electrónico ya está en uso.') {
-                setError('El correo electrónico ya está en uso.');
-            } else if (status === 'El usuario ya existe.') {
-                setError("El usuario ya existe.");
-            } else if (status === 'El número de identificación ya está registrado.') {
-                setError("El número de identificación ya está registrado.");
-            } else if (status === 'El número ya está registrado.') {
-                setError("El número ya está registrado.");
             }
             else {
-                setError("Error en el servidor. Intente nuevamente más tarde.");
+                alert('Contraseñas no coinciden')
             }
-            setShowPopup(true); // Mostrar popup
-            return;
+
+        } catch (error) {
+            console.error('Error al guardar información en la base de datos', error);
         }
 
-    };
-    const closePopup = () => {
-        setShowPopup(false);
     };
     return (
         <div className='CrearUsuario'>
@@ -351,7 +331,6 @@ const CrearUsuario = () => {
                     </form>
                 </div>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

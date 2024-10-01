@@ -3,20 +3,18 @@ import '../Admin/CrearDependencias.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
-import Popup from '../../componentes/Popup'
 
 const CrearDependencias = () => {
     const [data, setData] = useState([]);
-    const [showPopup, setShowPopup] = useState(false);
-    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         dependence: '',
     });
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmart.onrender.com/api/dependence/get')
+            const response = await axios.get('http://localhost:8080/api/dependence/get')
             setData(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error('Error en la data: ', error);
         }
@@ -59,19 +57,17 @@ const CrearDependencias = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            
-            const dependenceResponse = await axios.post('https://pqrsmart.onrender.com/api/dependence/save', {
+            console.log('Datos del formulario a enviar:', formData);
+            const dependenceResponse = await axios.post('http://localhost:8080/api/dependence/save', {
                 nameDependence: formData.dependence,
                 state: {id: 1}
 
             });
-            
-            
+            console.log('Respuesta al guardar dependencia:', dependenceResponse.data);
+            console.log('dependencia registrada correctamente');
+            alert('dependencia registrada correctamente')
             handleReset();
             fetchData();
-            setError('dependencia registrada correctamente' )
-            setShowPopup(true); // Mostrar popup
-            return;
 
         }
         catch (error) {
@@ -79,9 +75,6 @@ const CrearDependencias = () => {
         }
 
     }
-     const closePopup = () => {
-        setShowPopup(false);
-    };
 
     return (
         <div className='CrearDependencias'>
@@ -115,7 +108,6 @@ const CrearDependencias = () => {
                     </form>
                 </div>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

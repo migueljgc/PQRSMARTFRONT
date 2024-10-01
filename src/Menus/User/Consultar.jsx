@@ -31,10 +31,10 @@ const Consultar = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmart.onrender.com/api/request/get')
+            const response = await axios.get('http://localhost:8080/api/request/get')
             setData(response.data);
             const usuario = localStorage.getItem('users');
-            
+            console.log(usuario)
             if (usuario) {
                 const filteredData = response.data.filter(item => item.user && item.user.user === usuario); // Filtrar los datos por el usuario
                 filteredData.forEach(item => {
@@ -42,10 +42,12 @@ const Consultar = () => {
 
                 });
                 setData(filteredData);
-                
+                console.log("filteredData  ", filteredData)
             } else {
                 setData([]);
             }
+            console.log(response.data);
+            console.log("esta es la data ", data);
         } catch (error) {
             console.error('Error en la data: ', error);
         }
@@ -58,7 +60,7 @@ const Consultar = () => {
 
     const handleCancel = async (idRequest) => {
         try {
-            await axios.put(`https://pqrsmart.onrender.com/api/request/cancel/${idRequest}`);
+            await axios.put(`http://localhost:8080/api/request/cancel/${idRequest}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
         } catch (error) {

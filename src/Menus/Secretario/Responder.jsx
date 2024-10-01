@@ -5,11 +5,8 @@ import { MenuSecre } from '../../componentes/Menu';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { HiArrowCircleLeft } from 'react-icons/hi';
-import Popup from '../../componentes/Popup'
 
 const Responder = () => {
-    const [showPopup, setShowPopup] = useState(false);
-    const [error, setError] = useState('');
     const [data, setData] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
@@ -59,7 +56,8 @@ const Responder = () => {
 
 
     useEffect(() => {
-        
+        console.log(form.idRequest)
+        console.log(form)
         document.title = "Responder PQRS"
 
     }, []);
@@ -67,7 +65,7 @@ const Responder = () => {
         e.preventDefault();
         try {
             const response = await axios.put(
-                `https://pqrsmart.onrender.com/api/request/update/${form.idRequest}`,
+                `http://localhost:8080/api/request/update/${form.idRequest}`,
                 {
                     answer: formData.answer,
                     requestState: formData.requestState,
@@ -79,18 +77,17 @@ const Responder = () => {
                     },
                 }
             );
-            setError('EXITOSO ')
-            setShowPopup(true); // Mostrar popup
+            console.log('Response:', response.data);
+            alert('EXITOSO');
             navigate('/GestionarPQRS');
             setData(''); // resetear el estado de data
             handleReset(); // limpiar el formulario
-            return;
         } catch (error) {
             console.error('Error al actualizar el estado: ', error);
         }
     };
     
-    
+    console.log(datas)
     if (!datas) {
         return(
         <div className='Responder'>
@@ -118,9 +115,6 @@ const Responder = () => {
 
 
     }
-    const closePopup = () => {
-        setShowPopup(false);
-    };
     return (
         <div className='Responder'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -160,7 +154,6 @@ const Responder = () => {
                     </form>
                 </div>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

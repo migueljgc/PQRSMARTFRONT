@@ -18,8 +18,9 @@ const GestionCategoria = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmart.onrender.com/api/category/get')
+            const response = await axios.get('http://localhost:8080/api/category/get')
             setData(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error('Error en la data: ', error);
         }
@@ -52,7 +53,7 @@ const GestionCategoria = () => {
     }
     const handleCancel = async (idCategory) => {
         try {
-            await axios.put(`https://pqrsmart.onrender.com/api/category/cancel/${idCategory}`);
+            await axios.put(`http://localhost:8080/api/category/cancel/${idCategory}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
         } catch (error) {

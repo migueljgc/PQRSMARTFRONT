@@ -5,7 +5,6 @@ import { UserinfoSecre } from '../../componentes/Userinfo';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import Popup from '../../componentes/Popup'
 
 const GestionarPQRS = () => {
     const [data, setData] = useState([]);
@@ -13,13 +12,11 @@ const GestionarPQRS = () => {
     const navigate = useNavigate();
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
-    const [showPopup, setShowPopup] = useState(false);
-    const [error, setError] = useState('');
 
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:8080/api/request/get');
-            
+            console.log(response)
 
             const token = localStorage.getItem('token');
             const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
@@ -28,7 +25,7 @@ const GestionarPQRS = () => {
                 }
             });
             const usuario = response1.data.dependence.idDependence
-            
+            console.log(usuario)
             if (usuario) {
                 const filteredData = response.data.filter(item => item.dependence && item.dependence.idDependence === usuario); // Filtrar los datos por el usuario
                 filteredData.forEach(item => {
@@ -57,25 +54,22 @@ const GestionarPQRS = () => {
 
     const handleResponderClick = async (e) => {
         e.preventDefault();
-        
+        console.log(selectedRow)
         if (selectedRow) {
             
             // Actualizar la solicitud de PQRS seleccionada
             const response= await axios.get('http://localhost:8080/api/request/get', selectedRow)
-            
-            
+            console.log('response: ', response)
+            console.log('Solicitud de PQRS actualizada:', response.data);
+            alert()
                 navigate('/Responder', { state: { data: selectedRow } });
                 
         } else {
-            setError('Por favor seleccione una fila')
-            setShowPopup(true); // Mostrar popup
-            return;
+            alert('Por favor seleccione una fila');
         }
     };
 
-const closePopup = () => {
-        setShowPopup(false);
-    };
+
     const conditionalRowStyles = [
         {
             when: row => row === selectedRow,
@@ -194,7 +188,6 @@ useEffect(() => {
                     </form>
                 </div>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

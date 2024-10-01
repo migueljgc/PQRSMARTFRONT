@@ -9,7 +9,8 @@ export const UserinfoAmin = () => {
     return (
         <div>
             <div className="user-info">
-                
+                {/*<img src='/images/iconprofile.png' alt="Foto de perfil" className="profile-picture" width="35%" height="40%" onClick={() => setIsOpen((prev) => !prev)} />
+                */}
                 <FaUser className="profile-picture" onClick={() => setIsOpen((prev) => !prev)} />
             </div>
             {isOpen && (<Script />)
@@ -22,7 +23,8 @@ export const UserinfoUser = () => {
     return (
         <div>
             <div className="user-info">
-                
+                {/*<img src='/images/iconprofile.png' alt="Foto de perfil" className="profile-picture" width="35%" height="40%" onClick={() => setIsOpen((prev) => !prev)} />
+                */}
                 <FaUser className="profile-picture" onClick={() => setIsOpen((prev) => !prev)} />
             </div>
             {isOpen && (<ScriptUser />)
@@ -35,7 +37,8 @@ export const UserinfoSecre = () => {
     return (
         <div>
             <div className="user-info">
-                
+                {/*<img src='/images/iconprofile.png' alt="Foto de perfil" className="profile-picture" width="35%" height="40%" onClick={() => setIsOpen((prev) => !prev)} />
+                */}
                 <FaUser className="profile-picture" onClick={() => setIsOpen((prev) => !prev)} />
             </div>
             {isOpen && (<ScriptSecre />)

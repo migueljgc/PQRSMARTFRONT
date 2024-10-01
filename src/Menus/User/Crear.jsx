@@ -35,7 +35,7 @@ const Crear = () => {
         document.title = "Crear Solicitud"
         const fetchCategorias = async () => {
             try {
-                const response = await axios.get('https://pqrsmart.onrender.com/api/category/get');
+                const response = await axios.get('http://localhost:8080/api/category/get');
                 setCategorias(response.data);
             } catch (error) {
                 console.error('Error al obtener categorias:', error);
@@ -44,7 +44,7 @@ const Crear = () => {
 
         const fetchRequest = async () => {
             try {
-                const response1 = await axios.get('https://pqrsmart.onrender.com/api/request_type/get');
+                const response1 = await axios.get('http://localhost:8080/api/request_type/get');
                 setRequest(response1.data);
             } catch (error) {
                 console.error('Error al obtener Tipos de solicitudes', error);
@@ -53,7 +53,7 @@ const Crear = () => {
 
         const fetchDependencias = async () => {
             try {
-                const response = await axios.get('https://pqrsmart.onrender.com/api/dependence/get');
+                const response = await axios.get('http://localhost:8080/api/dependence/get');
                 setDependencias(response.data);
             } catch (error) {
                 console.error('Error al obtener dependencias:', error);
@@ -64,15 +64,18 @@ const Crear = () => {
             const fechaActual = new Date();
             const fechaFormat = fechaActual.toISOString().slice(0, 10);
             setFecha(fechaFormat);
+            console.log(fechaFormat)
+            //setFormData(prevFormData => ({ ...prevFormData, date: fechaFormat }));
+            console.log(formData)
         };
         const fetchUser = async () => {
-            const response1 = await axios.get('https://pqrsmart.onrender.com/api/auth/editar', {
+            const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
             const user = (response1.data.user)
-            
+            console.log(response1.data)
             const username = user;
             if (username) {
                 setFormData(prevFormData => ({ ...prevFormData, user: username }));
@@ -148,21 +151,21 @@ const Crear = () => {
 
         try {
 
-            const response1 = await axios.get('https://pqrsmart.onrender.com/api/auth/editar', {
+            const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
             const user = response1.data.user
-            
+            console.log(user)
             const formDataToSend = new FormData();
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
-            
+            console.log(formData)
             const StateRequest = { idRequestState: 1 };
             if (archivo) {
                 formDataToSend.append('archivo', archivo);
-                
+                console.log(archivo)
             }
             formDataToSend.append('request', new Blob([JSON.stringify({
                 description: formData.description,
@@ -177,15 +180,17 @@ const Crear = () => {
             }));
             setError('Espere.....')
             setShowPopup(true); // Mostrar popup
-            const respuesta = await axios.post('https://pqrsmart.onrender.com/api/request/save', formDataToSend, {
+            const respuesta = await axios.post('http://localhost:8080/api/request/save', formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
             
-           
+            console.log(respuesta.data)
             const responseData = respuesta.data;
             const numRadicado = responseData.radicado;
+            console.log('radicado: ',numRadicado)
+            console.log(respuesta)
             handleReset();
             setError('Solicitud Radicada Con Exito Su Numero De Radicado es: ' + numRadicado)
             setShowPopup(true); // Mostrar popup

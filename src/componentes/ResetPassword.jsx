@@ -86,18 +86,14 @@ export const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.post(`https://pqrsmart.onrender.com/forgot-password/reset/${token}`, { newPassword });
+             axios.post(`http://localhost:8080/forgot-password/reset/${token}`, { newPassword });
             setError('Contraseña actualizada.');
             setShowPopup(true); // Mostrar popup
         } catch (error) {
-            console.error(error)
             setError('Error al restablecer contraseña:');
             setShowPopup(true); // Mostrar popup('Error al restablecer contraseña.');
             return;
         }
-        setNewPassword('');
-        setConfirmPassword('')
-        navigate('/')
         return;
     };
     if (isLogged) {
