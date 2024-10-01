@@ -1,0 +1,74 @@
+.EditarPerfil {
+    display: grid;
+    grid-template-columns: 0.4fr 1.6fr;
+    grid-template-rows: 1.9fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "menus-editar cuerpo-editar";
+}
+
+.menus-editar {
+    grid-area: menus-editar;
+}
+
+.cuerpo-editar {
+    grid-area: cuerpo-editar;
+}
+
+.headers-editar{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.cuerpo-editar {
+    align-items: center;
+    text-align: center;
+
+}
+
+.title-editar {
+    font-size: 27px;
+    color: #ffffff;
+    align-items: center;
+    text-align: center;
+}
+
+.form-editar {
+    display: flex;
+    justify-content: center;
+}
+
+.solicitud-form-editar {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: beige solid 1px;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+}
+
+.input-box-editar{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-box-editar label {
+    margin-bottom: 5px;
+    margin-left: 30px;
+    padding-right: 30px;
+}
+
+.input-box-editar input{
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-right: 30px;
+}

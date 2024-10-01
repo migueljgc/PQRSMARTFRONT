@@ -52,7 +52,7 @@ export const ScriptUser = () => {
           {user && <p>Bienvenido, {user}!</p>}
         </div>
         <div className="abajo">
-          <a href="/EditarPerfilUser">
+          <a href="/EditarPerfil">
             Editar usuario
           </a>
 

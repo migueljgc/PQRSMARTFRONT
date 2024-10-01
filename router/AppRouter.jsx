@@ -71,6 +71,9 @@ export const AppRouter = () => {
         <Route path="/Consultar" element={
           <ProtectedRoute allowedRoles={['USER']} element={<Consultar/>} />
         } />
+        <Route path="/EditarPerfil" element={
+          <ProtectedRoute allowedRoles={['USER']} element={<EditarPerfil/>} />
+        } />
 
         {/* Rutas Secretario */}
         <Route path="/HomePagesSecre" element={
