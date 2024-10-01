@@ -31,7 +31,7 @@ const Consultar = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/request/get')
+            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get')
             setData(response.data);
             const usuario = localStorage.getItem('users');
             console.log(usuario)
@@ -60,7 +60,7 @@ const Consultar = () => {
 
     const handleCancel = async (idRequest) => {
         try {
-            await axios.put(`http://localhost:8080/api/request/cancel/${idRequest}`);
+            await axios.put(`https://pqrsmartback-production.up.railway.app/api/request/cancel/${idRequest}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
         } catch (error) {

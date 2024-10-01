@@ -18,7 +18,7 @@ const GestionCategoria = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/category/get')
+            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/category/get')
             setData(response.data);
             console.log(response.data)
         } catch (error) {
@@ -53,7 +53,7 @@ const GestionCategoria = () => {
     }
     const handleCancel = async (idCategory) => {
         try {
-            await axios.put(`http://localhost:8080/api/category/cancel/${idCategory}`);
+            await axios.put(`https://pqrsmartback-production.up.railway.app/api/category/cancel/${idCategory}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
         } catch (error) {

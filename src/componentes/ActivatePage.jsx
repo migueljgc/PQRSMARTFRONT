@@ -32,7 +32,7 @@ export const ActivatePage = () => {
         checkLoginStatus();
         const verifyEmail = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/auth/verify-email', {
+                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/verify-email', {
                     params: { token }
                 });
                 if (response.status === 200) {

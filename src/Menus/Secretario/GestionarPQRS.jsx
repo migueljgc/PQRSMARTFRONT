@@ -15,11 +15,11 @@ const GestionarPQRS = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/request/get');
+            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get');
             console.log(response)
 
             const token = localStorage.getItem('token');
-            const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
+            const response1 = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -58,7 +58,7 @@ const GestionarPQRS = () => {
         if (selectedRow) {
             
             // Actualizar la solicitud de PQRS seleccionada
-            const response= await axios.get('http://localhost:8080/api/request/get', selectedRow)
+            const response= await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get', selectedRow)
             console.log('response: ', response)
             console.log('Solicitud de PQRS actualizada:', response.data);
             alert()

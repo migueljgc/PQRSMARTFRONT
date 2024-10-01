@@ -6,6 +6,8 @@ import { UserinfoAmin } from '../../componentes/Userinfo';
 
 const CrearUsuario = () => {
     const [passwordError, setPasswordError] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const [dependenceTypes, setDependence] = useState([]);
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [identificationTypes, setIdentificationTypes] = useState([]);
@@ -47,7 +49,7 @@ const CrearUsuario = () => {
 
         const fetchIdentificationTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/identification_type/get');
+                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/identification_type/get');
                 console.log('Tipos de identificación obtenidos:', response.data);
                 setIdentificationTypes(response.data);
             } catch (error) {
@@ -57,7 +59,7 @@ const CrearUsuario = () => {
 
         const fetchPersonTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/person_type/get');
+                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/person_type/get');
                 console.log('Tipos de persona obtenidos:', response.data);
                 setPersonTypes(response.data);
             } catch (error) {
@@ -66,7 +68,7 @@ const CrearUsuario = () => {
         };
         const fetchDependence = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/dependence/get')
+                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get')
                 console.log('Dependencias obtenidos:', response.data);
                 setDependence(response.data);
             } catch (error) {
@@ -140,7 +142,7 @@ const CrearUsuario = () => {
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
             const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
             if (formData.contraseña === formData.confirmarContraseña) {
-                const userResponse = await axios.post('http://localhost:8080/api/auth/register', {
+                const userResponse = await axios.post('https://pqrsmartback-production.up.railway.app/api/auth/register', {
                     personType: { idPersonType: selectedPersonType.idPersonType },
                     name: formData.nombre,
                     lastName: formData.apellido,
@@ -153,22 +155,40 @@ const CrearUsuario = () => {
                     number: parseInt(formData.numero),
                     role: formData.rol,
                 });
-                alert('Se ha enviado un mensaje de verificacion a su correo, si no le aparece verifique la carpeta de spam.');
                 console.log('Respuesta al guardar usuario:', userResponse.data);
                 console.log('Usuario registrado correctamente');
                 setConfirmPasswordError('')
                 setPasswordError('')
                 handleReset();
+                setError('Se ha enviado un mensaje de verificacion a su correo, si no le aparece verifique la carpeta de spam.')
+                setShowPopup(true); // Mostrar popup
+                return;
 
-            }
-            else {
-                alert('Contraseñas no coinciden')
             }
 
         } catch (error) {
-            console.error('Error al guardar información en la base de datos', error);
+            const status = error.response.data;
+            console.log(status)
+            // Manejo de errores
+            if (status === 'El correo electrónico ya está en uso.') {
+                setError('El correo electrónico ya está en uso.');
+            } else if (status === 'El usuario ya existe.') {
+                setError("El usuario ya existe.");
+            } else if (status === 'El número de identificación ya está registrado.') {
+                setError("El número de identificación ya está registrado.");
+            } else if (status === 'El número ya está registrado.') {
+                setError("El número ya está registrado.");
+            }
+            else {
+                setError("Error en el servidor. Intente nuevamente más tarde.");
+            }
+            setShowPopup(true); // Mostrar popup
+            return;
         }
 
+    };
+    const closePopup = () => {
+        setShowPopup(false);
     };
     return (
         <div className='CrearUsuario'>
@@ -331,6 +351,7 @@ const CrearUsuario = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

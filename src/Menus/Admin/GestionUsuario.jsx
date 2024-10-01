@@ -34,7 +34,7 @@ const GestionUsuario = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/Usuario/get',{
+            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/Usuario/get',{
                 'Authorization': `Bearer ${token}`
             })
             setData(response.data);
@@ -50,7 +50,7 @@ const GestionUsuario = () => {
 
     const handleCancel = async (id) => {
         try {
-            await axios.patch(`http://localhost:8080/api/Usuario/cancel/${id}`);
+            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/cancel/${id}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData(); 
         } catch (error) {

@@ -12,7 +12,7 @@ const CrearDependencias = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/dependence/get')
+            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get')
             setData(response.data);
             console.log(response.data)
         } catch (error) {
@@ -58,7 +58,7 @@ const CrearDependencias = () => {
         e.preventDefault();
         try {
             console.log('Datos del formulario a enviar:', formData);
-            const dependenceResponse = await axios.post('http://localhost:8080/api/dependence/save', {
+            const dependenceResponse = await axios.post('https://pqrsmartback-production.up.railway.app/api/dependence/save', {
                 nameDependence: formData.dependence,
                 state: {id: 1}
 

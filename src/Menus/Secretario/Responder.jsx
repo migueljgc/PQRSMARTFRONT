@@ -65,7 +65,7 @@ const Responder = () => {
         e.preventDefault();
         try {
             const response = await axios.put(
-                `http://localhost:8080/api/request/update/${form.idRequest}`,
+                `https://pqrsmartback-production.up.railway.app/api/request/update/${form.idRequest}`,
                 {
                     answer: formData.answer,
                     requestState: formData.requestState,
