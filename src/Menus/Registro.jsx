@@ -331,7 +331,7 @@ const Registro = () => {
                             />
                             {confirmPasswordError && <div className='errores'> {confirmPasswordError}</div>}
                         </div>
-                        <div className="Buton">
+                        <div className="ButonR">
                             <button type="submit">Registrate</button>
                         </div>
                         <div className="labelAndA">

@@ -57,7 +57,7 @@
 }
 
 .btnSolicitar button {
-    background-color: #FFA500; /* Color de fondo inicial (naranja) */
+    background-color: #5E76FF; /* Color de fondo inicial (naranja) */
     color: white; /* Color del texto */
     border: none; /* Sin borde */
     padding: 6px 12px; /* Espaciado interno más pequeño */
@@ -70,7 +70,7 @@
 }
 
 .btnSolicitar button:hover {
-    background-color: #5E76FF; /* Cambiar a azul al pasar el mouse */
+    background-color: #1C285A; /* Cambiar a azul al pasar el mouse */
 }
 
 .btnSolicitar button:active {
@@ -86,14 +86,14 @@
 }
 
 .PAndA a {
-    color: #5E76FF;
+    color: #334E9C;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .PAndA a:hover {
-    color: #4753c8;
+    color: #000000;
     text-decoration: underline;
 }
 

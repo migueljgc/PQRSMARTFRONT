@@ -1,5 +1,5 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .RegistroUser {
@@ -12,19 +12,19 @@ body {
 }
 
 .FormularioRegistro {
-    background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
-    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    background: rgba(255, 255, 255, 0.05); /* Fondo semi-transparente para más oscuridad */
+    backdrop-filter: blur(12px); /* Efecto de desenfoque */
     padding: 40px;
-    border-radius: 12px;
-    color: #FFFFFF;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    border-radius: 15px;
+    color: #E6E8EC; /* Texto blanco-gris para mayor contraste */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8); /* Sombras negras más intensas */
     width: 100%;
     max-width: 600px;
     margin: auto;
 }
 
-.tituloRegistro{
-    color: #FFFFFF;
+.tituloRegistro {
+    color: #FFFFFF; /* Azul muy claro para el título */
     font-size: 1rem;
     text-align: center;
     margin-bottom: 20px;
@@ -39,40 +39,40 @@ body {
 .labelsAndInputs {
     display: flex;
     flex-direction: column;
-    gap: 5px;}
+    gap: 5px;
+}
 
 .labelsAndInputs label {
     font-weight: 600;
-    color: #CADAE5;
+    color: #142B4C; /* Azul claro apagado para las etiquetas */
     font-size: 14px;
 }
 
 .Selects, .inputs {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1); /* Fondo más oscuro */
+    color: #E0E0E0; /* Texto blanco-gris */
     border-radius: 8px;
     outline: none;
     transition: all 0.3s ease;
 }
 
 .Selects option {
-    background-color: #4753c8; /* Fondo de las opciones al abrir */
-    color: #fff; /* Color del texto de las opciones */
+    background-color: #1B2E50; /* Azul oscuro para las opciones de select */
+    color: #E0E0E0;
 }
-
 
 .Selects:focus,
 .inputs:focus {
-    border: 1px solid #5E76FF;
-    box-shadow: 0 0 8px rgba(94, 118, 255, 0.5);
+    border: 1px solid #5A6DBF; /* Azul más oscuro en foco */
+    box-shadow: 0 0 8px rgba(90, 109, 191, 0.5); /* Sombra azul suave */
 }
 
 .inputs::placeholder, .Selects::placeholder {
-    color: #FFFFFF;
-    opacity: 0.7;
+    color: #9FA6B2; /* Placeholder gris claro */
+    opacity: 0.8;
 }
 
 .Selects {
@@ -83,20 +83,22 @@ body {
     background-size: 12px;
 }
 
-
 .errores {
-    color: red;
+    color: #FF5E5E; /* Rojo fuerte para errores */
     font-size: 0.9em;
     margin-top: 5px;
 }
 
-.Buton {
-    margin-top: 20px;
+.ButonR {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 3px;
     text-align: center;
 }
 
-.Buton button {
-    background-color: #5E76FF;
+.ButonR button {
+    background-color: #5E76FF   ; /* Azul-negro para botones */
     color: white;
     border: none;
     padding: 12px 20px;
@@ -104,15 +106,17 @@ body {
     font-weight: bold;
     cursor: pointer;
     border-radius: 8px;
+    width: 50%;
+
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.Buton button:hover {
-    background-color: #4753c8;
+.ButonR button:hover {
+    background-color: #1C285A; /* Azul-negro más oscuro en hover */
     transform: translateY(-2px);
 }
 
-.Buton button:active {
+.ButonR button:active {
     transform: translateY(0);
 }
 
@@ -122,23 +126,23 @@ body {
 }
 
 .labelAndA a {
-    color: #5E76FF;
+    color: #334E9C; /* Azul más claro para los enlaces */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .labelAndA a:hover {
-    color: #4753c8;
+    color: #000000 ; /* Azul más oscuro en hover */
     text-decoration: underline;
 }
 
 /* Mensajes de error */
 .errore, .errores {
-    color: #FF6B6B;
+    color: #FF4D4D; /* Rojo más brillante para errores */
     font-size: 12px;
     margin-top: 5px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo de error más oscuro */
     padding: 8px;
     border-radius: 6px;
     position: relative;
