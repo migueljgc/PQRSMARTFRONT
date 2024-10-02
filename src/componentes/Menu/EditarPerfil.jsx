@@ -28,7 +28,7 @@ export const EditarPerfil = () => {
                 const headers = { 'Authorization': `Bearer ${token}` };
 
                 // Fetch user data
-                const userResponse = await axios.get('http://localhost:8080/api/auth/editar', { headers });
+                const userResponse = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', { headers });
                 setUser(userResponse.data);
                 console.log(user)
 
@@ -70,7 +70,7 @@ export const EditarPerfil = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.put('http://localhost:8080/api/user/editar', user, {
+            await axios.put('https://pqrsmartback-production.up.railway.app/api/user/editar', user, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
