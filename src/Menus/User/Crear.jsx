@@ -35,7 +35,7 @@ const Crear = () => {
         document.title = "Crear Solicitud"
         const fetchCategorias = async () => {
             try {
-                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/category/get');
+                const response = await axios.get('http://localhost:8080/api/category/get');
                 setCategorias(response.data);
             } catch (error) {
                 console.error('Error al obtener categorias:', error);
@@ -44,7 +44,7 @@ const Crear = () => {
 
         const fetchRequest = async () => {
             try {
-                const response1 = await axios.get('https://pqrsmartback-production.up.railway.app/api/request_type/get');
+                const response1 = await axios.get('http://localhost:8080/api/request_type/get');
                 setRequest(response1.data);
             } catch (error) {
                 console.error('Error al obtener Tipos de solicitudes', error);
@@ -53,7 +53,7 @@ const Crear = () => {
 
         const fetchDependencias = async () => {
             try {
-                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get');
+                const response = await axios.get('http://localhost:8080/api/dependence/get');
                 setDependencias(response.data);
             } catch (error) {
                 console.error('Error al obtener dependencias:', error);
@@ -69,7 +69,7 @@ const Crear = () => {
             console.log(formData)
         };
         const fetchUser = async () => {
-            const response1 = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', {
+            const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -151,7 +151,7 @@ const Crear = () => {
 
         try {
 
-            const response1 = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', {
+            const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -180,7 +180,7 @@ const Crear = () => {
             }));
             setError('Espere.....')
             setShowPopup(true); // Mostrar popup
-            const respuesta = await axios.post('https://pqrsmartback-production.up.railway.app/api/request/save', formDataToSend, {
+            const respuesta = await axios.post('http://localhost:8080/api/request/save', formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -209,17 +209,16 @@ const Crear = () => {
             <div className="menus">
                 <Menu />
             </div>
-            <div className="cuerpo">
-                <div className="headers">
-                    <h1 className="title">CREA TU SOLICITUD</h1>
-                    <div className="user-menu">
+            <div className="user-menu">
                         <UserinfoUser />
 
                     </div>
-                </div>
 
-                <div className="form">
-                    <form className="solicitud-form" onSubmit={handleSubmit}>
+            <div className="cuerpo">
+                    
+                <div className="formcrear">
+                    <form className="solicitud-form-crear" onSubmit={handleSubmit}>
+                    <h1 className="title">CREA TU SOLICITUD</h1>
                         <input type='hidden' name="date" value={date} />
                         <div className="form-group">
                             <label>Tipo De Solicitud</label>
