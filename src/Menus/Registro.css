@@ -58,7 +58,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.Select option {
+.Selects option {
     background-color: #4753c8; /* Fondo de las opciones al abrir */
     color: #fff; /* Color del texto de las opciones */
 }

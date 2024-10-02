@@ -336,7 +336,7 @@ const Registro = () => {
                         </div>
                         <div className="labelAndA">
                             <label >Ya Tienes Cuenta?</label>
-                            <a className='A' href="/Login">Inicia Sesion</a>
+                            <a className='A' href="/Login">Iniciar Sesion</a>
                         </div>
                     </div>
 
