@@ -63,7 +63,7 @@ const CrearDependencias = () => {
             console.log('Datos del formulario a enviar:', formData);
             const dependenceResponse = await axios.post('https://pqrsmartback-production.up.railway.app/api/dependence/save', {
                 nameDependence: formData.dependence,
-                state: {id: 1}
+                state: { id: 1 }
 
             });
             handleReset();
@@ -91,30 +91,29 @@ const CrearDependencias = () => {
             <div className="menus">
                 <MenuAdmin />
             </div>
-            <div className="cuerpos">
-            <div className="headers">
-                    <h1 className="title">CREAR DEPENDENCIA</h1>
-                    <div className="user-menu">
-                        <UserinfoAmin/>
+            <div className="user-menu">
+                <UserinfoAmin />
 
+            </div>
+            <div className="cuerpos-creardepe">
+
+                <div className="form-creardepe">
+                    <h1 className="title-creardepe">CREAR DEPENDENCIA</h1>
+
+                    <div className="input-box-creardepe">
+                        <label htmlFor="dependence">Dependencia:</label><br />
+                        <input
+                            type="text"
+                            id="dependence"
+                            name="dependence"
+                            value={formData.dependence}
+                            onChange={handleChange} required
+                        />
                     </div>
-                </div>
-                <div className="form">
-                    <form className="solicitud-form" onSubmit={handleSubmit}>
-                        <div className="input-box1">
-                            <label htmlFor="dependence">Dependencia:</label><br />
-                            <input
-                                type="text"
-                                id="dependence"
-                                name="dependence"
-                                value={formData.dependence}
-                                onChange={handleChange} required
-                            />
-                        </div>
-                        <div>
-                            <button className="btnCrearCat" type="submit">Registrar</button>
-                        </div>
-                    </form>
+                    <div className="btnCreardepe">
+                        <button  onClick={handleSubmit}>Registrar</button>
+                    </div>
+
                 </div>
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}

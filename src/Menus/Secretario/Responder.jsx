@@ -126,18 +126,15 @@ const Responder = () => {
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             <div className="menus">
                 <MenuSecre />
-            </div>
-            <div className="cuerpos">
-                <div className="headers">
-                    <h1 className="title">RESPONDER</h1>
-                    <div className="user-menu">
+            </div><div className="user-menu">
                         <UserinfoSecre />
 
                     </div>
-                </div>
-
+            <div className="cuerpos">
+              
                 <div className="form">
-                    <form className="solicitud-form" onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
+                    <h1 className="title">RESPONDER</h1>
                         <div className="input-box">
                             <label>Respueta:</label><br />
                             <textarea

@@ -8,7 +8,7 @@
     gap: 0px 2px;
     grid-auto-flow: row;
     grid-template-areas:
-        "menus cuerpos";
+        "menus cuerpos-creardepe";
 }
 
 .menus {
@@ -16,68 +16,91 @@
 }
 
 
-.cuerpos {
-    grid-area: cuerpos;
-
-}
-
-.title {
-    font-size: 27px;
-    color: #ffffff;
-    align-items: center;
-    text-align: center;
-}
-
-.form {
+.cuerpos-creardepe {
+    grid-area: cuerpos-creardepe;
     display: flex;
     justify-content: center;
-    
-}
-
-.solicitud-form {
-    background-color: #FFF;
+    align-items: center;
+    height: 100vh;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: beige solid 1px;
-    align-items: center;
-    text-align: center;
-    width: 80%;
-    justify-content: center;
+    overflow-y: auto;
+
 }
 
-.input-box1{
+.title-creardepe {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 25px;
-    margin-top: 180px;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
+.form-creardepe {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    width: 100%; /* Cambiado a porcentaje para ser más flexible */
+    max-width: 700px;
+    color: #FFFFFF;
+    box-sizing: border-box;
     
 }
 
-.input-box1 label {
-    margin-bottom: 5px;
-    margin-left: 30px;
-    padding-right: 30px;
-    font-size: 15px;
+.input-box-creardepe{
+    display: flex; /* Cambiar a flexbox */
+    align-items: center; /* Alinear verticalmente */
+    margin-bottom: 20px; /* Espacio entre los inputs */
+    
+    
 }
 
-.input-box1 input{
-    width: 50%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-    margin-right: 30px;
+.input-box-creardepe label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    margin-right: 0.8rem; /* Espacio a la derecha de la etiqueta */
+
 }
 
-.btnCrearCat{
-    margin-top: 180px;
-    background-color: #ec7548;
-    color: white;
+.input-box-creardepe input{
     border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 50%;
-    font-size: 16px;
+    color: #FFFFFF;
+    font-size: 1rem; /* Cambiado a unidad relativa */
+    border-bottom: 2px solid #fff;
+    outline: none;
+    background: transparent;
+    width: 100%; /* Ancho completo */
+    padding: 10px 0; /* Espaciado vertical */
+    transition: border-color 0.3s ease;
+}
+.input-box-creardepe input, select{
+    border-bottom: 2px solid #5E76FF; /* Cambiar el color de la línea al enfocar */
+}
+.btnCreardepe{
+    display: flex; /* Habilitar flexbox */
+    justify-content: center; /* Centrar horizontalmente */
+    margin-top: 10px; /* Espacio superior para separación */
+
+}
+.btnCreardepe button{
+    background-color: #FFA500; /* Color de fondo inicial (naranja) */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 6px 12px; /* Espaciado interno más pequeño */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    border-radius: 6px; /* Bordes redondeados más sutiles */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    width: 50%; /* Ancho relativo */
+    font-size: 1rem; /* Cambiado a unidad relativa */
+}
+.btnCreardepe button:hover {
+    background-color: #5E76FF; /* Cambiar a azul al pasar el mouse */
+}
+
+.btnCreardepe button:active {
+    background-color: #4753c8; /* Cambiar a un azul más oscuro al presionar */
+    transform: translateY(0); /* Reiniciar la posición al hacer clic */
 }

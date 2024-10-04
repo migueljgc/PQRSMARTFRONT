@@ -59,7 +59,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.Selects option {
+select option {
     background-color: #4A81D1; /* Azul oscuro para las opciones de select */
     color: #E0E0E0;
 }

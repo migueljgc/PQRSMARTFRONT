@@ -3,12 +3,9 @@ import '../Admin/CrearUsuario.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
-import Popup from '../../componentes/Popup'
 
 const CrearUsuario = () => {
     const [passwordError, setPasswordError] = useState('');
-    const [showPopup, setShowPopup] = useState(false);
-    const [error, setError] = useState('');
     const [dependenceTypes, setDependence] = useState([]);
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [identificationTypes, setIdentificationTypes] = useState([]);
@@ -156,59 +153,38 @@ const CrearUsuario = () => {
                     number: parseInt(formData.numero),
                     role: formData.rol,
                 });
+                alert('Se ha enviado un mensaje de verificacion a su correo, si no le aparece verifique la carpeta de spam.');
                 console.log('Respuesta al guardar usuario:', userResponse.data);
                 console.log('Usuario registrado correctamente');
                 setConfirmPasswordError('')
                 setPasswordError('')
                 handleReset();
-                setError('Se ha enviado un mensaje de verificacion a su correo, si no le aparece verifique la carpeta de spam.')
-                setShowPopup(true); // Mostrar popup
-                return;
 
+            }
+            else {
+                alert('Contraseñas no coinciden')
             }
 
         } catch (error) {
-            const status = error.response.data;
-            console.log(status)
-            // Manejo de errores
-            if (status === 'El correo electrónico ya está en uso.') {
-                setError('El correo electrónico ya está en uso.');
-            } else if (status === 'El usuario ya existe.') {
-                setError("El usuario ya existe.");
-            } else if (status === 'El número de identificación ya está registrado.') {
-                setError("El número de identificación ya está registrado.");
-            } else if (status === 'El número ya está registrado.') {
-                setError("El número ya está registrado.");
-            }
-            else {
-                setError("Error en el servidor. Intente nuevamente más tarde.");
-            }
-            setShowPopup(true); // Mostrar popup
-            return;
+            console.error('Error al guardar información en la base de datos', error);
         }
 
-    };
-    const closePopup = () => {
-        setShowPopup(false);
     };
     return (
         <div className='CrearUsuario'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             <div className="menus">
                 <MenuAdmin />
-            </div>
-            <div className="cuerpos">
-                <div className="headers">
-                    <h1 className="title">CREAR USUARIO</h1>
-                    <div className="user-menu">
+            </div><div className="user-menu">
                         <UserinfoAmin />
 
                     </div>
-                </div>
-
-                <div className="form">
+            <div className="cuerpos">
+                
+                <div className="formUsuario">
                     <form className="crearusu" onSubmit={handleSubmit}>
-                        <div className="input-label">
+                    <h1 className="title">CREAR USUARIO</h1>
+                        <div className="input-label-creausu">
                             <label >Tipo De Persona</label>
                             <select
                                 id="tipoPersona"
@@ -224,7 +200,7 @@ const CrearUsuario = () => {
                                 ))}
                             </select>
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Tipo De Identificacion</label>
                             <select
                                 id="tipoIdentificacion"
@@ -240,7 +216,7 @@ const CrearUsuario = () => {
                                 ))}
                             </select>
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Numero De Identificacion</label>
                             <input
                                 type="text"
@@ -249,7 +225,7 @@ const CrearUsuario = () => {
                                 value={formData.identificacion}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Nombres Completos</label>
                             <input
                                 type="text"
@@ -258,7 +234,7 @@ const CrearUsuario = () => {
                                 value={formData.nombre}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Apellidos Completos</label>
                             <input
                                 type="text"
@@ -267,7 +243,7 @@ const CrearUsuario = () => {
                                 value={formData.apellido}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Correo Electronico</label>
                             <input
                                 type="email"
@@ -276,7 +252,7 @@ const CrearUsuario = () => {
                                 value={formData.correo}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Telefono</label>
                             <input
                                 type="text"
@@ -285,7 +261,7 @@ const CrearUsuario = () => {
                                 value={formData.numero}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Usuario</label>
                             <input
                                 type="text"
@@ -294,7 +270,7 @@ const CrearUsuario = () => {
                                 value={formData.usuario}
                                 onChange={handleChange} required />
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Contraseña</label>
                             <input
                                 type="password"
@@ -305,7 +281,7 @@ const CrearUsuario = () => {
                             />
                             {passwordError && <div className='errore'> {passwordError}</div>}
                         </div>
-                        <div className="input-label">
+                        <div className="input-label-creausu">
                             <label >Confirmar Contraseña</label>
                             <input
                                 type="password"
@@ -316,8 +292,8 @@ const CrearUsuario = () => {
                             />
                             {confirmPasswordError && <div className='errore'> {confirmPasswordError}</div>}
                         </div>
-                        <div className="input-label">
-                            <label >Roles:</label><br />
+                        <div className="input-label-creausu">
+                            <label >Roles:</label>
                             <select
                                 id="rol"
                                 name="rol"
@@ -330,8 +306,8 @@ const CrearUsuario = () => {
                                 <option value="SECRE">SECRE</option>
                             </select>
                         </div>
-                        <div className="input-label">
-                            <label>Dependencia:</label><br />
+                        <div className="input-label-creausu">
+                            <label>Dependencia:</label>
                             <select
                                 id="dependencia"
                                 name="dependencia"
@@ -346,13 +322,12 @@ const CrearUsuario = () => {
                                 ))}
                             </select>
                         </div>
-                        <div className="Buton">
+                        <div className="Buton-creausu">
                             <button type="submit">Registrate</button>
                         </div>
                     </form>
                 </div>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }
