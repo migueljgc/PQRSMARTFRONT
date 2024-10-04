@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: 30px 0 -70px; /* Padding: arriba, derecha-izquierda, abajo */
+    margin-bottom: 30px;
 }
 
 .logo-img {
