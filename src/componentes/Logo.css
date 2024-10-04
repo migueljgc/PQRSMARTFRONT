@@ -1,12 +1,12 @@
 .logo {
-    background: red; /* Puedes ajustar el color o eliminarlo */
+    background: transparent; /* Puedes ajustar el color o eliminarlo */
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 10px 0 20px; /* Padding: arriba, derecha-izquierda, abajo */
+    padding: 30px 0 -70px; /* Padding: arriba, derecha-izquierda, abajo */
 }
 
 .logo-img {
-    width: 25vh; /* Ajusta el tamaño del logo si es necesario */
+    width: 35vh; /* Ajusta el tamaño del logo si es necesario */
     margin: 0 auto;
 }

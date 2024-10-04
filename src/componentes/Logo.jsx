@@ -1,4 +1,4 @@
-import logo from '/src/images/logo-foot.png';
+import logo from '/images/logo.png';
 import './Logo.css'
 
 function Logo() {
