@@ -3,9 +3,12 @@ import '../Admin/CrearCategoria.css'
 import axios from 'axios';
 import { MenuAdmin } from '../../componentes/Menu';
 import { UserinfoAmin } from '../../componentes/Userinfo';
+import Popup from '../../componentes/Popup'
 
 const CrearCategoria = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         category: '',
         dependence: '',
@@ -73,10 +76,23 @@ const CrearCategoria = () => {
 
         }
         catch (error) {
-            console.error('Error al guardar información:', error);
+            const status = error.response && error.response.status;
+            // Manejo de errores
+            if (status === 409) {
+                setError("Error la categoria ya se encuentra registrada.");
+            } 
+            else{
+                setError("Error en el servidor. Intente nuevamente más tarde.");
+            }
+            setShowPopup(true); // Mostrar popup
+            return;
         }
 
     }
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
     return (
         <div className='CrearCategoria'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -88,41 +104,43 @@ const CrearCategoria = () => {
             </div>
             <div className="cuerpos-crearcat">
                 <div className="form-crearcat">
-                    <h1 className="title-crearcat">CREAR CATEGORIA</h1>
-                    <div className="input-box-crearcat">
-                        <label className='category' htmlFor="category">Nombre De Categoria:</label><br />
-                        <input
-                            className='category'
-                            type="category"
-                            id="category"
-                            name="category"
-                            value={formData.category}
-                            onChange={handleChange} required
-                        />
-                    </div>
-                    <div className="input-box-crearcat">
-                        <label htmlFor="dependence">Dependencia:</label><br />
-                        <select
-                            type="text"
-                            id="dependence"
-                            name="dependence"
-                            value={formData.dependence}
-                            onChange={handleChange} required
-                        >
-                            <option key="" value="">Seleccione el tipo</option>
-                            {data.map((type) => (
-                                <option key={type.idDependence} value={type.idDependence}>
-                                    {type.nameDependence}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="btnCrearCate" >
-                        <button onClick={handleSubmit}>Registrar</button>
-                    </div>
-
+                    <form onSubmit={handleSubmit}>
+                        <h1 className="title-crearcat">CREAR CATEGORIA</h1>
+                        <div className="input-box-crearcat">
+                            <label className='category' htmlFor="category">Nombre De Categoria:</label><br />
+                            <input
+                                className='category'
+                                type="category"
+                                id="category"
+                                name="category"
+                                value={formData.category}
+                                onChange={handleChange} required
+                            />
+                        </div>
+                        <div className="input-box-crearcat">
+                            <label htmlFor="dependence">Dependencia:</label><br />
+                            <select
+                                type="text"
+                                id="dependence"
+                                name="dependence"
+                                value={formData.dependence}
+                                onChange={handleChange} required
+                            >
+                                <option key="" value="">Seleccione el tipo</option>
+                                {data.map((type) => (
+                                    <option key={type.idDependence} value={type.idDependence}>
+                                        {type.nameDependence}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="btnCrearCate" >
+                            <button type='submit'>Registrar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

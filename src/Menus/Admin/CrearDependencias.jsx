@@ -74,10 +74,17 @@ const CrearDependencias = () => {
 
         }
         catch (error) {
-            console.error('Error al guardar información:', error);
-            setError('Error al guardar información.');
+            const status = error.response && error.response.status;
+            // Manejo de errores
+            if (status === 403) {
+                setError("Error la dependencia ya se encuentra registrada.");
+            } 
+            else{
+                setError("Error en el servidor. Intente nuevamente más tarde.");
+            }
             setShowPopup(true); // Mostrar popup
             return;
+            
         }
 
     }
@@ -98,26 +105,28 @@ const CrearDependencias = () => {
             <div className="cuerpos-creardepe">
 
                 <div className="form-creardepe">
-                    <h1 className="title-creardepe">CREAR DEPENDENCIA</h1>
+                    <form onSubmit={handleSubmit} >
+                        <h1 className="title-creardepe">CREAR DEPENDENCIA</h1>
 
-                    <div className="input-box-creardepe">
-                        <label htmlFor="dependence">Dependencia:</label><br />
-                        <input
-                            type="text"
-                            id="dependence"
-                            name="dependence"
-                            value={formData.dependence}
-                            onChange={handleChange} required
-                        />
-                    </div>
-                    <div className="btnCreardepe">
-                        <button  onClick={handleSubmit}>Registrar</button>
-                    </div>
-
+                        <div className="input-box-creardepe">
+                            <label htmlFor="dependence">Dependencia:</label><br />
+                            <input
+                                type="text"
+                                id="dependence"
+                                name="dependence"
+                                value={formData.dependence}
+                                onChange={handleChange} required
+                            />
+                        </div>
+                        <div className="btnCreardepe">
+                            <button type='submit'>Registrar</button>
+                        </div>
+                    </form>
                 </div>
+
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
-        </div>
+        </div >
     );
 }
 
