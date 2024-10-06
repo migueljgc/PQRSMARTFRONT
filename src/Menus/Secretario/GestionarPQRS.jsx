@@ -78,8 +78,8 @@ const GestionarPQRS = () => {
         {
             when: row => row === selectedRow,
             style: {
-                backgroundColor: 'red',
-                color: 'black',
+                backgroundColor: '#5A93D9 !important',
+                color: 'black !important',
                 '&:hover': {
                     cursor: 'pointer'
                 }
