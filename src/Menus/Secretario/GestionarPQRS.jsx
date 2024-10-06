@@ -59,12 +59,13 @@ const GestionarPQRS = () => {
         e.preventDefault();
         console.log(selectedRow)
         if (selectedRow) {
-            
+
             // Actualizar la solicitud de PQRS seleccionada
-            const response= await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get', selectedRow)
-            
+            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get', selectedRow)
+
             navigate('/Responder', { state: { data: selectedRow } });
-                
+            setSelectedRow(null)
+
         } else {
             setError('Por favor seleccione una fila')
             setShowPopup(true); // Mostrar popup
@@ -77,12 +78,13 @@ const GestionarPQRS = () => {
         {
             when: row => row === selectedRow,
             style: {
-                backgroundColor: '#b0e0e6',
+                backgroundColor: 'red',
                 color: 'black',
                 '&:hover': {
                     cursor: 'pointer'
                 }
             }
+            
         }
     ];
     useEffect(() => {
@@ -102,18 +104,18 @@ const GestionarPQRS = () => {
         };
     }, []); // Solo se ejecuta una vez al montar el componente
 
-// Filtrar datos cuando cambie el texto de búsqueda
-useEffect(() => {
-    const filtered = data.filter(item =>
-        String(item.category.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
-        String(item.description).toLowerCase().includes(filterText.toLowerCase()) ||
-        String(item.date).toLowerCase().includes(filterText.toLowerCase()) ||
-        String(item.requestType.nameRequestType).toLowerCase().includes(filterText.toLowerCase()) ||  // Convertir a string
-        String(item.mediumAnswer).toLowerCase().includes(filterText.toLowerCase()) ||
-        String(item.requestState.nameRequestState).toLowerCase().includes(filterText.toLowerCase())
-    );
-    setFilteredData(filtered);
-}, [filterText, data]); // Se ejecuta cuando cambia filterText o data
+    // Filtrar datos cuando cambie el texto de búsqueda
+    useEffect(() => {
+        const filtered = data.filter(item =>
+            String(item.category.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
+            String(item.description).toLowerCase().includes(filterText.toLowerCase()) ||
+            String(item.date).toLowerCase().includes(filterText.toLowerCase()) ||
+            String(item.requestType.nameRequestType).toLowerCase().includes(filterText.toLowerCase()) ||  // Convertir a string
+            String(item.mediumAnswer).toLowerCase().includes(filterText.toLowerCase()) ||
+            String(item.requestState.nameRequestState).toLowerCase().includes(filterText.toLowerCase())
+        );
+        setFilteredData(filtered);
+    }, [filterText, data]); // Se ejecuta cuando cambia filterText o data
 
 
     // Definir las columnas de la tabla
@@ -162,36 +164,34 @@ useEffect(() => {
             <div className="menus">
                 <MenuSecre />
             </div>
-            <div className="cuerpos">
-                <div className="headers">
-                    <h1 className="title">GESTIONAR PQRS</h1>
-                    <div className="user-menu">
-                        <UserinfoSecre />
+            <div className="user-menu">
+                <UserinfoSecre />
+            </div>
+            <div className="cuerposgestionarpqrs">
 
-                    </div>
-                </div>
-
-                <div className="form">
-                    <form className="solicitud-forms">
+                <div className="formgestionarpqrs">
+                    <form className="solicitud-gestionarpqrs" onSubmit={handleResponderClick}>
+                        <h1 className="titlegestionarpqrs">GESTIONAR PQRS</h1>
                         <div className="busqueda">
-                            <input type="text" placeholder='Buscar' 
-                            value={filterText}
-                            onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
+                            <input type="text" placeholder='Buscar'
+                                value={filterText}
+                                onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
                             />
                         </div>
 
                         <DataTable
+                            className='dataTable-container'
                             columns={columns}
                             data={filteredData}
                             responsive
                             pagination
-                            paginationPerPage={7}
+                            paginationPerPage={6}
                             onRowClicked={handleRow}
                             conditionalRowStyles={conditionalRowStyles}
                         />
 
-                        <div className="Botone" disabled={!selectedRow}>
-                            <button onClick={handleResponderClick} disabled={!selectedRow} >Responder</button>
+                        <div className="Btngestionarpqrs" >
+                            <button disabled={selectedRow==null} >Responder</button>
                         </div>
                     </form>
                 </div>

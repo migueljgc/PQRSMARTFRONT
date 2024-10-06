@@ -1,6 +1,5 @@
-.GestionarPQRS{
+.GestionarPQRS {
     font-family: 'Montserrat', sans-serif;
-    background-color: #ebeef3;
     height: 100vh;
     display: grid;
     grid-template-columns: 0.5fr 1.5fr;
@@ -9,7 +8,7 @@
     gap: 0px 2px;
     grid-auto-flow: row;
     grid-template-areas:
-        "menus cuerpos";
+        "menus cuerposgestionarpqrs";
 }
 
 .menus {
@@ -17,55 +16,69 @@
 }
 
 
-.cuerpos {
-    grid-area: cuerpos;
-
-}
-
-.title {
-    font-size: 27px;
-    color: #ffffff;
-    align-items: center;
-    text-align: center;
-    margin-left: 30PX;
-}
-.form {
+.cuerposgestionarpqrs {
+    grid-area: cuerposgestionarpqrs;
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+
 }
 
-.solicitud-forms {
-    background-color: #FFF;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: beige solid 1px;
-    align-items: center;
+.titlegestionarpqrs {
+    color: #FFFFFF;
+    font-size: 2rem;
     text-align: center;
-    width: 80%;
 }
-.Botone button {
-    background-color: #ec7548;
-    /* Color de fondo del botón */
+
+.formgestionarpqrs {
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    width: 100%;
+    max-width: 800px;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    overflow: auto;
+    /* Si hay mucho contenido, permitir scroll interno */
+
+}
+
+.solicitud-gestionarpqrs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Btngestionarpqrs {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.Btngestionarpqrs button {
+    background-color: #5E76FF;
+    /* Azul-negro para botones */
     color: white;
-    /* Color del texto del botón */
     border: none;
-    /* Sin borde alrededor del botón */
-    padding: 10px 20px;
-    /* Espaciado interno (padding) */
-    border-radius: 8px;
-    /* Bordes redondeados */
-    font-family: 'Montserrat', sans-serif;
-    /* Fuente del botón */
-    font-size: 17px;
-    /* Tamaño de la fuente */
-    cursor: pointer;
-    /* Cambia el cursor cuando pasa sobre el botón */
-    transition: background-color 0.3s, transform 0.2s;
-    /* Transiciones suaves para el color y la transformación */
-    margin-bottom: 20px;
-    /* Espacio debajo del campo */
-    width: 30%;
+    padding: 12px 20px;
+    font-size: 16px;
     font-weight: bold;
-  }
-  
+    cursor: pointer;
+    border-radius: 8px;
+    width: 50%;
+}
+
+.Btngestionarpqrs button:hover {
+    background-color: #1C285A;
+    /* Azul-negro más oscuro en hover */
+    transform: translateY(-2px);
+}
+

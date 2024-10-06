@@ -122,7 +122,7 @@
 
 /* Para las celdas de la tabla */
 .dataTable-container .rdt_TableRow {
-    background-color: #4A81D1 !important;
+    background-color: #4A81D1 /*!important*/;
     font-weight: 600;
     color: #CADAE5;
     font-size: 14px;
