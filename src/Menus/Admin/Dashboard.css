@@ -18,17 +18,40 @@
 
 .cuerpos {
     grid-area: cuerpos;
-
-}
-
-.title {
-    font-size: 27px;
-    color: #ffffff;
-    align-items: center;
-    text-align: center;
-}
-.form{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.titledash {
+    color: #FFFFFF;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.dashform{
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    width: 100%;
+    max-width: 800px;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    overflow: auto;
+    /* Si hay mucho contenido, permitir scroll interno */
+    
+}
+.total{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .formdash {
@@ -49,7 +72,10 @@
 }
 .totalprs {
     grid-area: totalprs;
-    background-color: #FFF;
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -60,7 +86,10 @@
 
 .totalpqrsdepe {
     grid-area: totalpqrsdepe;
-    background-color: #FFF;
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
     padding: 20px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -68,17 +97,29 @@
     border: beige solid 1px;
     
 }
-.headers{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 100px;
+.totalpqrsdepe h1, .totalpqrsdepemes h1, .totalpqrsmes h1{
+    margin-bottom: 20px;
 }
+
+.pqrstotal{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.pqrstotal p{
+    font-size: 3rem ;
+}
+
 .user-menu{
     z-index: 2;
 }
 .totalpqrsmes {
     grid-area: totalpqrsmes;
-    background-color: #FFF;
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -89,7 +130,10 @@
 
 .totalpqrsdepemes {
     grid-area: totalpqrsdepemes;
-    background-color: #FFF;
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
