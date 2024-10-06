@@ -13,7 +13,7 @@ const Responder = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { state } = location;
-    const datas = state ? state.data : {};
+    const datas = state ? state.data:{} ;
     const [form, setForm] = useState(datas);
     const token = localStorage.getItem('token')
     const [formData, setFormData] = useState({
@@ -88,31 +88,29 @@ const Responder = () => {
             console.error('Error al actualizar el estado: ', error);
         }
     };
-    
-    console.log(datas)
-    if (!datas) {
-        return(
-        <div className='Responder'>
-            <div className="menus">
-                <MenuSecre />
-            </div>
-            <div className="cuerpos">
-                <div className="headers">
-                    <h1 className="title">RESPONDER</h1>
-                    <div className="user-menu">
-                        <UserinfoSecre />
 
+    console.log('los datos: ',datas)
+    if (!datas || !datas.idRequest) {
+        return (
+            <div className='Responder'>
+                <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
+                <div className="menus">
+                    <MenuSecre />
+                </div>
+                <div className="user-menu">
+                    <UserinfoSecre />
+                </div>
+                <div className="cuerpoResponder">
+
+                    <div className="formResponder">
+                        <form className="Responder-form">
+                            <h1 className="titleResponder">RESPONDER</h1>
+                            <h2>No hay datos Seleccionados.</h2>
+
+                        </form>
                     </div>
                 </div>
-
-                <div className="form">
-                    <form className="solicitud-form">
-                        <h2>No hay datos Seleccionados.</h2>
-
-                    </form>
-                </div>
             </div>
-        </div>
         )
 
 
@@ -126,16 +124,17 @@ const Responder = () => {
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             <div className="menus">
                 <MenuSecre />
-            </div><div className="user-menu">
-                        <UserinfoSecre />
+            </div>
+            <div className="user-menu">
+                <UserinfoSecre />
 
-                    </div>
-            <div className="cuerpos">
-              
-                <div className="form">
-                    <form onSubmit={handleSubmit}>
-                    <h1 className="title">RESPONDER</h1>
-                        <div className="input-box">
+            </div>
+            <div className="cuerpoResponder">
+
+                <div className="formResponder">
+                    <form className="Responder-form" onSubmit={handleSubmit}>
+                        <h1 className="titleResponder">RESPONDER</h1>
+                        <div className="input-box-Responder">
                             <label>Respueta:</label><br />
                             <textarea
                                 name="answer"

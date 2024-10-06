@@ -81,4 +81,9 @@
     /* Azul-negro más oscuro en hover */
     transform: translateY(-2px);
 }
-
+.Btngestionarpqrs button:active {
+    background-color: #1C285A;
+    /* Cambiar a un azul más oscuro al presionar */
+    transform: translateY(0);
+    /* Reiniciar la posición al hacer clic */
+}
