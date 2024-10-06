@@ -55,7 +55,7 @@ const GestionCategoria = () => {
     }
     const handleCancel = async (idCategory) => {
         try {
-            await axios.put(`https://pqrsmartback-production.up.railway.app/api/category/cancel/${idCategory}`);
+            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/category/cancel/${idCategory}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
             setError('Categoria Desactivada.');
