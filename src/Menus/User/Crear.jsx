@@ -169,7 +169,7 @@ const Crear = () => {
             }
             formDataToSend.append('request', new Blob([JSON.stringify({
                 description: formData.description,
-                mediumAnswer: formData.mediumAnswer,
+                mediumAnswer: 'Correo',
                 category: { idCategory: selectedCategoria ? selectedCategoria.idCategory : null },
                 requestType: { idRequestType: selectedRequestType ? selectedRequestType.idRequestType : null },
                 requestState: StateRequest,
