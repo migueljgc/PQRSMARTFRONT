@@ -57,7 +57,7 @@ const GestionCategoria = () => {
         try {
             await axios.put(`https://pqrsmartback-production.up.railway.app/api/category/cancel/${idCategory}`);
             // Actualizar la tabla después de cancelar la solicitud
-            fetchData(); 
+            fetchData();
             setError('Categoria Desactivada.');
             setShowPopup(true); // Mostrar popup
             return;
@@ -72,12 +72,12 @@ const GestionCategoria = () => {
         const filtered = data.filter(item =>
             String(item.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
             String(item.dependence.nameDependence).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.state.description).toLowerCase().includes(filterText.toLowerCase()) 
-            
+            String(item.state.description).toLowerCase().includes(filterText.toLowerCase())
+
         );
         setFilteredData(filtered);
     }, [filterText, data]); // Se ejecuta cuando cambia filterText o data
-    
+
     const columns = [
         {
             name: 'Categoria',
@@ -117,30 +117,28 @@ const GestionCategoria = () => {
             <div className="menus">
                 <MenuAdmin />
             </div>
-            <div className="cuerpos">
-            <div className="headers">
-                     <h1 className="title">GESTION DE CATEGORIAS</h1>
-                    <div className="user-menu">
-                        <UserinfoAmin/>
+            <div className="user-menu">
+                <UserinfoAmin />
+            </div>
 
-                    </div>
-                </div>
-               
-                <div className="form">
+            <div className="cuerpos">
+
+                <div className="formgestionCate">
                     <form className="gestionCate-form">
+                        <h1 className="titlegestionCate">GESTION DE CATEGORIAS</h1>
                         <div className="busqueda">
                             <input type="text" placeholder='Buscar' value={filterText}
-                            onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
+                                onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
                             />
-                            <button className='btnCrear' onClick={handleCrear}  >Crear</button>
                         </div>
 
                         <DataTable
+                            className='dataTable-container'
                             columns={columns}
                             data={filteredData}
                             responsive
                             pagination
-                            paginationPerPage={7}
+                            paginationPerPage={6}
                         />
                     </form>
                 </div>

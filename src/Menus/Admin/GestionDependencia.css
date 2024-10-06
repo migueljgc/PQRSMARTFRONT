@@ -18,53 +18,39 @@
 
 .cuerpos {
     grid-area: cuerpos;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
 }
 
-.title {
-    font-size: 27px;
-    color: #ffffff;
-    align-items: center;
+.titlegestionDepe {
+    color: #FFFFFF;
+    font-size: 2rem;
     text-align: center;
 }
 
-.form {
-    display: flex;
-    justify-content: center;
+.formgestionDepe {
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    width: 100%;
+    max-width: 800px;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    overflow: auto;
+    /* Si hay mucho contenido, permitir scroll interno */
+
 }
 
 .gestionDepe-form {
-    background-color: #FFF;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: beige solid 1px;
-    align-items: center;
-    text-align: center;
-    width: 70%;
-}
-
-.btnCrear {
-    background-color: #ec7548;
-    /* Color de fondo del botón */
-    color: white;
-    /* Color del texto del botón */
-    border: none;
-    /* Sin borde alrededor del botón */
-    padding: 8px 20px;
-    /* Espaciado interno (padding) */
-    border-radius: 8px;
-    /* Bordes redondeados */
-    font-family: 'Montserrat', sans-serif;
-    /* Fuente del botón */
-    font-size: 17px;
-    /* Tamaño de la fuente */
-    cursor: pointer;
-    /* Cambia el cursor cuando pasa sobre el botón */
-    transition: background-color 0.3s, transform 0.2s;
-    /* Transiciones suaves para el color y la transformación */
-    margin-bottom: 20px;
-    /* Espacio debajo del campo */
-    font-weight: bold;
-
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

@@ -139,7 +139,7 @@ const Consultar = () => {
 
                 <div className="formConsultar">
                     <form className="consultar-form">
-                        <h1 className="title">CONSULTAR SOLICITUD</h1>
+                        <h1 className="titleConsultar">CONSULTAR SOLICITUD</h1>
                         <div className="busqueda">
                             <label>Introduce Tu Numero De Radicado</label>
                             <input type="text"
@@ -155,7 +155,7 @@ const Consultar = () => {
                             fixedHeader
                             responsive
                             pagination
-                            paginationPerPage={7}
+                            paginationPerPage={6}
                             
                         />
                     </form>

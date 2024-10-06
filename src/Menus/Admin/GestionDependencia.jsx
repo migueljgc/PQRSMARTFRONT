@@ -57,7 +57,7 @@ const GestionDependencia = () => {
         try {
             await axios.put(`https://pqrsmartback-production.up.railway.app/api/dependence/cancel/${idDependence}`);
             // Actualizar la tabla después de cancelar la solicitud
-            fetchData(); 
+            fetchData();
             setError('Dependencia Desactivada.');
             setShowPopup(true); // Mostrar popup
             return;
@@ -72,8 +72,8 @@ const GestionDependencia = () => {
     useEffect(() => {
         const filtered = data.filter(item =>
             String(item.nameDependence).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.state.description).toLowerCase().includes(filterText.toLowerCase()) 
-            
+            String(item.state.description).toLowerCase().includes(filterText.toLowerCase())
+
         );
         setFilteredData(filtered);
     }, [filterText, data]); // Se ejecuta cuando cambia filterText o data
@@ -111,29 +111,27 @@ const GestionDependencia = () => {
             <div className="menus">
                 <MenuAdmin />
             </div>
+            <div className="user-menu">
+                <UserinfoAmin />
+            </div>
             <div className="cuerpos">
-            <div className="headers">
-                    <h1 className="title">GESTION DE DEPENDENCIAS</h1>
-                    <div className="user-menu">
-                        <UserinfoAmin/>
 
-                    </div>
-                </div>
-                <div className="form">
+                <div className="formgestionDepe">
                     <form className="gestionDepe-form">
+                        <h1 className="titlegestionDepe">GESTION DE DEPENDENCIAS</h1>
                         <div className="busqueda">
                             <input type="text" placeholder='Buscar' value={filterText}
-                            onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
+                                onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
                             />
-                            <button className='btnCrear' onClick={handleCrear}  >Crear</button>
                         </div>
 
                         <DataTable
+                            className='dataTable-container'
                             columns={columns}
                             data={filteredData}
                             responsive
                             pagination
-                            paginationPerPage={7}
+                            paginationPerPage={6}
                         />
                     </form>
                 </div>
