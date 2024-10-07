@@ -30,10 +30,7 @@ export const HomePage = () => {
             <div className="cuerpos">
                 <div className="headers">
                     <title className='titulo'>Bienvenido {name}</title>
-                    <div className="user-menu">
-                        <UserinfoUser />
 
-                    </div>
                 </div>
                 <div className="mision">
                     <p className='p1'>Mision: </p>
@@ -72,10 +69,7 @@ export const HomePageAdmin = () => {
             <div className="cuerpos">
                 <div className="headers">
                     <title className='titulo'>Bienvenido {name}</title>
-                    <div className="user-menu">
-                        <UserinfoAmin />
 
-                    </div>
                 </div>
 
                 <div className="mision">
@@ -117,10 +111,7 @@ export const HomePageSecre = () => {
             <div className="cuerpos">
                 <div className="headers">
                     <title className='titulo'>Bienvenido {name}</title>
-                    <div className="user-menu">
-                        <UserinfoSecre />
 
-                    </div>
                 </div>
 
                 <div className="mision">
