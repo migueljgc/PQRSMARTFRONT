@@ -9,7 +9,7 @@ import CrearUsuario from "./Menus/Admin/CrearUsuario.jsx";
 createRoot(document.getElementById('root')).render(
     <StrictMode>
             <Router>
-                <CrearUsuario />
+                <AppRouter />
             </Router>
     </StrictMode>,
 )
