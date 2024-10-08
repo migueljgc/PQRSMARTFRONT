@@ -147,3 +147,17 @@ select option {
     border-radius: 6px;
     position: relative;
 }
+
+.passwordRegistro {
+    display: flex;
+    align-items: center;
+    
+}
+
+
+
+.passwordRegistro span {
+    cursor: pointer;
+    margin-left: -30px;
+    
+}

@@ -50,6 +50,7 @@ export const Recovery = () => {
             console.log(email);
             const response = await axios.post('https://pqrsmartback-production.up.railway.app/forgot-password/email', { email });
             setError("Éxito");
+            setEmail('')
             setShowPopup(true); // Mostrar popup
             return;
         } catch (error) {

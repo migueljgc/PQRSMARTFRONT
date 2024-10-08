@@ -3,6 +3,7 @@ import '../Menus/Registro.css'
 import axios from 'axios';
 import Popup from '../componentes/Popup'
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Registro = () => {
     const [passwordError, setPasswordError] = useState('');
@@ -10,6 +11,8 @@ const Registro = () => {
     const [identificationTypes, setIdentificationTypes] = useState([]);
     const [personTypes, setPersonTypes] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     const [error, setError] = useState('');
     const [isLogged, setIsLogged] = useState('');
     const navigate = useNavigate();
@@ -26,10 +29,16 @@ const Registro = () => {
         tipoPersona: '',
         dependencia: 7,
     });
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+    const confirmTogglePasswordVisibility = () => {
+        setConfirmPasswordVisible(!confirmPasswordVisible);
+    };
     const checkLoginStatus = () => {
         const logged = localStorage.getItem('loggetPQRSMART') === 'true';
         setIsLogged(logged);
-        
+
         if (logged) {
             const userData = JSON.parse(localStorage.getItem('userPQRSMART'));
             if (userData) {
@@ -311,24 +320,38 @@ const Registro = () => {
                         </div>
                         <div className="labelsAndInputs">
                             <label >Contraseña</label>
-                            <input className='inputs'
-                                type="password"
-                                id="contraseña"
-                                name="contraseña"
-                                value={formData.contraseña}
-                                onChange={handleChange} required
-                            />
+                            <div className="passwordRegistro">
+                                <input className='inputs'
+                                    type={passwordVisible ? 'text' : 'password'}
+                                    id="contraseña"
+                                    name="contraseña"
+                                    value={formData.contraseña}
+                                    onChange={handleChange} required
+                                />
+                                <span
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {passwordVisible ? <FaEye /> : <FaEyeSlash />}
+                                </span>
+                            </div>
                             {passwordError && <div className='errore'> {passwordError}</div>}
                         </div>
                         <div className="labelsAndInputs">
                             <label >Confirmar Contraseña</label>
-                            <input className='inputs'
-                                type="password"
-                                id="confirmarContraseña"
-                                name="confirmarContraseña"
-                                value={formData.confirmarContraseña}
-                                onChange={handleChange} required
-                            />
+                            <div className="passwordRegistro">
+                                <input className='inputs'
+                                    type={confirmPasswordVisible ? 'text' : 'password'}
+                                    id="confirmarContraseña"
+                                    name="confirmarContraseña"
+                                    value={formData.confirmarContraseña}
+                                    onChange={handleChange} required
+                                />
+                                <span
+                                    onClick={confirmTogglePasswordVisibility}
+                                >
+                                    {confirmPasswordVisible ? <FaEye /> : <FaEyeSlash />}
+                                </span>
+                            </div>
                             {confirmPasswordError && <div className='errores'> {confirmPasswordError}</div>}
                         </div>
                         <div className="ButonR">

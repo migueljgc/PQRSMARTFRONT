@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import './ResetPassword.css'
 import Popup from '../componentes/Popup'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export const ResetPassword = () => {
     const { token } = useParams(); // obtener el token de la URL
@@ -12,6 +13,9 @@ export const ResetPassword = () => {
     const [isLogged, setIsLogged] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
 
     // Cargar el archivo Gradient.js
     useEffect(() => {
@@ -86,9 +90,13 @@ export const ResetPassword = () => {
         }
 
         try {
-             axios.post(`https://pqrsmartback-production.up.railway.app/forgot-password/reset/${token}`, { newPassword });
+            axios.post(`https://pqrsmartback-production.up.railway.app/forgot-password/reset/${token}`, { newPassword });
             setError('Contraseña actualizada.');
             setShowPopup(true); // Mostrar popup
+            if (showPopup === false) {
+                navigate('/login')
+            }
+
         } catch (error) {
             setError('Error al restablecer contraseña:');
             setShowPopup(true); // Mostrar popup('Error al restablecer contraseña.');
@@ -103,6 +111,12 @@ export const ResetPassword = () => {
     const closePopup = () => {
         setShowPopup(false);
     };
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+    const confirmTogglePasswordVisibility = () => {
+        setConfirmPasswordVisible(!confirmPasswordVisible);
+    };
 
     return (
         <div className='ResetPassword'>
@@ -112,27 +126,42 @@ export const ResetPassword = () => {
                     <h2>Restablecer Contraseña</h2>
                     <div className="passwordReset">
                         <label htmlFor="">Contraseña: </label>
-                        <input
-                            type="password"
-                            placeholder="Ingrese la nueva contraseña"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                        />
+                        <div className="passwordRegistro">
+                            <input
+                                type={passwordVisible ? 'text' : 'password'}
+                                placeholder="Ingrese la nueva contraseña"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                            />
+                            <span
+                                onClick={togglePasswordVisibility}
+                            >
+                                {passwordVisible ? <FaEye /> : <FaEyeSlash />}
+                            </span>
+                        </div>
                     </div>
 
                     <div className="passwordReset">
-                    <label htmlFor="">Confirmar Contraseña: </label>
-                        <input
-                            type="password"
-                            placeholder="Confirme la nueva contraseña"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
+                        <label htmlFor="">Confirmar Contraseña: </label>
+                        <div className="passwordRegistro">
+                            <input
+                                type={confirmPasswordVisible ? 'text' : 'password'}
+
+                                placeholder="Confirme la nueva contraseña"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                            <span
+                                onClick={confirmTogglePasswordVisibility}
+                            >
+                                {confirmPasswordVisible ? <FaEye /> : <FaEyeSlash />}
+                            </span>
+                        </div>
                     </div>
                     <div className="btnConfirPassw">
                         <button type='submit'>Restablecer contraseña</button>
                     </div>
-                    
+
                 </form>
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}

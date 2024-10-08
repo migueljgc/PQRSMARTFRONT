@@ -3,13 +3,15 @@ import './Login.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../componentes/Popup'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Login() {
     const navigate = useNavigate();
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
     const [isLogged, setIsLogged] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
 
@@ -41,6 +43,9 @@ function Login() {
         }
         checkLoginStatus();
     }, []);
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
     const checkLoginStatus = () => {
         const logged = localStorage.getItem('loggetPQRSMART') === 'true';
         setIsLogged(logged);
@@ -108,14 +113,14 @@ function Login() {
             // Manejo de errores
             if (status === 401) {
                 setError('Contraseña incorrecta');
-            }else if (status === 403) {
+            } else if (status === 403) {
                 setError("La cuenta está inactiva. Por favor verifique su correo para activar.");
             } else if (status === 423) {
                 setError("La cuenta está bloqueada.");
             } else if (status === 500) {
                 setError("Error en el servidor. Intente nuevamente más tarde.");
             }
-            else{
+            else {
                 setError("Error en el servidor. Intente nuevamente más tarde.");
             }
             setShowPopup(true); // Mostrar popup
@@ -151,18 +156,30 @@ function Login() {
                             <input
                                 type="text"
                                 required
-                                id="user" value={user} onChange={e => setUser(e.target.value)}
+                                id="user" value={user} onChange={e => setUser(e.target.value.toLowerCase())}
                             />
+
                             <label>Usuario</label>
                         </div>
                         <div className="user-box">
-                            <input
-                                type="password"
-                                required
-                                id="password" value={password} onChange={e => setPassword(e.target.value)}
-                            />
-                            <label>Contraseña</label>
+                            <div className="password-wrapper">
+                                <input
+                                    type={passwordVisible ? 'text' : 'password'}
+                                    required
+                                    id="password"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    
+                                />
+                                <label>Contraseña</label>
+                                <span
+                                    onClick={togglePasswordVisibility}>
+                                    {passwordVisible ? <FaEye /> : <FaEyeSlash />}
+                                </span>
+                            </div>
+
                         </div>
+
                         <div className="btn-container">
                             <button type="submit" className="btn fifth">Iniciar sesión</button>
                         </div>
