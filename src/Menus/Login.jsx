@@ -144,7 +144,7 @@ function Login() {
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             <div className="login-box">
                 <div className="logo-section">
-                    <h1>PQRSmart</h1>
+                    <h1 className='PQRSmart'>PQRSmart</h1>
                     <div className="vertical-line"></div> {/* Línea vertical */}
                 </div>
                 <div className="form-section">

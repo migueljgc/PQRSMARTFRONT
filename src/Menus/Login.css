@@ -214,6 +214,15 @@ a {
     /* Color del texto */
 
 }
+.PQRSmart {
+    transition: transform 1s ease, font-size 1s ease;
+}
+
+.PQRSmart:hover {
+    transform: scale(1.2) translateX(-10px) translateY(-10px) rotate(360deg);
+    font-size: 4rem; /* Aumenta el tamaño a 4rem */
+}
+
 
 /* Estilo del enlace para recuperar la contraseña */
 .OlvidasteContra {
