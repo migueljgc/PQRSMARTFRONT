@@ -245,6 +245,7 @@ a {
     .logo-section h1 {
         font-size: 28px;
         /* Ajusta el tamaño del logo */
+        
     }
 
     .user-box input {
@@ -274,6 +275,14 @@ a {
         /* Añade un margen superior */
         align-self: center;
         background-color: #34B0E3;
+    }
+    .PQRSmart {
+        transition: transform 1s ease, font-size 1s ease;
+    }
+    
+    .PQRSmart:hover {
+        transform: scale(1.2) translateX(100px) translateY(-10px) rotate(360deg);
+        font-size: 4rem; /* Aumenta el tamaño a 4rem */
     }
 }
 
