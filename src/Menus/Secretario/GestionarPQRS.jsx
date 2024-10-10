@@ -6,15 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import Popup from '../../componentes/Popup'
+import Responder from './Responder';
 
 const GestionarPQRS = () => {
     const [data, setData] = useState([]);
     const [selectedRow, setSelectedRow] = useState(null); // Cambiado para que sea null en lugar de un array
-    const navigate = useNavigate();
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
+    const [estado, setEstado] = useState(false)
 
     const fetchData = async () => {
         try {
@@ -63,14 +64,14 @@ const GestionarPQRS = () => {
             // Actualizar la solicitud de PQRS seleccionada
             const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get', selectedRow)
 
-            navigate('/Responder', { state: { data: selectedRow } });
-            setSelectedRow(null)
-
+            setEstado(true)
+            
         } else {
             setError('Por favor seleccione una fila')
             setShowPopup(true); // Mostrar popup
             return;
         }
+        setFilteredData(filtered);
     };
 
 
@@ -84,7 +85,7 @@ const GestionarPQRS = () => {
                     cursor: 'pointer'
                 }
             }
-            
+
         }
     ];
     useEffect(() => {
@@ -105,15 +106,15 @@ const GestionarPQRS = () => {
     }, []); // Solo se ejecuta una vez al montar el componente
 
     // Filtrar datos cuando cambie el texto de búsqueda
+    const filtered = data.filter(item =>
+        String(item.category.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.description).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.date).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.requestType.nameRequestType).toLowerCase().includes(filterText.toLowerCase()) ||  // Convertir a string
+        String(item.mediumAnswer).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.requestState.nameRequestState).toLowerCase().includes(filterText.toLowerCase())
+    );
     useEffect(() => {
-        const filtered = data.filter(item =>
-            String(item.category.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.description).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.date).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.requestType.nameRequestType).toLowerCase().includes(filterText.toLowerCase()) ||  // Convertir a string
-            String(item.mediumAnswer).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.requestState.nameRequestState).toLowerCase().includes(filterText.toLowerCase())
-        );
         setFilteredData(filtered);
     }, [filterText, data]); // Se ejecuta cuando cambia filterText o data
 
@@ -191,10 +192,17 @@ const GestionarPQRS = () => {
                         />
 
                         <div className="Btngestionarpqrs" >
-                            <button disabled={selectedRow==null} >Responder</button>
+                            <button disabled={selectedRow == null} >Responder</button>
                         </div>
                     </form>
                 </div>
+                {estado && (
+                <Responder
+                    selectedRow={selectedRow}
+                    setEstado={setEstado}
+
+                />
+            )}
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>

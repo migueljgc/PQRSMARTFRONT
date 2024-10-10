@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import '../Secretario/Responder.css'
-import { UserinfoSecre } from '../../componentes/Userinfo';
-import { MenuSecre } from '../../componentes/Menu';
-import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Popup from '../../componentes/Popup'
+import { useNavigate } from 'react-router-dom';
 
-const Responder = () => {
-    const [data, setData] = useState([]);
+const Responder = ({ selectedRow, setEstado }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
-    const location = useLocation();
-    const navigate = useNavigate();
-    const { state } = location;
-    const datas = state ? state.data:{} ;
-    const [form, setForm] = useState(datas);
+    const [form, setForm] = useState(selectedRow);
     const token = localStorage.getItem('token')
     const [formData, setFormData] = useState({
         answer: '',
         requestState: { idRequestState: 2 }
     });
 
-
-    useEffect(() => {
-        if (state && state.data) {
-            setForm(state.data)
-        }
-    }, [state]);
     const handleReset = () => {
         setFormData({
             answer: '',
@@ -40,29 +27,13 @@ const Responder = () => {
     };
 
     useEffect(() => {
-        const script = document.createElement('script');
-        script.src = '/Gradient.js'; // Ruta directa al archivo en public
-        script.async = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            // Inicializar el gradiente una vez que el script haya cargado
-            const gradient = new Gradient();
-            gradient.initGradient('#gradient-canvas');
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []); // Solo se ejecuta una vez al montar el componente
-
-
-    useEffect(() => {
         console.log(form.idRequest)
         console.log(form)
         document.title = "Responder PQRS"
 
     }, []);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -80,81 +51,51 @@ const Responder = () => {
                 }
             );
             console.log('Response:', response.data);
-            alert('EXITOSO');
-            navigate('/GestionarPQRS');
-            setData(''); // resetear el estado de data
             handleReset(); // limpiar el formulario
+
+            setError('Envio Exitoso')
+            setShowPopup(true); // Mostrar popup
+            // Después de un breve retraso, recargar la página
+            setTimeout(() => {
+                window.location.reload(); // Recargar la página por completo
+            }, 2000); // Ajusta el tiempo de retraso según lo que necesites
+
+            return;
         } catch (error) {
             console.error('Error al actualizar el estado: ', error);
         }
+
     };
 
-    console.log('los datos: ',datas)
-    if (!datas || !datas.idRequest) {
-        return (
-            <div className='Responder'>
-                <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-                <div className="menus">
-                    <MenuSecre />
-                </div>
-                <div className="user-menu">
-                    <UserinfoSecre />
-                </div>
-                <div className="cuerpoResponder">
-
-                    <div className="formResponder">
-                        <form className="Responder-form">
-                            <h1 className="titleResponder">RESPONDER</h1>
-                            <h2>No hay datos Seleccionados.</h2>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        )
-
-
-    }
 
     const closePopup = () => {
         setShowPopup(false);
+        setEstado(false)
     };
     return (
-        <div className='Responder'>
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus">
-                <MenuSecre />
-            </div>
-            <div className="user-menu">
-                <UserinfoSecre />
+        <div className="modalResponder">
+            <div className="modal-content-Responder">
+                <form className="solicitud-form-Responder" onSubmit={handleSubmit}>
+                    <div className="input-box-Responder">
+                        <span className="close" onClick={() => setEstado(false)}>&times;</span>
+                        <label className="titleResponder">Respueta:</label><br />
+                        <textarea
+                            name="answer"
+                            id="answer"
+                            rows="4"
+                            cols="50"
+                            value={formData.answer || ''}
+                            onChange={handleChange}
+                            required
+                        ></textarea>
+                    </div>
 
-            </div>
-            <div className="cuerpoResponder">
+                    <div className="enviar">
+                        <button type="submit">Enviar</button>
 
-                <div className="formResponder">
-                    <form className="Responder-form" onSubmit={handleSubmit}>
-                        <h1 className="titleResponder">RESPONDER</h1>
-                        <div className="input-box-Responder">
-                            <label>Respueta:</label><br />
-                            <textarea
-                                name="answer"
-                                id="answer"
-                                rows="4"
-                                cols="50"
-                                value={formData.answer || ''}
-                                onChange={handleChange}
-                                required
-                            ></textarea>
-                        </div>
+                    </div>
 
-                        <div className="enviar">
-                            <button type="submit">Enviar</button>
-                            <br />
-                            {data}
-                        </div>
-
-                    </form>
-                </div>
+                </form>
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>

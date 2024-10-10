@@ -17,6 +17,7 @@ const GestionCategoria = () => {
     const navigate = useNavigate();
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
+    
 
     const fetchData = async () => {
         try {
