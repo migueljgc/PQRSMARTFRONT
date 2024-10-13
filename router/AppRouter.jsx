@@ -20,6 +20,7 @@ import { ActivatePage } from '../src/componentes/ActivatePage';
 import { Recovery } from '../src/componentes/Recovery';
 import { ResetPassword } from '../src/componentes/ResetPassword';
 import { EditarPerfil } from '../src/componentes/Menu/EditarPerfil';
+import TablaUsuarios from '../src/Menus/prueba/TablaUsuarios';
 
 
 export const AppRouter = () => {
@@ -32,6 +33,8 @@ export const AppRouter = () => {
         <Route path="/Registro" element={<Registro/>} />
         <Route path="/activate/:token" element={<ActivatePage/>} />
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
+        <Route path="/tabla" element={<TablaUsuarios/>} />
+
         <Route path="*" element={<Login />} />
 
         {/* Rutas protegidas */}

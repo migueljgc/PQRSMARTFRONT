@@ -9,7 +9,7 @@ import TablaUsuarios from "./Menus/prueba/TablaUsuarios.jsx";
 createRoot(document.getElementById('root')).render(
     <StrictMode>
             <Router>
-                <TablaUsuarios />
+                <AppRouter />
             </Router>
     </StrictMode>,
 )

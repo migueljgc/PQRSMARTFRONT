@@ -1,24 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TablaUsuarios.css';
+import axios from 'axios';
 
 const TablaUsuarios = () => {
-    const usuariosIniciales = [
-        { usuario: 'jdoe', nombre: 'John', apellido: 'Doe', identificacion: '123456', rol: 'Admin', estado: 'Activo' },
-        { usuario: 'mross', nombre: 'Marta', apellido: 'Ross', identificacion: '654321', rol: 'Usuario', estado: 'Inactivo' },
-        { usuario: 'bsmith', nombre: 'Bob', apellido: 'Smith', identificacion: '987654', rol: 'Admin', estado: 'Activo' },
-        { usuario: 'kwhite', nombre: 'Karen', apellido: 'White', identificacion: '987123', rol: 'Usuario', estado: 'Inactivo' },
-        // Puedes agregar más usuarios para probar la paginación
-    ];
+    const [data, setData] = useState([]);
+    const token = localStorage.getItem('token');
+    useEffect(() => {
+        document.title = "Gestionar Usuarios";
+        fetchData();
+    }, []);
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/Usuario/get', {
+                'Authorization': `Bearer ${token}`
+            });
+            setData(response.data);
+            console.log(response.data)
+        } catch (error) {
+            console.error('Error en la data: ', error);
+        }
+    };
+    const handleCancel = async (id) => {
+        try {
+            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/cancel/${id}`);
+            fetchData();
+            
+        } catch (error) {
+            console.error('Error al desactivar el usuario: ', error);
+            
+        }
+    };
+    const handleActivate = async (id) => {
+        try {
+            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/activate/${id}`);
+            fetchData();
+            
+        } catch (error) {
+            console.error('Error al desactivar el usuario: ', error);
+            
+        }
+    };
+
 
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const usuariosPorPagina = 2; // Cambia esto para ajustar cuántos usuarios mostrar por página
+    const usuariosPorPagina = 6; // Cambia esto para ajustar cuántos usuarios mostrar por página
 
-    const usuariosFiltrados = usuariosIniciales.filter(usuario =>
-        Object.values(usuario).some(val =>
-            val.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    // Filtra los usuarios de acuerdo al término de búsqueda
+    const usuariosFiltrados = data.filter(user =>
+        Object.values(user).some(val =>
+            val && val.toString().toLowerCase().includes(searchTerm.toLowerCase()) // Comprobación de que 'val' no sea null o undefined
         )
     );
+
 
     const paginacion = usuariosFiltrados.slice(currentPage * usuariosPorPagina, (currentPage + 1) * usuariosPorPagina);
 
@@ -41,37 +75,46 @@ const TablaUsuarios = () => {
 
             <table className="tabla-minimalista">
                 <thead>
-                <tr>
-                    <th onClick={() => ordenarPor('usuario')}>Usuario</th>
-                    <th onClick={() => ordenarPor('nombre')}>Nombre</th>
-                    <th onClick={() => ordenarPor('apellido')}>Apellido</th>
-                    <th onClick={() => ordenarPor('identificacion')}>Identificación</th>
-                    <th onClick={() => ordenarPor('rol')}>Rol</th>
-                    <th onClick={() => ordenarPor('estado')}>Estado</th>
-                </tr>
+                    <tr>
+                        <th onClick={() => ordenarPor('usuario')}>Usuario</th>
+                        <th onClick={() => ordenarPor('nombre')}>Nombre</th>
+                        <th onClick={() => ordenarPor('apellido')}>Apellido</th>
+                        <th onClick={() => ordenarPor('identificacion')}>Identificación</th>
+                        <th onClick={() => ordenarPor('rol')}>Rol</th>
+                        <th onClick={() => ordenarPor('estado.state')}>Estado</th>
+                        <th onClick={() => ordenarPor('accion')}>Accion</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {paginacion.length > 0 ? (
-                    paginacion.map((usuario, index) => (
-                        <tr key={index}>
-                            <td>{usuario.usuario}</td>
-                            <td>{usuario.nombre}</td>
-                            <td>{usuario.apellido}</td>
-                            <td>{usuario.identificacion}</td>
-                            <td>{usuario.rol}</td>
-                            <td>
-                                    <span className={`estado ${usuario.estado.toLowerCase()}`}>
-                                        {usuario.estado === 'Activo' ? '✔️' : '❌'}
+                    {paginacion.length > 0 ? (
+                        paginacion.map((user, index) => (
+                            <tr key={index}>
+                                <td>{user.user}</td>
+                                <td>{user.name}</td>
+                                <td>{user.lastName}</td>
+                                <td>{user.identificationNumber}</td>
+                                <td>{user.role}</td>
+                                <td>
+                                    <span className={`estado ${user.stateUser?.state?.toLowerCase()}`}>
+                                        {user.stateUser?.state === 'ACTIVO' ? '✔️' : '❌'}
                                     </span>
-                                {usuario.estado}
-                            </td>
+                                    {user.stateUser?.state}
+                                </td>
+                                <td>
+                                    <span className='activar' onClick={() => handleActivate(user.id)}>
+                                        {'✔️'}
+                                    </span>
+                                    <span onClick={() => handleCancel(user.id)}>
+                                        {'❌'}
+                                    </span>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
                         </tr>
-                    ))
-                ) : (
-                    <tr>
-                        <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
-                    </tr>
-                )}
+                    )}
                 </tbody>
             </table>
 

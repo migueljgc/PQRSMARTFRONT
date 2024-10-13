@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import '../Admin/GestionUsuario.css';
 import { MenuAdmin } from '../../componentes/Menu';
-import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserinfoAmin } from '../../componentes/Userinfo';
-import { FaSearch } from "react-icons/fa";
-import { MdOutlineCancel } from "react-icons/md";
 import Popup from '../../componentes/Popup';
 
 const GestionUsuario = () => {
     const [data, setData] = useState([]);
-    const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
     const [filterText, setFilterText] = useState('');
-    const [filteredData, setFilteredData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const usuariosPorPagina = 6; // Cambia esto para ajustar cuántos usuarios mostrar por página
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -45,10 +42,6 @@ const GestionUsuario = () => {
         }
     };
 
-    const handleCrear = () => {
-        navigate('/CrearUsuario');
-    };
-
     const handleCancel = async (id) => {
         try {
             await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/cancel/${id}`);
@@ -61,45 +54,42 @@ const GestionUsuario = () => {
             setShowPopup(true);
         }
     };
+    const handleActivate = async (id) => {
+        try {
+            const response = await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/activate/${id}`,{}, {
+                headers: {
+                    'Authorization': `Bearer ${token}` // Verificar que se envíe correctamente el token
+                }
+            });
+            console.log('Usuario activado', response.data);
+            fetchData();
+            setError('Usuario Activado.');
+            setShowPopup(true);
+        } catch (error) {
+            console.error('Error al Activar el usuario: ', error);
+            setError('Error al guardar información.');
+            setShowPopup(true);
+            
+        }
+    };
 
     useEffect(() => {
         document.title = "Gestionar Usuarios";
         fetchData();
     }, []);
 
-    useEffect(() => {
-        const filtered = data.filter(item =>
-            String(item.user).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.name).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.lastName).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.identificationNumber).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.role).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.stateUser.state).toLowerCase().includes(filterText.toLowerCase())
-        );
-        setFilteredData(filtered);
-    }, [filterText, data]);
+    const filtered = data.filter(item =>
+        String(item.user).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.name).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.lastName).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.identificationNumber).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.role).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.stateUser.state).toLowerCase().includes(filterText.toLowerCase())
+    );
 
-    const columns = [
-        { name: 'Usuario', selector: row => row.user },
-        { name: 'Nombre', selector: row => row.name },
-        { name: 'Apellido', selector: row => row.lastName },
-        { name: 'Identificacion', selector: row => row.identificationNumber },
-        { name: 'Rol', selector: row => row.role },
-        { name: 'Estado', selector: row => row.stateUser.state },
-        {
-            name: 'Acciones',
-            cell: row => (
-                <div className='acciones'>
-                    <div className="icono-editar">
-                        <FaSearch />
-                    </div>
-                    <div className="icono-eliminar" onClick={() => handleCancel(row.id)}>
-                        <MdOutlineCancel />
-                    </div>
-                </div>
-            )
-        },
-    ];
+    const paginacion = filtered.slice(currentPage * usuariosPorPagina, (currentPage + 1) * usuariosPorPagina);
+
+    const totalPaginas = Math.ceil(filtered.length / usuariosPorPagina);
 
     const closePopup = () => {
         setShowPopup(false);
@@ -115,26 +105,74 @@ const GestionUsuario = () => {
                 <UserinfoAmin />
             </div>
             <div className="cuerpos">
-                <div className="formgestionUser">
-                    <form className="gestionUser-form">
-                        <h1 className="titlegestionUser">Usuarios Creados</h1>
-                        <div className="busqueda">
-                            <input
-                                type="text"
-                                placeholder='Buscar'
-                                value={filterText}
-                                onChange={(e) => setFilterText(e.target.value)}
-                            />
-                        </div>
-                        <DataTable
-                            className='dataTable-container'
-                            columns={columns}
-                            data={filteredData}
-                            responsive
-                            pagination
-                            paginationPerPage={6}
+                <div className="tabla-usuario">
+                    <h2>Lista de Usuarios</h2>
+
+                    <div className="buscador-usuario">
+                        <input
+                            type="text"
+                            placeholder="Buscar en la tabla..."
+                            value={filterText}
+                            onChange={(e) => setFilterText(e.target.value)}
+                            className="buscador"
                         />
-                    </form>
+                        <img src="src/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                    </div>
+
+                    <table className="tabla-minimalista-usuario">
+                        <thead>
+                            <tr>
+                                <th onClick={() => ordenarPor('usuario')}>Usuario</th>
+                                <th onClick={() => ordenarPor('nombre')}>Nombre</th>
+                                <th onClick={() => ordenarPor('apellido')}>Apellido</th>
+                                <th onClick={() => ordenarPor('identificacion')}>Identificación</th>
+                                <th onClick={() => ordenarPor('rol')}>Rol</th>
+                                <th onClick={() => ordenarPor('estado.state')}>Estado</th>
+                                <th onClick={() => ordenarPor('accion')}>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginacion.length > 0 ? (
+                                paginacion.map((user, index) => (
+                                    <tr key={index}>
+                                        <td>{user.user}</td>
+                                        <td>{user.name}</td>
+                                        <td>{user.lastName}</td>
+                                        <td>{user.identificationNumber}</td>
+                                        <td>{user.role}</td>
+                                        <td>
+                                            <span className={`estado ${user.stateUser?.state?.toLowerCase()}`}>
+                                                {user.stateUser?.state === 'ACTIVO' ? '✔️' : '❌'}
+                                            </span>
+                                            {user.stateUser?.state}
+                                        </td>
+                                        <td>
+                                            <span className='activar' onClick={() => handleActivate(user.id)}>
+                                                {'✔️'}
+                                            </span>
+                                            <span onClick={() => handleCancel(user.id)}>
+                                                {'❌'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+
+                    <div className="paginacion">
+                        <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))} disabled={currentPage === 0}>
+                            Anterior
+                        </button>
+                        <span>{currentPage + 1} de {totalPaginas}</span>
+                        <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPaginas - 1))} disabled={currentPage >= totalPaginas - 1}>
+                            Siguiente
+                        </button>
+                    </div>
                 </div>
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
