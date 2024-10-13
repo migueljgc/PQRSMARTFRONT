@@ -4,12 +4,12 @@ import { AppRouter } from '../router/AppRouter.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '../router/AxiosConfig'
 import '../src/main.css'
-import CrearUsuario from "./Menus/Admin/CrearUsuario.jsx";
+import TablaUsuarios from "./Menus/prueba/TablaUsuarios.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
             <Router>
-                <AppRouter />
+                <TablaUsuarios />
             </Router>
     </StrictMode>,
 )
