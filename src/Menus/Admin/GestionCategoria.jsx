@@ -14,14 +14,14 @@ const GestionCategoria = () => {
     const [data, setData] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
-    const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
-    
+    const [currentPage, setCurrentPage] = useState(0);
+    const usuariosPorPagina = 6; // Cambia esto para ajustar cuántos usuarios mostrar por página
+
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/category/get')
+            const response = await axios.get('/api/category/get')
             setData(response.data);
             console.log(response.data)
         } catch (error) {
@@ -51,62 +51,46 @@ const GestionCategoria = () => {
         document.title = "Gestion de Categorias"
         fetchData();
     }, []);
-    const handleCrear = () => {
-        navigate('/CrearCategoria')
-    }
     const handleCancel = async (idCategory) => {
         try {
-            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/category/cancel/${idCategory}`);
+            await axios.patch(`/api/category/cancel/${idCategory}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
             setError('Categoria Desactivada.');
             setShowPopup(true); // Mostrar popup
             return;
         } catch (error) {
-            console.error('Error al eliminar la dependencia: ', error);
+            console.error('Error al eliminar la categoria: ', error);
             setError('Error al guardar información.');
             setShowPopup(true); // Mostrar popup
             return;
         }
     };
-    useEffect(() => {
-        const filtered = data.filter(item =>
-            String(item.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.dependence.nameDependence).toLowerCase().includes(filterText.toLowerCase()) ||
-            String(item.state.description).toLowerCase().includes(filterText.toLowerCase())
-
-        );
-        setFilteredData(filtered);
-    }, [filterText, data]); // Se ejecuta cuando cambia filterText o data
-
-    const columns = [
-        {
-            name: 'Categoria',
-            selector: row => row.nameCategory
-        },
-        {
-            name: 'Dependencia',
-            selector: row => row.dependence.nameDependence
-        },
-        {
-            name: 'Estado Categoria',
-            selector: row => row.state.description || row.state
-        },
-        {
-            name: 'Editar',
-            cell: row => (
-                <div className='accion'>
-                    <div className="versoli">
-                        <FaSearch />
-                    </div>
-                    <div className="eliminarsoli" onClick={() => handleCancel(row.idCategory)}>
-                        <MdOutlineCancel />
-                    </div>
-                </div>
-            )
+    const handleActivate = async (idCategory) => {
+        try {
+            await axios.patch(`https://pqrsmartback-production-307d.up.railway.app/api/category/activate/${idCategory}`);
+            // Actualizar la tabla después de cancelar la solicitud
+            fetchData();
+            setError('Categoria Activada.');
+            setShowPopup(true); // Mostrar popup
+            return;
+        } catch (error) {
+            console.error('Error al eliminar la categoria: ', error);
+            setError('Error al guardar información.');
+            setShowPopup(true); // Mostrar popup
+            return;
         }
+    };
+    const filtered = data.filter(item =>
+        String(item.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.dependence.nameDependence).toLowerCase().includes(filterText.toLowerCase()) ||
+        String(item.state.description).toLowerCase().includes(filterText.toLowerCase())
 
-    ]
+    );
+
+    const paginacion = filtered.slice(currentPage * usuariosPorPagina, (currentPage + 1) * usuariosPorPagina);
+
+    const totalPaginas = Math.ceil(filtered.length / usuariosPorPagina);
 
     const closePopup = () => {
         setShowPopup(false);
@@ -123,26 +107,70 @@ const GestionCategoria = () => {
             </div>
 
             <div className="cuerpos">
+                <div className="tabla-usuario">
+                    <h2>Lista de Categoria</h2>
 
-                <div className="formgestionCate">
-                    <form className="gestionCate-form">
-                        <h1 className="titlegestionCate">GESTION DE CATEGORIAS</h1>
-                        <div className="busqueda">
-                            <input type="text" placeholder='Buscar' value={filterText}
-                                onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
-                            />
-                        </div>
-
-                        <DataTable
-                            className='dataTable-container'
-                            columns={columns}
-                            data={filteredData}
-                            responsive
-                            pagination
-                            paginationPerPage={6}
+                    <div className="buscador-usuario">
+                        <input
+                            type="text"
+                            placeholder="Buscar en la tabla..."
+                            value={filterText}
+                            onChange={(e) => setFilterText(e.target.value)}
+                            className="buscador"
                         />
-                    </form>
+                        <img src="src/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                    </div>
+
+                    <table className="tabla-minimalista-usuario">
+                        <thead>
+                            <tr>
+                                <th onClick={() => ordenarPor('categoria')}>Categoria</th>
+                                <th onClick={() => ordenarPor('dependencia')}>Dependencia</th>
+                                <th onClick={() => ordenarPor('estado.description')}>Estado</th>
+                                <th onClick={() => ordenarPor('accion')}>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginacion.length > 0 ? (
+                                paginacion.map((category, index) => (
+                                    <tr key={index}>
+                                        <td>{category.nameCategory}</td>
+                                        <td>{category.dependence.nameDependence}</td>
+                                        <td>
+                                            <span className={`estado ${category.state?.description?.toLowerCase()}`}>
+                                                {category.state?.description === 'ACTIVADO' ? '✔️' : '❌'}
+                                            </span>
+                                            {category.state?.description}
+                                        </td>
+                                        <td>
+                                            <span className='activar' onClick={() => handleActivate(category.idCategory)}>
+                                                {'✔️'}
+                                            </span>
+                                            <span onClick={() => handleCancel(category.idCategory)}>
+                                                {'❌'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+
+                    <div className="paginacion">
+                        <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))} disabled={currentPage === 0}>
+                            Anterior
+                        </button>
+                        <span>{currentPage + 1} de {totalPaginas}</span>
+                        <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPaginas - 1))} disabled={currentPage >= totalPaginas - 1}>
+                            Siguiente
+                        </button>
+                    </div>
                 </div>
+
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
