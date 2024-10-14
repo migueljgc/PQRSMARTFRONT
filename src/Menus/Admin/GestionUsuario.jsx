@@ -44,7 +44,7 @@ const GestionUsuario = () => {
 
     const handleCancel = async (id) => {
         try {
-            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/cancel/${id}`);
+            await axios.patch(`https://pqrsmartback-production-307d.up.railway.app/api/Usuario/cancel/${id}`);
             fetchData();
             setError('Usuario Bloqueado.');
             setShowPopup(true);
@@ -56,7 +56,7 @@ const GestionUsuario = () => {
     };
     const handleActivate = async (id) => {
         try {
-            const response = await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/activate/${id}`,{}, {
+            const response = await axios.patch(`https://pqrsmartback-production-307d.up.railway.app/api/Usuario/activate/${id}`,{}, {
                 headers: {
                     'Authorization': `Bearer ${token}` // Verificar que se envíe correctamente el token
                 }
