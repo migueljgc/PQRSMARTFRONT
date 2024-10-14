@@ -5,19 +5,21 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserinfoAmin } from '../../componentes/Userinfo';
 import Popup from '../../componentes/Popup';
+import ModificarUsuario from "../prueba/ModificarUsuario.jsx";
 
 const GestionUsuario = () => {
     const [data, setData] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
     const [filterText, setFilterText] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const usuariosPorPagina = 6; // Cambia esto para ajustar cuántos usuarios mostrar por página
+    const usuariosPorPagina = 6;
 
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = '/Gradient.js'; // Ruta directa al archivo en public
+        script.src = '/Gradient.js';
         script.async = true;
         document.body.appendChild(script);
 
@@ -54,11 +56,12 @@ const GestionUsuario = () => {
             setShowPopup(true);
         }
     };
+
     const handleActivate = async (id) => {
         try {
-            const response = await axios.patch(`/api/Usuario/activate/${id}`,{}, {
+            const response = await axios.patch(`/api/Usuario/activate/${id}`, {}, {
                 headers: {
-                    'Authorization': `Bearer ${token}` // Verificar que se envíe correctamente el token
+                    'Authorization': `Bearer ${token}`
                 }
             });
             console.log('Usuario activado', response.data);
@@ -69,8 +72,19 @@ const GestionUsuario = () => {
             console.error('Error al Activar el usuario: ', error);
             setError('Error al guardar información.');
             setShowPopup(true);
-            
         }
+    };
+
+    const handleEditUser = (user) => {
+        setSelectedUser(user); // Establece el usuario seleccionado
+        setShowPopup(true);    // Abre el popup
+    };
+
+    const handleSaveUser = (updatedUser) => {
+        // Aquí puedes hacer la lógica para guardar el usuario
+        console.log('Usuario guardado:', updatedUser);
+        setShowPopup(false);
+        fetchData(); // Actualiza la tabla con los datos modificados
     };
 
     useEffect(() => {
@@ -90,10 +104,6 @@ const GestionUsuario = () => {
     const paginacion = filtered.slice(currentPage * usuariosPorPagina, (currentPage + 1) * usuariosPorPagina);
 
     const totalPaginas = Math.ceil(filtered.length / usuariosPorPagina);
-
-    const closePopup = () => {
-        setShowPopup(false);
-    };
 
     return (
         <div className='GestionUsuario'>
@@ -121,46 +131,46 @@ const GestionUsuario = () => {
 
                     <table className="tabla-minimalista-usuario">
                         <thead>
-                            <tr>
-                                <th onClick={() => ordenarPor('usuario')}>Usuario</th>
-                                <th onClick={() => ordenarPor('nombre')}>Nombre</th>
-                                <th onClick={() => ordenarPor('apellido')}>Apellido</th>
-                                <th onClick={() => ordenarPor('identificacion')}>Identificación</th>
-                                <th onClick={() => ordenarPor('rol')}>Rol</th>
-                                <th onClick={() => ordenarPor('estado.state')}>Estado</th>
-                                <th onClick={() => ordenarPor('accion')}>Accion</th>
-                            </tr>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Identificación</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Accion</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {paginacion.length > 0 ? (
-                                paginacion.map((user, index) => (
-                                    <tr key={index}>
-                                        <td>{user.user}</td>
-                                        <td>{user.name}</td>
-                                        <td>{user.lastName}</td>
-                                        <td>{user.identificationNumber}</td>
-                                        <td>{user.role}</td>
-                                        <td>
+                        {paginacion.length > 0 ? (
+                            paginacion.map((user, index) => (
+                                <tr key={index} onClick={() => handleEditUser(user)}>
+                                    <td>{user.user}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.lastName}</td>
+                                    <td>{user.identificationNumber}</td>
+                                    <td>{user.role}</td>
+                                    <td>
                                             <span className={`estado ${user.stateUser?.state?.toLowerCase()}`}>
                                                 {user.stateUser?.state === 'ACTIVO' ? '✔️' : '❌'}
                                             </span>
-                                            {user.stateUser?.state}
-                                        </td>
-                                        <td>
+                                        {user.stateUser?.state}
+                                    </td>
+                                    <td>
                                             <span className='activar' onClick={() => handleActivate(user.id)}>
                                                 {'✔️'}
                                             </span>
-                                            <span onClick={() => handleCancel(user.id)}>
+                                        <span onClick={() => handleCancel(user.id)}>
                                                 {'❌'}
                                             </span>
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                                    </td>
                                 </tr>
-                            )}
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                            </tr>
+                        )}
                         </tbody>
                     </table>
 
@@ -175,7 +185,14 @@ const GestionUsuario = () => {
                     </div>
                 </div>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />}
+            {showPopup && (
+                <ModificarUsuario
+                    isOpen={showPopup}
+                    onClose={() => setShowPopup(false)}
+                    usuario={selectedUser}
+                    onSave={handleSaveUser}
+                />
+            )}
         </div>
     );
 };
