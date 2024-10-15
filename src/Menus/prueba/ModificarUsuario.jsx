@@ -9,7 +9,7 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
     const [password, setPassword] = useState('');
     const [rol, setRol] = useState(usuario?.role || '');
     const [estado, setEstado] = useState(usuario?.stateUser?.state || 'Activo');
-    const [dependencia, setDependencia] = useState(usuario?.dependencia || '');
+    const [dependencia, setDependencia] = useState(usuario?.dependence?.nameDependence || '');
     const [dependencias, setDependencias] = useState([]);
 
     const handleSave = () => {
@@ -30,18 +30,18 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
     useEffect(() => {
         const fetchDependencias = async () => {
             try {
-                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get', {
+                const response = await axios.get('http://localhost:8080/api/dependence/get', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                
                 console.log(response.data); // Verifica la estructura de datos
                 setDependencias(response.data); // Ajusta según la estructura de datos que devuelva el endpoint
             } catch (error) {
                 console.error('Error al obtener dependencias:', error);
             }
         };
-
         if (rol === 'SECRE') {
             fetchDependencias();
         }
@@ -75,35 +75,36 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
                     <input
                         type="email"
                         value={correo}
+                        disabled
                         onChange={(e) => setCorreo(e.target.value)}
                     />
 
                     <label>Contraseña</label>
                     <input
                         type="password"
-                        placeholder="Dejar en blanco para no cambiar"
+                        placeholder="********************"
+                        disabled
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
                     <label>Rol</label>
                     <select value={rol} onChange={(e) => setRol(e.target.value)}>
-                        <option value="Admin">Admin</option>
-                        <option value="User">User</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="USER">User</option>
                         <option value="SECRE">SECRE</option>
                     </select>
 
                     <label>Estado</label>
-                    <select value={estado} onChange={(e) => setEstado(e.target.value)}>
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo">Inactivo</option>
-                    </select>
+                    <input value={estado} disabled onChange={(e) => setEstado(e.target.value)}
+                        
+                    />
 
                     {rol === 'SECRE' && (
                         <>
                             <label>Dependencia</label>
                             <select value={dependencia} onChange={(e) => setDependencia(e.target.value)}>
-                                <option value="">Selecciona una dependencia</option>
+                                
                                 {dependenciasActivas.map(dep => (
                                     <option key={dep.idDependence} value={dep.nameDependence}>
                                         {dep.nameDependence}

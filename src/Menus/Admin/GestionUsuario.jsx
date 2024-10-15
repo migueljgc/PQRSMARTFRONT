@@ -35,7 +35,7 @@ const GestionUsuario = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('/api/Usuario/get', {
+            const response = await axios.get('http://localhost:8080/api/Usuario/get', {
                 'Authorization': `Bearer ${token}`
             });
             setData(response.data);
@@ -46,7 +46,7 @@ const GestionUsuario = () => {
 
     const handleCancel = async (id) => {
         try {
-            await axios.patch(`/api/Usuario/cancel/${id}`);
+            await axios.patch(`http://localhost:8080/api/Usuario/cancel/${id}`);
             fetchData();
             setError('Usuario Bloqueado.');
             setShowPopup(true);
@@ -59,7 +59,7 @@ const GestionUsuario = () => {
 
     const handleActivate = async (id) => {
         try {
-            const response = await axios.patch(`/api/Usuario/activate/${id}`, {}, {
+            const response = await axios.patch(`http://localhost:8080/api/Usuario/activate/${id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -77,6 +77,7 @@ const GestionUsuario = () => {
 
     const handleEditUser = (user) => {
         setSelectedUser(user); // Establece el usuario seleccionado
+        console.log(user)
         setShowPopup(true);    // Abre el popup
     };
 
@@ -131,46 +132,50 @@ const GestionUsuario = () => {
 
                     <table className="tabla-minimalista-usuario">
                         <thead>
-                        <tr>
-                            <th>Usuario</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Identificación</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                            <th>Accion</th>
-                        </tr>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Identificación</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Accion</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {paginacion.length > 0 ? (
-                            paginacion.map((user, index) => (
-                                <tr key={index} onClick={() => handleEditUser(user)}>
-                                    <td>{user.user}</td>
-                                    <td>{user.name}</td>
-                                    <td>{user.lastName}</td>
-                                    <td>{user.identificationNumber}</td>
-                                    <td>{user.role}</td>
-                                    <td>
+                            {paginacion.length > 0 ? (
+                                paginacion.map((user, index) => (
+                                    <tr key={index} >
+                                        <td>{user.user}</td>
+                                        <td>{user.name}</td>
+                                        <td>{user.lastName}</td>
+                                        <td>{user.identificationNumber}</td>
+                                        <td>{user.role}</td>
+                                        <td>
                                             <span className={`estado ${user.stateUser?.state?.toLowerCase()}`}>
                                                 {user.stateUser?.state === 'ACTIVO' ? '✔️' : '❌'}
                                             </span>
-                                        {user.stateUser?.state}
-                                    </td>
-                                    <td>
+                                            {user.stateUser?.state}
+                                        </td>
+                                        <td>
                                             <span className='activar' onClick={() => handleActivate(user.id)}>
                                                 {'✔️'}
                                             </span>
-                                        <span onClick={() => handleCancel(user.id)}>
+                                            <span className='activar' onClick={() => handleCancel(user.id)}>
                                                 {'❌'}
                                             </span>
-                                    </td>
+
+                                            <span className='activar' onClick={() => handleEditUser(user)}>
+                                                {'🔎'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
                                 </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
-                            </tr>
-                        )}
+                            )}
                         </tbody>
                     </table>
 
