@@ -10,6 +10,7 @@ import ModificarUsuario from "../prueba/ModificarUsuario.jsx";
 const GestionUsuario = () => {
     const [data, setData] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [show, setShow] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
@@ -49,11 +50,11 @@ const GestionUsuario = () => {
             await axios.patch(`http://localhost:8080/api/Usuario/cancel/${id}`);
             fetchData();
             setError('Usuario Bloqueado.');
-            setShowPopup(true);
+            setShow(true);
         } catch (error) {
             console.error('Error al desactivar el usuario: ', error);
             setError('Error al guardar información.');
-            setShowPopup(true);
+            setShow(true);
         }
     };
 
@@ -67,11 +68,11 @@ const GestionUsuario = () => {
             console.log('Usuario activado', response.data);
             fetchData();
             setError('Usuario Activado.');
-            setShowPopup(true);
+            setShow(true);
         } catch (error) {
             console.error('Error al Activar el usuario: ', error);
             setError('Error al guardar información.');
-            setShowPopup(true);
+            setShow(true);
         }
     };
 
@@ -81,11 +82,26 @@ const GestionUsuario = () => {
         setShowPopup(true);    // Abre el popup
     };
 
-    const handleSaveUser = (updatedUser) => {
+    const handleSaveUser = async (updatedUser) => {
         // Aquí puedes hacer la lógica para guardar el usuario
-        console.log('Usuario guardado:', updatedUser);
-        setShowPopup(false);
-        fetchData(); // Actualiza la tabla con los datos modificados
+        
+        const update=updatedUser;
+        console.log('Usuario guardado:', update);
+        try {
+            await axios.put(`http://localhost:8080/api/Usuario/Update`,update);
+            fetchData();
+            setShowPopup(false)
+            console.log('Usuario guardado:', updatedUser);
+            setError('Usuario guardado.');
+            setShow(true);
+            fetchData(); // Actualiza la tabla con los datos modificados
+        } catch (error) {
+            console.error('Error al guardar el usuario: ', error);
+            setError('Error al guardar el usuario');
+            setShow(true);
+        }
+        
+        
     };
 
     useEffect(() => {
@@ -106,6 +122,9 @@ const GestionUsuario = () => {
 
     const totalPaginas = Math.ceil(filtered.length / usuariosPorPagina);
 
+    const closePopup = () => {
+        setShow(false);
+    };
     return (
         <div className='GestionUsuario'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -198,6 +217,7 @@ const GestionUsuario = () => {
                     onSave={handleSaveUser}
                 />
             )}
+            {show && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 };

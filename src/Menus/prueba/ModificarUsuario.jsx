@@ -8,7 +8,7 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
     const [correo, setCorreo] = useState(usuario?.email || '');
     const [password, setPassword] = useState('');
     const [rol, setRol] = useState(usuario?.role || '');
-    const [estado, setEstado] = useState(usuario?.stateUser?.state || 'Activo');
+    const [estado, setEstado] = useState(usuario?.stateUser?.state || 'No tiene estado');
     const [dependencia, setDependencia] = useState(usuario?.dependence?.nameDependence || '');
     const [dependencias, setDependencias] = useState([]);
 
@@ -20,7 +20,7 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
             email: correo,
             password: password || usuario.password,
             role: rol,
-            stateUser: { state: estado },
+            stateUser: { id:usuario.stateUser.id, state: estado },
             dependencia: dependencia
         };
         onSave(updatedUser);
