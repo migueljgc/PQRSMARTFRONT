@@ -83,7 +83,7 @@
     margin-top: 10px; /* Espacio superior para separación */
 }
 .btnCrearCate button{
-    background-color: #FFA500; /* Color de fondo inicial (naranja) */
+    background-color: #5E76FF; /* Color de fondo inicial (naranja) */
     color: white; /* Color del texto */
     border: none; /* Sin borde */
     padding: 6px 12px; /* Espaciado interno más pequeño */
@@ -96,10 +96,10 @@
 }
 
 .btnCrearCate button:hover {
-    background-color: #5E76FF; /* Cambiar a azul al pasar el mouse */
+    background-color: #4753c8;
+    transform: translateY(-2px);
 }
 
 .btnCrearCate button:active {
-    background-color: #4753c8; /* Cambiar a un azul más oscuro al presionar */
-    transform: translateY(0); /* Reiniciar la posición al hacer clic */
+    transform: translateY(0);
 }
