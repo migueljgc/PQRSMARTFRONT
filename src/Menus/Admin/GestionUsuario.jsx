@@ -15,7 +15,7 @@ const GestionUsuario = () => {
     const token = localStorage.getItem('token');
     const [filterText, setFilterText] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const usuariosPorPagina = 6;
+    const usuariosPorPagina = 12;
 
     useEffect(() => {
         const script = document.createElement('script');
