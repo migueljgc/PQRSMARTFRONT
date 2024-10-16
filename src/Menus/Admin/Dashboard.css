@@ -2,143 +2,68 @@
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
     display: grid;
-    grid-template-columns: 0.3fr 1.8fr;
-    grid-template-rows: 0.3fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 2px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "menus cuerpos";
+    grid-template-columns: 0.25fr 1.75fr; /* Ajuste del tamaño de las columnas */
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    grid-template-areas: "menus cuerpos";
+    position: relative; /* Para el canvas de fondo */
 }
-
-.menus {
-    grid-area: menus;
-}
-
 
 .cuerpos {
     grid-area: cuerpos;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    height: 100vh;
     padding: 20px;
     overflow-y: auto;
+    position: relative; /* Para que el contenido se superponga al fondo */
+    z-index: 1; /* Asegura que el contenido esté por encima del fondo */
 }
 
-.titledash {
-    color: #FFFFFF;
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.dashform{
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+.dashform {
     width: 100%;
-    max-width: 800px;
-    color: #FFFFFF;
-    box-sizing: border-box;
-    overflow: auto;
-    /* Si hay mucho contenido, permitir scroll interno */
-    
-}
-.total{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+    padding: 30px;
+    margin-top: 50vh; /* Agregar un margen superior para bajar las cartas */
 }
 
 .formdash {
     display: grid;
-    width: 80%;
-    grid-auto-columns: 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 5px 5px;
-    grid-template-areas:
-        "totalprs totalpqrsdepe"
-        "totalpqrsmes totalpqrsdepemes";
-}        
-.formdash h1{
-    font-size: 20px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
 }
-.totalprs {
-    grid-area: totalprs;
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
+
+.card {
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 35vh;
-    border: beige solid 1px;
-    
-}
-
-.totalpqrsdepe {
-    grid-area: totalpqrsdepe;
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
-    padding: 20px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 35vh;
-    border: beige solid 1px;
-    
-}
-.totalpqrsdepe h1, .totalpqrsdepemes h1, .totalpqrsmes h1{
-    margin-bottom: 20px;
-}
-
-.pqrstotal{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin-top: 60px;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s; /* Transición para el efecto hover */
 }
 
-.pqrstotal p{
-    font-size: 3rem ;
+.card:hover {
+    transform: translateY(-5px); /* Efecto de desplazamiento hacia arriba */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Aumentar la sombra al hacer hover */
 }
 
-.user-menu{
-    z-index: 2;
-}
-.totalpqrsmes {
-    grid-area: totalpqrsmes;
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 35vh;                                                                                       
-    border: beige solid 1px;
-    
+.card h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333; /* Color del título */
 }
 
-.totalpqrsdepemes {
-    grid-area: totalpqrsdepemes;
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 35vh;
-    border: beige solid 1px;
-    
+.pqrstotal {
+    font-size: 2rem;
+    color: #007bff; /* Color del total */
 }
 
+/* Asegúrate de que los gráficos también se vean bien en las cartas */
+.card canvas {
+    max-width: 100%;
+    height: auto;
+}
