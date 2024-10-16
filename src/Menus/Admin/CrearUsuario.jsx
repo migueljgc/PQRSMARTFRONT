@@ -179,10 +179,10 @@ const CrearUsuario = () => {
                         <UserinfoAmin />
 
                     </div>
-            <div className="cuerpos">
+            <div className="cuerpos-usu">
                 
-                <div className="formUsuario">
-                    <form className="crearusu" onSubmit={handleSubmit}>
+                <div className="form-Usuario">
+                    <form className="crear-usu" onSubmit={handleSubmit}>
                     <h1 className="title">CREAR USUARIO</h1>
                         <div className="input-label-creausu">
                             <label >Tipo De Persona</label>
