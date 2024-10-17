@@ -10,7 +10,9 @@ import { MdOutlineCancel } from "react-icons/md";
 const Consultar = () => {
     const [data, setData] = useState([]);
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
-    const [filteredsData, setFilteredData] = useState([]); // Estado para los datos filtrados
+    const [currentPage, setCurrentPage] = useState(0);
+    const usuariosPorPagina = 12;
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -69,25 +71,28 @@ const Consultar = () => {
     };
 
     // Filtrar datos cuando cambie el texto de búsqueda
-    useEffect(() => {
-        const filtered = data.filter(item =>
-            String(item.radicado).toLowerCase().includes(filterText.toLowerCase())
-        );
-        setFilteredData(filtered);
-    }, [filterText, data]); // Se ejecuta cuando cambia filterText o data
+    const filtered = data.filter(item =>
+        String(item.radicado).toLowerCase().includes(filterText.toLowerCase())
+    );
+    const paginacion = filtered.slice(currentPage * usuariosPorPagina, (currentPage + 1) * usuariosPorPagina);
 
+    const totalPaginas = Math.ceil(filtered.length / usuariosPorPagina);
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
     const columns = [
         {
             name: 'Tipo de Solicitud',
-            selector: row => row.requestType.nameRequestType
+            selector: row => pqrs.requestType.nameRequestType
         },
         {
             name: 'Fecha',
-            selector: row => row.date
+            selector: row => pqrs.date
         },
         {
             name: 'Descripcion',
-            selector: row => row.description,
+            selector: row => pqrs.description,
             cell: row => (
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
                     {row.description.length > 50 ? `${row.description.slice(0, 50)}...` : row.description}
@@ -96,11 +101,11 @@ const Consultar = () => {
         },
         {
             name: 'Estado',
-            selector: row => row.requestState.nameRequestState
+            selector: row => pqrs.requestState.nameRequestState
         },
         {
             name: 'Respuesta',
-            selector: row => row.answer,
+            selector: row => pqrs.answer,
             cell: row => (
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
                     {row.answer && row.answer.length > 50
@@ -135,32 +140,80 @@ const Consultar = () => {
                 <UserinfoUser />
             </div>
             <div className="cuerpo">
-
-
-                <div className="formConsultar">
-                    <form className="consultar-form">
-                        <h1 className="titleConsultar">CONSULTAR SOLICITUD</h1>
-                        <div className="busqueda">
-                            <label>Introduce Tu Numero De Radicado</label>
-                            <input type="text"
-                                value={filterText}
-                                onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
-                            />
-                        </div>
-                        <label className='nota' >Nota: Con La X Puede Cancelar Su Solicitud</label>
-                        <DataTable
-                            className='dataTable-container'
-                            columns={columns}
-                            data={filteredsData}
-                            fixedHeader
-                            responsive
-                            pagination
-                            paginationPerPage={6}
-                            
+                <div className="tabla-usuario">
+                    <h1 className="titleConsultar">CONSULTAR SOLICITUD</h1>
+                    <div className="busqueda">
+                        <label>Introduce Tu Numero De Radicado</label>
+                        <input type="text"
+                            value={filterText}
+                            onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
                         />
-                    </form>
+                        <img src="src/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                    </div>
+                    <label className='nota' >Nota: Con La X Puede Cancelar Su Solicitud</label>
+                    <table className="tabla-minimalista-usuario">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Solicitud</th>
+                                <th>Fecha</th>
+                                <th>Descripcion</th>
+                                <th>Estado</th>
+                                <th>Respuesta</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginacion.length > 0 ? (
+                                paginacion.map((pqrs, index) => (
+                                    <tr key={index} >
+                                        <td>{pqrs.requestType.nameRequestType}</td>
+                                        <td>{pqrs.date}</td>
+                                        <td>
+                                            <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
+                                                {pqrs.description.length > 50 ? `${pqrs.description.slice(0, 50)}...` : pqrs.description}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span className={`estado ${pqrs.requestState?.nameRequestState?.toLowerCase()}`}>
+                                                {pqrs.requestState?.nameRequestState === 'ACTIVO' ? '✔️' : pqrs.requestState?.nameRequestState === 'Pendiente' ? '🔎' : '❌'}
+
+                                            </span>
+                                            {pqrs.requestState?.nameRequestState}
+                                        </td>
+                                        <td>
+                                            <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
+                                                {pqrs.answer && pqrs.answer.length > 50
+                                                    ? `${pqrs.answer.slice(0, 50)}...`
+                                                    : pqrs.answer || ''}  {/* Si row.answer es null o undefined, mostramos 'No disponible' */}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span className='activar' onClick={() => handleCancel(user.idRequest)}>
+                                                {'❌'}
+                                            </span>
+
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                    <div className="paginacion">
+                        <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))} disabled={currentPage === 0}>
+                            Anterior
+                        </button>
+                        <span>{currentPage + 1} de {totalPaginas}</span>
+                        <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPaginas - 1))} disabled={currentPage >= totalPaginas - 1}>
+                            Siguiente
+                        </button>
+                    </div>
                 </div>
             </div>
+
         </div>
     );
 }
