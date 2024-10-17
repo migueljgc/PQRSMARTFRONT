@@ -47,7 +47,11 @@ export const ActivatePage = () => {
                     setShowPopup(true); // Mostrar popup
                     return;
                 }
-                navigate('/');
+                setTimeout(() => {
+                    navigate('/')
+                    
+                  }, "5000");
+                  
                 return;
 
             } catch (error) {
