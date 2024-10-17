@@ -7,6 +7,11 @@ import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import Popup from '../../componentes/Popup'
 import Responder from './Responder';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Al inicio del componente
+toast.configure();
 
 const GestionarPQRS = () => {
     const [data, setData] = useState([]);
@@ -20,22 +25,52 @@ const GestionarPQRS = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get');
-            console.log(response)
-
+            console.log(response);
+    
             const token = localStorage.getItem('token');
             const response1 = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            const usuario = response1.data.dependence.idDependence
-            console.log(usuario)
+            const usuario = response1.data.dependence.idDependence;
+            console.log(usuario);
+    
             if (usuario) {
-                const filteredData = response.data.filter(item => item.dependence && item.dependence.idDependence === usuario); // Filtrar los datos por el usuario
+                const filteredData = response.data.filter(item => item.dependence && item.dependence.idDependence === usuario);
+    
+                const alertas20Dias = [];
+                const alertas30Dias = [];
+    
                 filteredData.forEach(item => {
-                    item.date = new Date(item.date).toDateString();
-
+                    const fechaCreacion = new Date(item.date);
+                    const fechaActual = new Date();
+                    const diferenciaTiempo = fechaActual - fechaCreacion;
+                    const diasTranscurridos = Math.floor(diferenciaTiempo / (1000 * 60 * 60 * 24));
+    
+                    item.diasTranscurridos = diasTranscurridos;
+    
+                    const noRespondida = !item.answer || item.answer.trim() === '';
+    
+                    if (noRespondida) {
+                        if (diasTranscurridos >= 30) {
+                            alertas30Dias.push(item.idRequest);
+                        } else if (diasTranscurridos >= 20) {
+                            alertas20Dias.push(item.idRequest);
+                        }
+                    }
+    
+                    item.date = fechaCreacion.toDateString();
                 });
+    
+                // Mostrar notificaciones con react-toastify
+                if (alertas30Dias.length > 0) {
+                    toast.error(`Peticiones vencidas (30 días): ${alertas30Dias.join(', ')}`, { position: toast.POSITION.TOP_RIGHT });
+                }
+                if (alertas20Dias.length > 0) {
+                    toast.warn(`Peticiones sin responder (20 días): ${alertas20Dias.join(', ')}`, { position: toast.POSITION.TOP_RIGHT });
+                }
+    
                 setData(filteredData);
             } else {
                 setData([]);
@@ -44,13 +79,21 @@ const GestionarPQRS = () => {
             console.error('Error en la data: ', error);
         }
     };
+    
 
 
 
     useEffect(() => {
-        document.title = "Gestion PQRS"
+        document.title = "Gestion PQRS";
         fetchData();
+    
+        const intervalo = setInterval(() => {
+            fetchData();
+        }, 3600000); // Actualiza cada hora (3600000 ms)
+    
+        return () => clearInterval(intervalo); // Limpia el intervalo al desmontar el componente
     }, []);
+    
 
     const handleRow = (row) => {
         setSelectedRow(row);
