@@ -30,7 +30,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get');
+                const response = await axios.get('/api/request/get');
                 const data = response.data;
                 setPqrsData(data);
                 calcularTotales(data);
