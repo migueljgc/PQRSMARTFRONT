@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserinfoAmin } from '../../componentes/Userinfo';
 import Popup from '../../componentes/Popup';
-import ModificarUsuario from "../prueba/ModificarUsuario.jsx";
+import ModificarUsuario from "../TablasCuadroVerModi/ModificarUsuario.jsx";
 
 const GestionUsuario = () => {
     const [data, setData] = useState([]);

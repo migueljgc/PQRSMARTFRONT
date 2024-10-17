@@ -20,7 +20,7 @@ import { ActivatePage } from '../src/componentes/ActivatePage';
 import { Recovery } from '../src/componentes/Recovery';
 import { ResetPassword } from '../src/componentes/ResetPassword';
 import { EditarPerfil } from '../src/componentes/Menu/EditarPerfil';
-import TablaUsuarios from '../src/Menus/prueba/TablaUsuarios';
+import TablaUsuarios from '../src/Menus/TablasCuadroVerModi/TablaUsuarios';
 
 
 export const AppRouter = () => {

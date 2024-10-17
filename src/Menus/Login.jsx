@@ -70,7 +70,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://pqrsmartback-production.up.railway.app/api/auth/authenticate', {
+            const response = await axios.post('/api/auth/authenticate', {
                 user,
                 password,
             });
@@ -83,7 +83,7 @@ function Login() {
                 const { token, authorities } = response.data;
                 localStorage.setItem('tokenPQRSMART', token);
                 localStorage.setItem('userPQRSMART', JSON.stringify({ user, role: authorities[0] })); // Assuming single role
-                const response1 = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', {
+                const response1 = await axios.get('/api/auth/editar', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
