@@ -6,6 +6,8 @@ import DataTable from 'react-data-table-component';
 import { UserinfoUser } from '../../componentes/Userinfo'
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
+import Popup from '../../componentes/Popup';
+import VerPqrs from '../TablasCuadroVerModi/VerPqrs';
 
 const Consultar = () => {
     const [data, setData] = useState([]);
@@ -13,6 +15,9 @@ const Consultar = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const usuariosPorPagina = 12;
     const [showPopup, setShowPopup] = useState(false);
+    const [show, setShow] = useState(false);
+    const [pqrs, setPqrs] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -33,7 +38,7 @@ const Consultar = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get')
+            const response = await axios.get('/api/request/get')
             setData(response.data);
             const usuario = localStorage.getItem('users');
             console.log(usuario)
@@ -62,7 +67,7 @@ const Consultar = () => {
 
     const handleCancel = async (idRequest) => {
         try {
-            await axios.put(`https://pqrsmartback-production.up.railway.app/api/request/cancel/${idRequest}`);
+            await axios.put(`/api/request/cancel/${idRequest}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
         } catch (error) {
@@ -81,56 +86,12 @@ const Consultar = () => {
     const closePopup = () => {
         setShowPopup(false);
     };
-    const columns = [
-        {
-            name: 'Tipo de Solicitud',
-            selector: row => pqrs.requestType.nameRequestType
-        },
-        {
-            name: 'Fecha',
-            selector: row => pqrs.date
-        },
-        {
-            name: 'Descripcion',
-            selector: row => pqrs.description,
-            cell: row => (
-                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
-                    {row.description.length > 50 ? `${row.description.slice(0, 50)}...` : row.description}
-                </div>
-            ),
-        },
-        {
-            name: 'Estado',
-            selector: row => pqrs.requestState.nameRequestState
-        },
-        {
-            name: 'Respuesta',
-            selector: row => pqrs.answer,
-            cell: row => (
-                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
-                    {row.answer && row.answer.length > 50
-                        ? `${row.answer.slice(0, 50)}...`
-                        : row.answer || ''}  {/* Si row.answer es null o undefined, mostramos 'No disponible' */}
-                </div>
-            ),
-        },
-        {
-            name: 'Accion',
-            cell: row => (
-                <div className='accion'>
-                    <div className="versoli">
-                        <FaSearch />
-                    </div>
-                    <div className="eliminarsoli" onClick={() => handleCancel(row.idRequest)}>
-                        <MdOutlineCancel />
-                    </div>
-                </div>
-            ),
-
-        },
-
-    ]
-
+    
+    const handleView = (pqrs) => {
+        setPqrs(pqrs); // Establece el usuario seleccionado
+        console.log(pqrs)
+        setShow(true);    // Abre el popup
+    };
     return (
         <div className='consultarPqrs'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
@@ -188,6 +149,9 @@ const Consultar = () => {
                                             </div>
                                         </td>
                                         <td>
+                                        <span className='activar' onClick={() => handleView(pqrs)}>
+                                                {'🔎'}
+                                            </span>
                                             <span className='activar' onClick={() => handleCancel(user.idRequest)}>
                                                 {'❌'}
                                             </span>
@@ -213,7 +177,14 @@ const Consultar = () => {
                     </div>
                 </div>
             </div>
-
+            {show && (
+                <VerPqrs
+                    isOpen={show}
+                    onClose={() => setShow(false)}
+                    pqrs={pqrs}
+                />
+            )}
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 }

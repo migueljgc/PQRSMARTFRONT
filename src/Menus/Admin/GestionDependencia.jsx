@@ -17,7 +17,7 @@ const GestionDependencia = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get')
+            const response = await axios.get('/api/dependence/get')
             setData(response.data);
             console.log(response.data)
         } catch (error) {
@@ -50,7 +50,7 @@ const GestionDependencia = () => {
 
     const handleCancel = async (idDependence) => {
         try {
-            await axios.put(`https://pqrsmartback-production-307d.up.railway.app/api/dependence/cancel/${idDependence}`);
+            await axios.put(`/api/dependence/cancel/${idDependence}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
             setError('Dependencia Desactivada.');
@@ -65,7 +65,7 @@ const GestionDependencia = () => {
     };
     const handleActivate = async (idDependence) => {
         try {
-            await axios.put(`https://pqrsmartback-production-307d.up.railway.app/api/dependence/activate/${idDependence}`);
+            await axios.put(`/api/dependence/activate/${idDependence}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
             setError('Dependencia Activada.');
