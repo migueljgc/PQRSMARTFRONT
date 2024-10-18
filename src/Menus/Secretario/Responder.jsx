@@ -4,7 +4,7 @@ import axios from 'axios';
 import Popup from '../../componentes/Popup'
 import { useNavigate } from 'react-router-dom';
 
-const Responder = ({ pqrs, onSave, onClose, isOpen }) => {
+const Responder = ({ pqrs, onRechazar, onSave, onClose, isOpen }) => {
     
     const [formData, setFormData] = useState({
         answer: pqrs.answer
@@ -51,7 +51,7 @@ const Responder = ({ pqrs, onSave, onClose, isOpen }) => {
 
                     <div className="enviar">
                         <button onClick={handleSave}>Enviar</button>
-                        <button onClick={handleSave}>Rechazar</button>
+                        <button onClick={()=> onRechazar(pqrs.idRequest)}>Rechazar</button>
                         <button onClick={onClose}>Cancelar</button>
                     </div>
 

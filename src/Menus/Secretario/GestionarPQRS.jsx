@@ -147,16 +147,11 @@ const GestionarPQRS = () => {
         setShowPopup(false);
     };
     //Responder
-    const handleSavePqrs = async (updatedPqrs) => {
-        const update=updatedPqrs;
-        console.log('Usuario guardado:', update);
+    const handleSavePqrs = async (idRequest) => {
+        console.log('Rechazada: ', idRequest);
        
         try {
-            const response = await axios.put(`/api/request/update/${update.idRequest}`,
-                {
-                    answer: update.answer,
-                    requestState: update.requestState,
-                }
+            const response = await axios.put(`/api/request/rechazar/${idRequest}`
             );
             console.log('Response:', response.data);
             setEstado(false)
@@ -168,6 +163,18 @@ const GestionarPQRS = () => {
             console.error('Error al actualizar el estado: ', error);
         }
 
+    };
+    const handleRechazar = async (idRequest) => {
+        try {
+            await axios.put(`/api/request/rechazar/${idRequest}`);
+            // Actualizar la tabla después de cancelar la solicitud
+            setEstado(false)
+            setError('Envio Exitoso')
+            setShowPopup(true); // Mostrar popup
+            fetchData();
+        } catch (error) {
+            console.error('Error al cancelar la solicitud: ', error);
+        }
     };
 
     return (
@@ -259,6 +266,7 @@ const GestionarPQRS = () => {
                         onSave={handleSavePqrs}
                         isOpen={estado}
                         onClose={() => setEstado(false)+ setSelectedRow('')}
+                        onRechazar={handleRechazar}
                         
 
                     />
