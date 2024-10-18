@@ -11,7 +11,7 @@ const TablaUsuarios = () => {
     }, []);
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/Usuario/get', {
+            const response = await axios.get('/api/Usuario/get', {
                 'Authorization': `Bearer ${token}`
             });
             setData(response.data);

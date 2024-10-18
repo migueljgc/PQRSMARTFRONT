@@ -136,7 +136,7 @@ const Consultar = () => {
                                         </td>
                                         <td>
                                             <span className={`estado ${pqrs.requestState?.nameRequestState?.toLowerCase()}`}>
-                                                {pqrs.requestState?.nameRequestState === 'ACTIVO' ? '✔️' : pqrs.requestState?.nameRequestState === 'Pendiente' ? '🔎' : '❌'}
+                                                {pqrs.requestState?.nameRequestState === 'Finalizado' ? '✔️' : pqrs.requestState?.nameRequestState === 'Pendiente' ? '🔎' : '❌'}
 
                                             </span>
                                             {pqrs.requestState?.nameRequestState}

@@ -2,56 +2,54 @@ import React, { useEffect, useState } from 'react';
 import '../Secretario/GestionarPQRS.css'
 import { MenuSecre } from '../../componentes/Menu';
 import { UserinfoSecre } from '../../componentes/Userinfo';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import DataTable from 'react-data-table-component';
 import Popup from '../../componentes/Popup'
 import Responder from './Responder';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Al inicio del componente
-toast.configure();
+
 
 const GestionarPQRS = () => {
+    const [currentPage, setCurrentPage] = useState(0);
+    const usuariosPorPagina = 12;
     const [data, setData] = useState([]);
     const [selectedRow, setSelectedRow] = useState(null); // Cambiado para que sea null en lugar de un array
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
-    const [filteredData, setFilteredData] = useState([]); // Estado para los datos filtrados
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
     const [estado, setEstado] = useState(false)
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get');
+            const response = await axios.get('/api/request/get');
             console.log(response);
-    
+
             const token = localStorage.getItem('token');
-            const response1 = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', {
+            const response1 = await axios.get('/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
             const usuario = response1.data.dependence.idDependence;
             console.log(usuario);
-    
+
             if (usuario) {
                 const filteredData = response.data.filter(item => item.dependence && item.dependence.idDependence === usuario);
-    
+
                 const alertas20Dias = [];
                 const alertas30Dias = [];
-    
+
                 filteredData.forEach(item => {
                     const fechaCreacion = new Date(item.date);
                     const fechaActual = new Date();
                     const diferenciaTiempo = fechaActual - fechaCreacion;
                     const diasTranscurridos = Math.floor(diferenciaTiempo / (1000 * 60 * 60 * 24));
-    
+
                     item.diasTranscurridos = diasTranscurridos;
-    
+
                     const noRespondida = !item.answer || item.answer.trim() === '';
-    
+
                     if (noRespondida) {
                         if (diasTranscurridos >= 30) {
                             alertas30Dias.push(item.idRequest);
@@ -59,18 +57,18 @@ const GestionarPQRS = () => {
                             alertas20Dias.push(item.idRequest);
                         }
                     }
-    
+
                     item.date = fechaCreacion.toDateString();
                 });
-    
+
                 // Mostrar notificaciones con react-toastify
                 if (alertas30Dias.length > 0) {
-                    toast.error(`Peticiones vencidas (30 días): ${alertas30Dias.join(', ')}`, { position: toast.POSITION.TOP_RIGHT });
+                    toast.error(`Peticiones vencidas (30 días): Su id ${alertas30Dias.join(', ')}`);
                 }
-                if (alertas20Dias.length > 0) {
-                    toast.warn(`Peticiones sin responder (20 días): ${alertas20Dias.join(', ')}`, { position: toast.POSITION.TOP_RIGHT });
+                else if (alertas20Dias.length > 0) {
+                    toast.warn(`Peticiones sin responder (20 días): Su id ${alertas20Dias.join(', ')}`);
                 }
-    
+
                 setData(filteredData);
             } else {
                 setData([]);
@@ -79,24 +77,21 @@ const GestionarPQRS = () => {
             console.error('Error en la data: ', error);
         }
     };
-    
-
-
 
     useEffect(() => {
         document.title = "Gestion PQRS";
         fetchData();
-    
+
         const intervalo = setInterval(() => {
             fetchData();
-        }, 3600000); // Actualiza cada hora (3600000 ms)
-    
+        }, 10800000); // Actualiza cada hora (3600000 ms)
+
         return () => clearInterval(intervalo); // Limpia el intervalo al desmontar el componente
     }, []);
-    
 
-    const handleRow = (row) => {
-        setSelectedRow(row);
+
+    const handleRow = (pqrs) => {
+        setSelectedRow(pqrs);
     };
 
     const handleResponderClick = async (e) => {
@@ -105,32 +100,18 @@ const GestionarPQRS = () => {
         if (selectedRow) {
 
             // Actualizar la solicitud de PQRS seleccionada
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/request/get', selectedRow)
+            const response = await axios.get('/api/request/get', selectedRow)
 
             setEstado(true)
-            
+
         } else {
             setError('Por favor seleccione una fila')
             setShowPopup(true); // Mostrar popup
             return;
         }
-        setFilteredData(filtered);
+        
     };
 
-
-    const conditionalRowStyles = [
-        {
-            when: row => row === selectedRow,
-            style: {
-                backgroundColor: '#5A93D9 !important',
-                color: 'black !important',
-                '&:hover': {
-                    cursor: 'pointer'
-                }
-            }
-
-        }
-    ];
     useEffect(() => {
         const script = document.createElement('script');
         script.src = '/Gradient.js'; // Ruta directa al archivo en public
@@ -157,49 +138,36 @@ const GestionarPQRS = () => {
         String(item.mediumAnswer).toLowerCase().includes(filterText.toLowerCase()) ||
         String(item.requestState.nameRequestState).toLowerCase().includes(filterText.toLowerCase())
     );
-    useEffect(() => {
-        setFilteredData(filtered);
-    }, [filterText, data]); // Se ejecuta cuando cambia filterText o data
+    const paginacion = filtered.slice(currentPage * usuariosPorPagina, (currentPage + 1) * usuariosPorPagina);
 
+    const totalPaginas = Math.ceil(filtered.length / usuariosPorPagina);
 
-    // Definir las columnas de la tabla
-    const columns = [
-        {
-            name: 'Categoria',
-            selector: row => row.category.nameCategory
-        },
-        {
-            name: 'Descripcion',
-            selector: row => row.description
-        },
-        {
-            name: 'Fecha',
-            selector: row => row.date,
-            sortable: true
-        },
-        {
-            name: 'Tipo de Solicitud',
-            selector: row => row.requestType.nameRequestType
-        },
-        {
-            name: 'Medio de Respuesta',
-            selector: row => row.mediumAnswer
-
-        },
-        {
-            name: 'Estado',
-            selector: row => row.requestState.nameRequestState
-        },
-        {
-            name: 'Respuesta',
-            selector: row => row.answer
-        },
-
-
-    ];
 
     const closePopup = () => {
         setShowPopup(false);
+    };
+    //Responder
+    const handleSavePqrs = async (updatedPqrs) => {
+        const update=updatedPqrs;
+        console.log('Usuario guardado:', update);
+       
+        try {
+            const response = await axios.put(`/api/request/update/${update.idRequest}`,
+                {
+                    answer: update.answer,
+                    requestState: update.requestState,
+                }
+            );
+            console.log('Response:', response.data);
+            setEstado(false)
+            setError('Envio Exitoso')
+            setShowPopup(true); // Mostrar popup
+            fetchData(); // Actualiza la tabla con los datos modificados
+            return;
+        } catch (error) {
+            console.error('Error al actualizar el estado: ', error);
+        }
+
     };
 
     return (
@@ -213,41 +181,93 @@ const GestionarPQRS = () => {
             </div>
             <div className="cuerposgestionarpqrs">
 
-                <div className="formgestionarpqrs">
-                    <form className="solicitud-gestionarpqrs" onSubmit={handleResponderClick}>
-                        <h1 className="titlegestionarpqrs">GESTIONAR PQRS</h1>
-                        <div className="busqueda">
-                            <input type="text" placeholder='Buscar'
-                                value={filterText}
-                                onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
-                            />
-                        </div>
-
-                        <DataTable
-                            className='dataTable-container'
-                            columns={columns}
-                            data={filteredData}
-                            responsive
-                            pagination
-                            paginationPerPage={6}
-                            onRowClicked={handleRow}
-                            conditionalRowStyles={conditionalRowStyles}
+                <div className="tabla-usuario">
+                    <h1 className="titleConsultar">GESTIONAR PQRS</h1>
+                    <div className="busqueda">
+                        <input type="text"
+                            value={filterText}
+                            onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
                         />
+                        <img src="src/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                    </div>
+                    <label className='nota' >Nota: Con La X Puede Cancelar Su Solicitud</label>
+                    <table className="tabla-minimalista-usuario">
+                        <thead>
+                            <tr>
+                                <th>Categoria</th>
+                                <th>Descripcion</th>
+                                <th>Fecha</th>
+                                <th>Tipo de Solicitud</th>
+                                <th>Medio de Respuesta</th>
+                                <th>Estado</th>
+                                <th>Respuesta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginacion.length > 0 ? (
+                                paginacion.map((pqrs, index) => (
+                                    <tr key={index} onClick={() => handleRow(pqrs)} className={pqrs === selectedRow ? 'fila-seleccionada' : ''}>
+                                        <td>{pqrs.category.nameCategory}</td>
+                                        <td>
+                                            <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
+                                                {pqrs.description.length > 50 ? `${pqrs.description.slice(0, 50)}...` : pqrs.description}
+                                            </div>
+                                        </td>
+                                        <td>{pqrs.date}</td>
+                                        <td>{pqrs.requestType.nameRequestType}</td>
+                                        <td>{pqrs.mediumAnswer}</td>
+                                        <td>
+                                            <span className={`estado ${pqrs.requestState?.nameRequestState?.toLowerCase()}`}>
+                                                {pqrs.requestState?.nameRequestState === 'Finalizado' ? '✔️' : pqrs.requestState?.nameRequestState === 'Pendiente' ? '🔎' : '❌'}
 
-                        <div className="Btngestionarpqrs" >
-                            <button disabled={selectedRow == null} >Responder</button>
-                        </div>
-                    </form>
+                                            </span>
+                                            {pqrs.requestState?.nameRequestState}
+                                        </td>
+                                        <td>
+                                            <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
+                                                {pqrs.answer && pqrs.answer.length > 50
+                                                    ? `${pqrs.answer.slice(0, 50)}...`
+                                                    : pqrs.answer || ''}  {/* Si row.answer es null o undefined, mostramos 'No disponible' */}
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                    <div className="paginacion">
+                        <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))} disabled={currentPage === 0}>
+                            Anterior
+                        </button>
+                        <span>{currentPage + 1} de {totalPaginas}</span>
+                        <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPaginas - 1))} disabled={currentPage >= totalPaginas - 1}>
+                            Siguiente
+                        </button>
+                    </div>
+                    <div className="Btngestionarpqrs" >
+                        <button disabled={selectedRow == null} onClick={handleResponderClick}>Responder</button>
+                    </div>
                 </div>
                 {estado && (
-                <Responder
-                    selectedRow={selectedRow}
-                    setEstado={setEstado}
+                    <Responder
+                        pqrs={selectedRow}
+                        onSave={handleSavePqrs}
+                        isOpen={estado}
+                        onClose={() => setEstado(false)+ setSelectedRow('')}
+                        
 
-                />
-            )}
+                    />
+                )}
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
+            <ToastContainer
+
+            />
         </div>
     );
 }

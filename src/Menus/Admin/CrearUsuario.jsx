@@ -47,7 +47,7 @@ const CrearUsuario = () => {
 
         const fetchIdentificationTypes = async () => {
             try {
-                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/identification_type/get');
+                const response = await axios.get('/api/identification_type/get');
                 console.log('Tipos de identificación obtenidos:', response.data);
                 setIdentificationTypes(response.data);
             } catch (error) {
@@ -57,7 +57,7 @@ const CrearUsuario = () => {
 
         const fetchPersonTypes = async () => {
             try {
-                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/person_type/get');
+                const response = await axios.get('/api/person_type/get');
                 console.log('Tipos de persona obtenidos:', response.data);
                 setPersonTypes(response.data);
             } catch (error) {
@@ -66,7 +66,7 @@ const CrearUsuario = () => {
         };
         const fetchDependence = async () => {
             try {
-                const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get')
+                const response = await axios.get('/api/dependence/get')
                 console.log('Dependencias obtenidos:', response.data);
                 setDependence(response.data);
             } catch (error) {
@@ -140,7 +140,7 @@ const CrearUsuario = () => {
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
             const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
             if (formData.contraseña === formData.confirmarContraseña) {
-                const userResponse = await axios.post('https://pqrsmartback-production.up.railway.app/api/auth/register', {
+                const userResponse = await axios.post('/api/auth/register', {
                     personType: { idPersonType: selectedPersonType.idPersonType },
                     name: formData.nombre,
                     lastName: formData.apellido,

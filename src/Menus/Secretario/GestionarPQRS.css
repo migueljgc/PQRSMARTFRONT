@@ -27,40 +27,17 @@
 
 }
 
-.titlegestionarpqrs {
-    color: #FFFFFF;
-    font-size: 2rem;
-    text-align: center;
-}
-
-.formgestionarpqrs {
-    margin-top: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    width: 100%;
-    max-width: 800px;
-    color: #FFFFFF;
-    box-sizing: border-box;
-    overflow: auto;
-    /* Si hay mucho contenido, permitir scroll interno */
-
-}
-
-.solicitud-gestionarpqrs {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.fila-seleccionada {
+    background-color: #5A93D9 !important;
+    color: white !important;
+    font-weight: bold;
 }
 
 .Btngestionarpqrs {
     display: flex;
     justify-content: center;
     text-align: center;
+    padding-top: 20px;
 }
 
 .Btngestionarpqrs button {
