@@ -45,7 +45,7 @@ const Responder = ({ pqrs, onRechazar, onSave, onClose, isOpen }) => {
                         cols="50"
                         value={formData.answer || ''}
                         onChange={handleChange}
-
+                        required
                     ></textarea>
 
 

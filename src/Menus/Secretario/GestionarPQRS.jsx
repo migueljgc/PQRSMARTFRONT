@@ -51,9 +51,9 @@ const GestionarPQRS = () => {
                     const noRespondida = !item.answer || item.answer.trim() === '';
 
                     if (noRespondida) {
-                        if (diasTranscurridos >= 30) {
+                        if (diasTranscurridos >= 15) {
                             alertas30Dias.push(item.idRequest);
-                        } else if (diasTranscurridos >= 20) {
+                        } else if (diasTranscurridos >= 10) {
                             alertas20Dias.push(item.idRequest);
                         }
                     }
@@ -131,6 +131,7 @@ const GestionarPQRS = () => {
 
     // Filtrar datos cuando cambie el texto de búsqueda
     const filtered = data.filter(item =>
+        String(item.radicado).toLowerCase().includes(filterText.toLowerCase()) ||
         String(item.category.nameCategory).toLowerCase().includes(filterText.toLowerCase()) ||
         String(item.description).toLowerCase().includes(filterText.toLowerCase()) ||
         String(item.date).toLowerCase().includes(filterText.toLowerCase()) ||
@@ -147,11 +148,14 @@ const GestionarPQRS = () => {
         setShowPopup(false);
     };
     //Responder
-    const handleSavePqrs = async (idRequest) => {
-        console.log('Rechazada: ', idRequest);
-       
+    const handleSavePqrs = async (updatedPqrs) => {
+        console.log('envio: ', updatedPqrs);
         try {
-            const response = await axios.put(`/api/request/rechazar/${idRequest}`
+            const response = await axios.put(`/api/request/update/${updatedPqrs.idRequest}`,
+                {
+                    answer: updatedPqrs.answer,
+                    requestState: updatedPqrs.requestState,
+                },
             );
             console.log('Response:', response.data);
             setEstado(false)
@@ -164,6 +168,7 @@ const GestionarPQRS = () => {
         }
 
     };
+    
     const handleRechazar = async (idRequest) => {
         try {
             await axios.put(`/api/request/rechazar/${idRequest}`);
