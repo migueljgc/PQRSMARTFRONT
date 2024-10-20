@@ -156,13 +156,11 @@ const Consultar = () => {
                                             {pqrs.requestState?.nameRequestState}
                                         </td>
                                         <td>
-                                            <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
+                                            {/*<div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
                                                 {pqrs.answer && pqrs.answer.length > 50
                                                     ? `${pqrs.answer.slice(0, 50)}...`
                                                     : pqrs.answer || ''}  {/* Si row.answer es null o undefined, mostramos 'No disponible' */}
-                                            </div>
-                                        </td>
-                                        <td>
+                                            {/*</div>*/}
                                             <span>
                                                 {pqrs.archivoAnswer ? (
                                                     <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
@@ -175,8 +173,23 @@ const Consultar = () => {
                                                 )
                                                 }
                                             </span>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                {pqrs.evidenceAnswer ? (
+                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                        <button className='btn-descargar'>Descargar</button>
+                                                    </a>
+                                                ) : (
+                                                    <div>
+                                                        <span>No disponible</span>
+                                                    </div>
+                                                )
+                                                }
+                                            </span>
 
                                         </td>
+
                                         <td>
                                         <span className='activar' onClick={() => handleView(pqrs)}>
                                                 {'🔎'}
