@@ -109,7 +109,7 @@ const GestionarPQRS = () => {
             setShowPopup(true); // Mostrar popup
             return;
         }
-        
+
     };
 
     useEffect(() => {
@@ -150,13 +150,27 @@ const GestionarPQRS = () => {
     //Responder
     const handleSavePqrs = async (updatedPqrs) => {
         console.log('envio: ', updatedPqrs);
+        const formDataToSend = new FormData();
+        const archivo = updatedPqrs.archivoAnswer
+        if (archivo !== null) {
+            formDataToSend.append('archivo', archivo);
+            console.log(archivo)
+        }
+        formDataToSend.append('request', new Blob([JSON.stringify({
+            answer: updatedPqrs.answer,
+            requestState: updatedPqrs.requestState,
+        })], {
+            type: 'application/json'
+        }));
+        setError('Espere.....')
+        setShowPopup(true); // Mostrar popup
         try {
             const response = await axios.put(`/api/request/update/${updatedPqrs.idRequest}`,
-                {
-                    answer: updatedPqrs.answer,
-                    requestState: updatedPqrs.requestState,
-                },
-            );
+                formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
             console.log('Response:', response.data);
             setEstado(false)
             setError('Envio Exitoso')
@@ -168,7 +182,7 @@ const GestionarPQRS = () => {
         }
 
     };
-    
+
     const handleRechazar = async (idRequest) => {
         try {
             await axios.put(`/api/request/rechazar/${idRequest}`);
@@ -211,6 +225,7 @@ const GestionarPQRS = () => {
                                 <th>Fecha</th>
                                 <th>Tipo de Solicitud</th>
                                 <th>Medio de Respuesta</th>
+                                <th>Evidencia</th>
                                 <th>Estado</th>
                                 <th>Respuesta</th>
                             </tr>
@@ -228,6 +243,21 @@ const GestionarPQRS = () => {
                                         <td>{pqrs.date}</td>
                                         <td>{pqrs.requestType.nameRequestType}</td>
                                         <td>{pqrs.mediumAnswer}</td>
+                                        <td>
+                                            <span>
+                                                {pqrs.archivo ? (
+                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                        <button className='btn-descargar'>Descargar</button>
+                                                    </a>
+                                                ) : (
+                                                    <div>
+                                                        <span>No disponible</span>
+                                                    </div>
+                                                )
+                                                }
+                                            </span>
+
+                                        </td>
                                         <td>
                                             <span className={`estado ${pqrs.requestState?.nameRequestState?.toLowerCase()}`}>
                                                 {pqrs.requestState?.nameRequestState === 'Finalizado' ? '✔️' : pqrs.requestState?.nameRequestState === 'Pendiente' ? '🔎' : '❌'}
@@ -270,9 +300,9 @@ const GestionarPQRS = () => {
                         pqrs={selectedRow}
                         onSave={handleSavePqrs}
                         isOpen={estado}
-                        onClose={() => setEstado(false)+ setSelectedRow('')}
+                        onClose={() => setEstado(false) + setSelectedRow('')}
                         onRechazar={handleRechazar}
-                        
+
 
                     />
                 )}

@@ -37,10 +37,12 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.input-box-Responder label{
+    margin-top: 10px;
+}
 .enviar {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
     /* Centrar horizontalmente */
     margin-top: 10px;
     /* Espacio superior para separación */
@@ -67,4 +69,18 @@
     /* Cambiar a un azul más oscuro al presionar */
     transform: translateY(0);
     /* Reiniciar la posición al hacer clic */
+}
+
+.file-input-Responder{
+    margin-top: 10px;
+    background-color: #E0E0E0;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.file-input-Responder:hover {
+    border-color: black;
 }

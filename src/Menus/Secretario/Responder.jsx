@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../Secretario/Responder.css'
-import axios from 'axios';
-import Popup from '../../componentes/Popup'
-import { useNavigate } from 'react-router-dom';
 
 const Responder = ({ pqrs, onRechazar, onSave, onClose, isOpen }) => {
-    
+
     const [formData, setFormData] = useState({
-        answer: pqrs.answer
+        answer: pqrs.answer,
+        file: null, // Nuevo estado para el archivo
     });
+
     const handleSave = () => {
         const updatedPqrs = {
             ...pqrs,
             answer: formData.answer,
             requestState: { idRequestState: 2 },
             idRequest: pqrs.idRequest,
+            archivoAnswer: formData.file, // Incluir archivo en el guardado
         };
         onSave(updatedPqrs);
     };
@@ -25,7 +25,12 @@ const Responder = ({ pqrs, onRechazar, onSave, onClose, isOpen }) => {
             [e.target.name]: e.target.value,
         });
     };
-
+    const handleFileChange = (e) => {
+        setFormData({
+            ...formData,
+            file: e.target.files[0]
+        })
+    }
     useEffect(() => {
         document.title = "Responder PQRS"
 
@@ -48,16 +53,23 @@ const Responder = ({ pqrs, onRechazar, onSave, onClose, isOpen }) => {
                         required
                     ></textarea>
 
+                    <label>Adjuntar Evidencia (opcional)</label>
+                    <input type="file" className="file-input-Responder" id='file'
+                        onChange={handleFileChange} // Manejar el archivo name='archivo'
+
+
+                    />
+
 
                     <div className="enviar">
                         <button onClick={handleSave}>Enviar</button>
-                        <button onClick={()=> onRechazar(pqrs.idRequest)}>Rechazar</button>
+                        <button onClick={() => onRechazar(pqrs.idRequest)}>Rechazar</button>
                         <button onClick={onClose}>Cancelar</button>
                     </div>
 
                 </div>
             </div>
-            
+
         </div>
     );
 }

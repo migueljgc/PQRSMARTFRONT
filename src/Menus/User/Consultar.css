@@ -63,3 +63,11 @@
     font-size: 14px;
 }
 
+.btn-descargar{
+    padding: 10px 10px 10px 10px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+
+}

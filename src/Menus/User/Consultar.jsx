@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../User/Consultar.css'
 import { Menu } from '../../componentes/Menu';
 import axios from 'axios';
-import DataTable from 'react-data-table-component';
 import { UserinfoUser } from '../../componentes/Userinfo'
-import { FaSearch } from "react-icons/fa";
-import { MdOutlineCancel } from "react-icons/md";
 import Popup from '../../componentes/Popup';
 import VerPqrs from '../TablasCuadroVerModi/VerPqrs';
 
@@ -118,8 +115,10 @@ const Consultar = () => {
                                 <th>Tipo de Solicitud</th>
                                 <th>Fecha</th>
                                 <th>Descripcion</th>
+                                <th>Evidencia</th>
                                 <th>Estado</th>
                                 <th>Respuesta</th>
+                                <th>Evidencia Respuesta</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
@@ -135,6 +134,21 @@ const Consultar = () => {
                                             </div>
                                         </td>
                                         <td>
+                                            <span>
+                                                {pqrs.archivo ? (
+                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                        <button>Descargar</button>
+                                                    </a>
+                                                ) : (
+                                                    <div>
+                                                        <span>No disponible</span>
+                                                    </div>
+                                                )
+                                                }
+                                            </span>
+
+                                        </td>
+                                        <td>
                                             <span className={`estado ${pqrs.requestState?.nameRequestState?.toLowerCase()}`}>
                                                 {pqrs.requestState?.nameRequestState === 'Finalizado' ? '✔️' : pqrs.requestState?.nameRequestState === 'Pendiente' ? '🔎' : '❌'}
 
@@ -147,6 +161,21 @@ const Consultar = () => {
                                                     ? `${pqrs.answer.slice(0, 50)}...`
                                                     : pqrs.answer || ''}  {/* Si row.answer es null o undefined, mostramos 'No disponible' */}
                                             </div>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                {pqrs.archivoAnswer ? (
+                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                        <button className='btn-descargar'>Descargar</button>
+                                                    </a>
+                                                ) : (
+                                                    <div>
+                                                        <span>No disponible</span>
+                                                    </div>
+                                                )
+                                                }
+                                            </span>
+
                                         </td>
                                         <td>
                                         <span className='activar' onClick={() => handleView(pqrs)}>
