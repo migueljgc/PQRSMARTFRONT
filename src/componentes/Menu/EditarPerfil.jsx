@@ -28,7 +28,7 @@ export const EditarPerfil = () => {
                 const headers = { 'Authorization': `Bearer ${token}` };
 
                 // Fetch user data
-                const userResponse = await axios.get('https://pqrsmartback-production.up.railway.app/api/auth/editar', { headers });
+                const userResponse = await axios.get('/api/auth/editar', { headers });
                 setUser(userResponse.data);
                 console.log(user)
 
@@ -70,7 +70,7 @@ export const EditarPerfil = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.put('https://pqrsmartback-production.up.railway.app/api/user/editar', user, {
+            await axios.put('/api/user/editar', user, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -93,40 +93,42 @@ export const EditarPerfil = () => {
                 <Menu />
             </div>
             <div className="cuerpo-editar">
-                <div className="headers-editar">
-                    <h1 className="title-editar">PERFIL</h1>
-                    <div className="user-menu">
-                        <UserinfoUser />
-
-                    </div>
-                </div>
-
                 <div className="form-editar">
-                    <form className="solicitud-form-editar" onSubmit={handleSubmit}>
+                    <form className="solicitud-form-editar" >
+                        <h1 className="title-editar">PERFIL</h1>
                         <div className="input-box-editar">
-                            <label>User:</label>
+                            <label>Usuario:</label>
                             <input type="text" name="user" value={user.user} onChange={handleChange} disabled />
                         </div>
-                        <br />
                         <div className="input-box-editar">
-                            <label>Name:</label>
-                            <input type="text" name="name" value={user.name} onChange={handleChange} />
+                            <label>Nombre:</label>
+                            <input type="text" disabled name="name" value={user.name} onChange={handleChange} />
                         </div>
-                        <br />
                         <div className="input-box-editar">
-                            <label>Last Name:</label>
-                            <input type="text" name="lastName" value={user.lastName} onChange={handleChange} />
+                            <label>Apellido:</label>
+                            <input type="text" disabled name="lastName" value={user.lastName} onChange={handleChange} />
                         </div>
-                        <br />
                         <div className="input-box-editar">
-                            <label>Email:</label>
-                            <input type="email" name="email" value={user.email} onChange={handleChange} />
+                            <label>Correo:</label>
+                            <div className="input-box-editar-A">
+                                <input type="email" disabled name="email" value={user.email} onChange={handleChange} />
+                                <a href="">Editar</a>
+                            </div>
+                            
                         </div>
-                        <br />
+                        <div className="input-box-editar">
+                            <label>Tipo de Persona:</label>
+                            <input type="text" disabled name="personType" value={user.personType.namePersonType} onChange={handleChange} />
+                        </div>
+                        <div className="input-box-editar">
+                            <label>Tipo de Identificacion:</label>
+                            <input type="text" disabled name="identificationType" value={user.identificationType.nameIdentificationType} onChange={handleChange} />
+                        </div>
+                        <div className="input-box-editar">
+                            <label>Numero de Identificacion:</label>
+                            <input type="text" disabled name="identificationNumber" value={user.identificationNumber} onChange={handleChange} />
+                        </div>
 
-                        
-
-                        <button type="submit" className="submit-btn">Enviar</button>
                     </form>
                 </div>
             </div>

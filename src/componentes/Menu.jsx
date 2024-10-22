@@ -1,14 +1,14 @@
-
 import React, { useEffect } from 'react';
 import '../componentes/Menu.css'
 import { useNavigate } from 'react-router-dom';
 import { FaPenClip } from "react-icons/fa6";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { ImExit } from "react-icons/im";
+import { ImExit, ImProfile } from "react-icons/im";
 import { RxDashboard } from "react-icons/rx";
 import { RiContactsBook2Line } from "react-icons/ri";
 import { IoHomeOutline } from "react-icons/io5";
 import Logo from "./Logo.jsx";
+import { CgProfile } from 'react-icons/cg';
 
 
 export const Menu = () => {
@@ -52,6 +52,13 @@ export const Menu = () => {
             <div className="list__button">
               <img src="assets/dashboard.svg" className="list__img" />
               <a href="/HomePage" className="nav__link">Inicio</a>
+            </div>
+          </li>
+
+          <li className="list__item">
+            <div className="list__button">
+            <ImProfile />
+              <a href="/EditarPerfil" className="nav__link">Perfil</a>
             </div>
           </li>
 
@@ -125,6 +132,12 @@ export const MenuAdmin = () => {
             <div className="list__button">
               <img src="assets/dashboard.svg" className="list__img" />
               <a href="/HomePagesAdmin" className="nav__link">Inicio</a>
+            </div>
+          </li>
+          <li className="list__item">
+            <div className="list__button">
+              <ImProfile />
+              <a href="/EditarPerfil" className="nav__link">Perfil</a>
             </div>
           </li>
           <li className="list__item">
@@ -247,6 +260,12 @@ export const MenuSecre = () => {
             <div className="list__button">
               <img src="assets/dashboard.svg" className="list__img" />
               <a href="/HomePage" className="nav__link">Inicio</a>
+            </div>
+          </li>
+          <li className="list__item">
+            <div className="list__button">
+              <ImProfile />
+              <a href="/EditarPerfil" className="nav__link">Perfil</a>
             </div>
           </li>
 
