@@ -10,10 +10,10 @@ body {
 
 #gradient-canvas {
     position: absolute;
-    --gradient-color-1: #4A81D1; /* Azul claro para confianza y profesionalismo */
-    --gradient-color-2: #3368B0; /* Un azul más oscuro para estabilidad */
-    --gradient-color-3: #5A93D9; /* Azul suave para equilibrio */
-    --gradient-color-4: #295087; /* Un tono intermedio de azul */
+    --gradient-color-1: #A8E6CF; /* Verde claro para frescura */
+    --gradient-color-2: #81C784; /* Verde medio para equilibrio */
+    --gradient-color-3: #64B5F6; /* Azul claro para confianza */
+    --gradient-color-4: #42A5F5; /* Azul oscuro para estabilidad */
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -40,7 +40,7 @@ body {
 .logo-section {
     flex: 1;
     text-align: center;
-    color: #34B0E3;
+    color: #333333;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@ body {
     /* Ancho de la línea */
     height: 300px;
     /* Altura de la línea */
-    background-color: #34B0E3;
+    background-color: #546E7A;
     /* Color de la línea */
     margin-left: 40px;
     /* Espacio entre el texto y la línea */
@@ -84,12 +84,12 @@ body {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #333333;
     margin-bottom: 30px;
     outline: none;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #546E7A;
 }
   
 .user-box label {
@@ -98,7 +98,7 @@ body {
     left: 0;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #333333;
     pointer-events: none;
     transition: 0.2s;
 }
@@ -107,7 +107,7 @@ body {
 .user-box input:valid~label {
     top: -20px;
     left: 0;
-    color: #f3f4f6;
+    color: #333333;
     font-size: 12px;
 }
 .password-wrapper {
@@ -133,7 +133,7 @@ body {
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
-    border: 2px solid #f3f4f6;
+    border: 2px solid #388E3C;
     border-radius: 0.6em;
     color: #e74c3c;
     cursor: pointer;
@@ -154,9 +154,9 @@ body {
 }
 
 .fifth {
-    border-color: #f6f3f3;
+    border-color: #000000;
     border-radius: 0;
-    color: #f6f3f3;
+    color: #000000;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -171,7 +171,7 @@ body {
     transform: translateX(-50%);
     width: 0;
     height: 100%;
-    background: #063d75;
+    background: #546E7A;
     z-index: -1;
     transition: width 150ms ease-in-out;
 }
@@ -185,7 +185,7 @@ body {
 }
 
 .titulologin {
-    color: #FFFFFF;
+    color: #000000;
     font-weight: 900;
     font-size: 1.5rem;
     display: flex;
@@ -210,7 +210,7 @@ body {
 
 .CheckboxYRegistro label,
 a {
-    color: #fff;
+    color: #000000;
     /* Color del texto */
 
 }
