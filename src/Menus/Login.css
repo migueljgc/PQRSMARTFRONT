@@ -40,7 +40,7 @@ body {
 .logo-section {
     flex: 1;
     text-align: center;
-    color: #333333;
+    color: #34B0E3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@ body {
     /* Ancho de la línea */
     height: 300px;
     /* Altura de la línea */
-    background-color: #546E7A;
+    background-color: #34B0E3;
     /* Color de la línea */
     margin-left: 40px;
     /* Espacio entre el texto y la línea */
@@ -84,21 +84,21 @@ body {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
-    color: #333333;
+    color: #fff;
     margin-bottom: 30px;
     outline: none;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #546E7A;
+    border-bottom: 1px solid #fff;
 }
-  
+
 .user-box label {
     position: absolute;
     top: 0;
     left: 0;
     padding: 10px 0;
     font-size: 16px;
-    color: #333333;
+    color: #fff;
     pointer-events: none;
     transition: 0.2s;
 }
@@ -107,13 +107,13 @@ body {
 .user-box input:valid~label {
     top: -20px;
     left: 0;
-    color: #333333;
+    color: #f3f4f6;
     font-size: 12px;
 }
 .password-wrapper {
     display: flex;
     align-items: center;
-    
+
 }
 
 
@@ -122,7 +122,7 @@ body {
     cursor: pointer;
     margin-left: -30px;
     margin-top: -10px;
-    
+
 }
 
 .btn-container {
@@ -133,7 +133,7 @@ body {
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
-    border: 2px solid #388E3C;
+    border: 2px solid #f3f4f6;
     border-radius: 0.6em;
     color: #e74c3c;
     cursor: pointer;
@@ -154,9 +154,9 @@ body {
 }
 
 .fifth {
-    border-color: #000000;
+    border-color: #f6f3f3;
     border-radius: 0;
-    color: #000000;
+    color: #f6f3f3;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -171,7 +171,7 @@ body {
     transform: translateX(-50%);
     width: 0;
     height: 100%;
-    background: #546E7A;
+    background: #063d75;
     z-index: -1;
     transition: width 150ms ease-in-out;
 }
@@ -185,7 +185,7 @@ body {
 }
 
 .titulologin {
-    color: #000000;
+    color: #FFFFFF;
     font-weight: 900;
     font-size: 1.5rem;
     display: flex;
@@ -210,7 +210,7 @@ body {
 
 .CheckboxYRegistro label,
 a {
-    color: #000000;
+    color: #fff;
     /* Color del texto */
 
 }
@@ -245,7 +245,7 @@ a {
     .logo-section h1 {
         font-size: 28px;
         /* Ajusta el tamaño del logo */
-        
+
     }
 
     .user-box input {
@@ -279,7 +279,7 @@ a {
     .PQRSmart {
         transition: transform 1s ease, font-size 1s ease;
     }
-    
+
     .PQRSmart:hover {
         transform: scale(1.2) translateX(100px) translateY(-10px) rotate(360deg);
         font-size: 4rem; /* Aumenta el tamaño a 4rem */
