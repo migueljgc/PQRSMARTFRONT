@@ -4,12 +4,15 @@ import { Menu } from '../Menu';
 import Popup from '../Popup'
 import axios from 'axios';
 import './EditarPerfil.css'
+import CambiarCorreo from '../../Menus/TablasCuadroVerModi/CambiarCorreo';
 
 export const EditarPerfil = () => {
-
+    const [show, setShow] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
     const [error, setError] = useState('');
     const [user, setUser] = useState({
+        id: '',
         user: '',
         name: '',
         lastName: '',
@@ -20,9 +23,7 @@ export const EditarPerfil = () => {
         dependence: { idDependence: '', nameDependence: '' }
     });
 
-
-    useEffect(() => {
-        const fetchUserAndOptions = async () => {
+const fetchUserAndOptions = async () => {
             try {
                 const token = localStorage.getItem('tokenPQRSMART');
                 const headers = { 'Authorization': `Bearer ${token}` };
@@ -36,6 +37,8 @@ export const EditarPerfil = () => {
                 console.error('Error fetching user data or options', error);
             }
         };
+    useEffect(() => {
+        
 
         fetchUserAndOptions();
     }, []);
@@ -64,26 +67,36 @@ export const EditarPerfil = () => {
             [name]: value
         }));
     };
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSaveUser = async (updatedUser) => {
+        // Aquí puedes hacer la lógica para guardar el usuario
+        
+        const update=updatedUser;
+        console.log('Usuario guardado:', update);
         try {
-            const token = localStorage.getItem('token');
-            await axios.put('/api/user/editar', user, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            alert('User updated successfully');
+            await axios.put(`http://localhost:8080/api/Usuario/Update-correo`,update);
+            fetchUserAndOptions();
+            setShowPopup(false)
+            console.log('Usuario guardado:', updatedUser);
+            setError('Usuario guardado, tome en cuenta que para seguir en la plataforma debe confirmar su correo.');
+            setShow(true);
+            fetchUserAndOptions(); // Actualiza la tabla con los datos modificados
         } catch (error) {
-            console.error('Error updating user data', error);
-            alert('Error updating user');
+            console.error('Error al guardar el usuario: ', error);
+            setError('Error al guardar el usuario');
+            setShow(true);
         }
+        
+        
     };
 
+
+    const handleEditUser = (user) => {
+        setSelectedUser(user); // Establece el usuario seleccionado
+        console.log(user)
+        setShowPopup(true);    // Abre el popup
+    };
     const closePopup = () => {
-        setShowPopup(false);
+        setShow(false);
     };
     return (
         <div className='EditarPerfil'>
@@ -112,17 +125,17 @@ export const EditarPerfil = () => {
                             <label>Correo:</label>
                             <div className="input-box-editar-A">
                                 <input type="email" disabled name="email" value={user.email} onChange={handleChange} />
-                                <a href="">Editar</a>
+                                <a onClick={() => handleEditUser(user)}>Editar</a>
                             </div>
                             
                         </div>
                         <div className="input-box-editar">
                             <label>Tipo de Persona:</label>
-                            <input type="text" disabled name="personType" value={user.personType.namePersonType} onChange={handleChange} />
+                            <input type="text" disabled name="personType" value={user.personType?.namePersonType} onChange={handleChange} />
                         </div>
                         <div className="input-box-editar">
                             <label>Tipo de Identificacion:</label>
-                            <input type="text" disabled name="identificationType" value={user.identificationType.nameIdentificationType} onChange={handleChange} />
+                            <input type="text" disabled name="identificationType" value={user.identificationType?.nameIdentificationType} onChange={handleChange} />
                         </div>
                         <div className="input-box-editar">
                             <label>Numero de Identificacion:</label>
@@ -132,7 +145,15 @@ export const EditarPerfil = () => {
                     </form>
                 </div>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />}
+            {showPopup && (
+                <CambiarCorreo
+                    isOpen={showPopup}
+                    onClose={() => setShowPopup(false)}
+                    usuario={selectedUser}
+                    onSave={handleSaveUser}
+                />
+            )}
+            {show && <Popup message={error} onClose={closePopup} />}
 
         </div>
     );

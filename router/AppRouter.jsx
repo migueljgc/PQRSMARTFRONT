@@ -64,6 +64,11 @@ export const AppRouter = () => {
         <Route path="/CrearDependencias" element={
           <ProtectedRoute allowedRoles={['ADMIN']} element={<CrearDependencias />} />
         } />
+        <Route path="/EditarPerfil" element={
+          <ProtectedRoute allowedRoles={['ADMIN']} element={<EditarPerfil/>} />
+        } />
+
+
 
         {/* Rutas Usuario */}
         <Route path="/HomePage" element={
@@ -75,9 +80,11 @@ export const AppRouter = () => {
         <Route path="/Consultar" element={
           <ProtectedRoute allowedRoles={['USER']} element={<Consultar/>} />
         } />
-        <Route path="/EditarPerfil" element={
+        <Route path="/perfil-user" element={
           <ProtectedRoute allowedRoles={['USER']} element={<EditarPerfil/>} />
         } />
+
+
 
         {/* Rutas Secretario */}
         <Route path="/HomePagesSecre" element={
@@ -89,7 +96,9 @@ export const AppRouter = () => {
         <Route path="/Responder" element={
           <ProtectedRoute allowedRoles={['SECRE']} element={<Responder />} />
         } />
-
+        <Route path="/EditarPerfil" element={
+          <ProtectedRoute allowedRoles={['SECRE']} element={<EditarPerfil/>} />
+        } />
 
       </Route>
     </Routes>

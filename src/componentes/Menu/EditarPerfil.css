@@ -87,3 +87,6 @@
     transition: all 0.3s ease;
     margin-right: 8px;
 }
+.input-box-editar-A a{
+    cursor: pointer;
+}

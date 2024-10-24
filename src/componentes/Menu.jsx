@@ -58,7 +58,7 @@ export const Menu = () => {
           <li className="list__item">
             <div className="list__button">
             <ImProfile />
-              <a href="/EditarPerfil" className="nav__link">Perfil</a>
+              <a href="/perfil-user" className="nav__link">Perfil</a>
             </div>
           </li>
 

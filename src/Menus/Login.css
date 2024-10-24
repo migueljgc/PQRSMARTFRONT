@@ -40,7 +40,7 @@ body {
 .logo-section {
     flex: 1;
     text-align: center;
-    color: #333333;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,7 +84,7 @@ body {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
-    color: #333333;
+    color: #ffffff;
     margin-bottom: 30px;
     outline: none;
     background: transparent;
