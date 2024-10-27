@@ -48,7 +48,7 @@ export const Recovery = () => {
     const handleResetRequest = async () => {
         try {
             console.log(email);
-            const response = await axios.post('https://pqrsmartback-production.up.railway.app/forgot-password/email', { email });
+            const response = await axios.post('/forgot-password/email', { email });
             setError("Éxito");
             setEmail('')
             setShowPopup(true); // Mostrar popup

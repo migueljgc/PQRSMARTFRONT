@@ -202,9 +202,6 @@ const GestionarPQRS = () => {
             <div className="menus">
                 <MenuSecre />
             </div>
-            <div className="user-menu">
-                <UserinfoSecre />
-            </div>
             <div className="cuerposgestionarpqrs">
 
                 <div className="tabla-usuario">

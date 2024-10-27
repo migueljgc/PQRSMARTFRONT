@@ -90,7 +90,7 @@ export const ResetPassword = () => {
         }
 
         try {
-            axios.post(`https://pqrsmartback-production.up.railway.app/forgot-password/reset/${token}`, { newPassword });
+            axios.post(`/forgot-password/reset/${token}`, { newPassword });
             setError('Contraseña actualizada.');
             setShowPopup(true); // Mostrar popup
             if (showPopup === false) {

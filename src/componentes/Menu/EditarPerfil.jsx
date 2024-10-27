@@ -23,22 +23,22 @@ export const EditarPerfil = () => {
         dependence: { idDependence: '', nameDependence: '' }
     });
 
-const fetchUserAndOptions = async () => {
-            try {
-                const token = localStorage.getItem('tokenPQRSMART');
-                const headers = { 'Authorization': `Bearer ${token}` };
+    const fetchUserAndOptions = async () => {
+        try {
+            const token = localStorage.getItem('tokenPQRSMART');
+            const headers = { 'Authorization': `Bearer ${token}` };
 
-                // Fetch user data
-                const userResponse = await axios.get('/api/auth/editar', { headers });
-                setUser(userResponse.data);
-                console.log(user)
+            // Fetch user data
+            const userResponse = await axios.get('/api/auth/editar', { headers });
+            setUser(userResponse.data);
+            console.log(user)
 
-            } catch (error) {
-                console.error('Error fetching user data or options', error);
-            }
-        };
+        } catch (error) {
+            console.error('Error fetching user data or options', error);
+        }
+    };
     useEffect(() => {
-        
+
 
         fetchUserAndOptions();
     }, []);
@@ -69,24 +69,34 @@ const fetchUserAndOptions = async () => {
     };
     const handleSaveUser = async (updatedUser) => {
         // Aquí puedes hacer la lógica para guardar el usuario
-        
-        const update=updatedUser;
-        console.log('Usuario guardado:', update);
+
+        const update = updatedUser;
+        const id = update.id;
+        const email = update.email
+
         try {
-            await axios.put(`http://localhost:8080/api/Usuario/Update-correo`,update);
+            await axios.put('/api/Usuario/Update-correo', { email, id });
             fetchUserAndOptions();
             setShowPopup(false)
-            console.log('Usuario guardado:', updatedUser);
-            setError('Usuario guardado, tome en cuenta que para seguir en la plataforma debe confirmar su correo.');
+            console.log('Usuario guardado:', id, email);
+            setError('Usuario guardado, para que el cambio quede efectuado debe verificar el correo.');
             setShow(true);
             fetchUserAndOptions(); // Actualiza la tabla con los datos modificados
         } catch (error) {
-            console.error('Error al guardar el usuario: ', error);
-            setError('Error al guardar el usuario');
-            setShow(true);
+            if (error.status === 409) {
+                console.error('El correo electrónico ya está en uso. ', error);
+                setError('El correo electrónico ya está en uso.');
+                setShow(true);
+            }
+            else {
+                console.error('Error al guardar el usuario: ', error);
+                setError('Error al guardar el usuario');
+                setShow(true);
+            }
+
         }
-        
-        
+
+
     };
 
 
@@ -102,9 +112,10 @@ const fetchUserAndOptions = async () => {
         <div className='EditarPerfil'>
 
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus-editar">
+            
                 <Menu />
-            </div>
+            
+
             <div className="cuerpo-editar">
                 <div className="form-editar">
                     <form className="solicitud-form-editar" >
@@ -127,7 +138,7 @@ const fetchUserAndOptions = async () => {
                                 <input type="email" disabled name="email" value={user.email} onChange={handleChange} />
                                 <a onClick={() => handleEditUser(user)}>Editar</a>
                             </div>
-                            
+
                         </div>
                         <div className="input-box-editar">
                             <label>Tipo de Persona:</label>

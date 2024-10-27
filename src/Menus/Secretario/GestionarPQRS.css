@@ -1,14 +1,7 @@
 .GestionarPQRS {
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 0.5fr 1.5fr;
-    grid-template-rows: 0.3fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 2px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "menus cuerposgestionarpqrs";
+    display: flex;
 }
 
 .menus {

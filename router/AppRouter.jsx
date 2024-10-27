@@ -16,7 +16,7 @@ import CrearDependencias from '../src/Menus/Admin/CrearDependencias';
 import CrearUsuario from '../src/Menus/Admin/CrearUsuario';
 import GestionarPQRS from '../src/Menus/Secretario/GestionarPQRS';
 import Responder from '../src/Menus/Secretario/Responder';
-import { ActivatePage } from '../src/componentes/ActivatePage';
+import { Activate, ActivatePage } from '../src/componentes/ActivatePage';
 import { Recovery } from '../src/componentes/Recovery';
 import { ResetPassword } from '../src/componentes/ResetPassword';
 import { EditarPerfil } from '../src/componentes/Menu/EditarPerfil';
@@ -32,6 +32,7 @@ export const AppRouter = () => {
         <Route path="/Recuperacion" element={<Recovery/>} />
         <Route path="/Registro" element={<Registro/>} />
         <Route path="/activate/:token" element={<ActivatePage/>} />
+        <Route path="/activate-email/:token" element={<Activate/>} />
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
         <Route path="/tabla" element={<TablaUsuarios/>} />
 

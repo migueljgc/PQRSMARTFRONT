@@ -10,16 +10,78 @@ body {
     background: #EAEBEF;
     font-family: 'Poppins', sans-serif;
 }
+.menus{
+    z-index: 300;
+    display: flex;
+    
+}
+header{
+    z-index: 200;
+    padding: 0.45rem 2rem 0.45rem 1.27rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+}
 
-.nav {
-    width: 300px;
+.left{
+    width: 200px;
+    height: 40px;
+    
+}
+.Menu-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+}
+.Menus{    
+    font-size: 30px;
+    
+}
+
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15vh;
+    transition: opacity 0.3s ease; /* Transición de opacidad */
+}
+
+.sideBar {
+    display: flex;
     background-color: #fff;
     border-radius: 0 16px 16px 0;
-    height: 100vh;
-    padding-top: 20px;
+    height: 100%;
+    padding: 1.1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 100;
+    transition: width 0.3s ease;
+}
+
+
+.sideBar a{
+    color: #000;
+    text-decoration: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    padding: 1.3rem 0.7rem;
+    gap: 1.3rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    
+}
+.sideBar li{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    cursor: pointer;
+    
 }
 
 .logo {
@@ -27,50 +89,12 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 15vh;
+    
 }
 
-
-.nav__link {
-    color: #303440;
+.list__img{
+    width: 1.8rem;
     display: block;
-    padding: 15px 0;
-    text-decoration: none;
-}
-
-.nav__link--inside {
-    border-radius: 6px;
-    padding-left: 20px;
-    text-align: left;
-}
-
-.nav__link--inside:hover {
-    background: #F6F8FA;
-}
-
-.list {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    list-style: none;
-    padding-left: 0;
-}
-
-.list__item {
-    width: 100%;
-    text-align: center;
-    overflow: hidden;
-}
-
-.list__button {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    width: 70%;
-    margin: 0 auto;
-    cursor: pointer;
 }
 
 .list__show {

@@ -112,7 +112,7 @@ function Login() {
             const status = error.response && error.response.status;
             // Manejo de errores
             if (status === 401) {
-                setError('Contraseña incorrecta');
+                setError('Usuario y/o Contraseña incorrecta');
             } else if (status === 403) {
                 setError("La cuenta está inactiva. Por favor verifique su correo para activar.");
             } else if (status === 423) {
