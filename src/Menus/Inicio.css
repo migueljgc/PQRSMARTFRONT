@@ -6,5 +6,6 @@
   background: linear-gradient(180deg, #F3F6FA, #03072B);
   transition: background 0.5s;
   height: 100vh;
+  scroll-behavior: smooth;
 
 }
