@@ -1,0 +1,62 @@
+/* Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(255, 255, 255, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    animation: slideDown 1s ease-in;
+}
+
+
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: #03072B;
+    
+}
+
+.navs {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.navs-link, .login-btn {
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.navs-links:hover, .login-btn:hover {
+    color: #0078d7;
+    transform: scale(1.05);
+}
+
+
+.header-login-btn {
+    background-color: transparent;
+    border: 2px solid #00c7ff;
+    color: #00c7ff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.4s, box-shadow 0.4s;
+}
+
+.header-login-btn:hover {
+    background: linear-gradient(90deg, #00c7ff, #0078d7);
+    color: #ffffff;
+    box-shadow: 0px 4px 15px rgba(0, 199, 255, 0.3);
+}

@@ -1,0 +1,15 @@
+/* Intro.css */
+.intro {
+    padding: 2rem 1rem;
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    animation: slideInIntro 1.5s ease;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+@keyframes slideInIntro {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}

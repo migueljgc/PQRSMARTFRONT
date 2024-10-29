@@ -21,13 +21,15 @@ import { Recovery } from '../src/componentes/Recovery';
 import { ResetPassword } from '../src/componentes/ResetPassword';
 import { EditarPerfil } from '../src/componentes/Menu/EditarPerfil';
 import TablaUsuarios from '../src/Menus/TablasCuadroVerModi/TablaUsuarios';
+import Inicio from '../src/Menus/Inicio';
 
 
 export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Navbar />}>
-        <Route index element={<Login />} />
+        <Route index element={<Inicio />} />
+        <Route path="/inicio" element={<Inicio />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Recuperacion" element={<Recovery/>} />
         <Route path="/Registro" element={<Registro/>} />
@@ -36,7 +38,7 @@ export const AppRouter = () => {
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
         <Route path="/tabla" element={<TablaUsuarios/>} />
 
-        <Route path="*" element={<Login />} />
+        <Route path="*" element={<Inicio />} />
 
         {/* Rutas protegidas */}
 
