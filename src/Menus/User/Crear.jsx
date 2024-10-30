@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../User/Crear.css'
-import { Menu } from '../../componentes/Menu';
-import {UserinfoUser} from '../../componentes/Userinfo'
 import axios from 'axios';
 import Popup from '../../componentes/Popup'
 import { HeaderUser } from '../../componentes/Inicio/Header';

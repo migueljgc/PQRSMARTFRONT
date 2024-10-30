@@ -141,7 +141,7 @@ body {
     
 }
 
-.sideBar a{
+.sideBar a, span{
     color: #000;
     text-decoration: none;
     display: flex;
@@ -153,14 +153,14 @@ body {
     transition: width 0.3s ease;
     
 }
-.list__item{
+.sideBar li{
     width: 100%;
     display: flex;
     align-items: center;
     list-style: none;
     cursor: pointer;
-    
 }
+
 .sideBar ul {
     width: 100%;
     height: 100%;
@@ -176,6 +176,9 @@ body {
 .list__img{
     width: 1.8rem;
     display: block;
+}
+.list__inside {
+    transition: max-height 1s ease;
 }
 
 

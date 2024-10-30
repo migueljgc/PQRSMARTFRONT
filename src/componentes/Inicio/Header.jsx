@@ -101,6 +101,7 @@ export function HeaderUser() {
 
 export function HeaderAdmin() {
     const [sidebarWidth, setSidebarWidth] = useState('4rem');
+    const [expandedSections, setExpandedSections] = useState({});
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.setItem('loggetPQRSMART', 'false');
@@ -112,9 +113,14 @@ export function HeaderAdmin() {
     const toggleSidebar = () => {
         setSidebarWidth(sidebarWidth === '4rem' ? '300px' : '4rem');
     };
-    
 
-    
+    const toggleSection = (section) => {
+        setExpandedSections(prevState => ({
+            ...prevState,
+            [section]: !prevState[section]
+        }));
+    };
+
     return (
         <div className="HeaderUser">
             <header className='headerUser'>
@@ -138,68 +144,75 @@ export function HeaderAdmin() {
                 <nav>
                     <ul className="list">
 
-                        <li className="list__item">
+                        <li className="">
                             <img src="assets/dashboard.svg" className="list__img" />
                             <a href="/HomePagesAdmin" className="nav__link">Inicio</a>
 
                         </li>
 
-                        <li className="list__item">
+                        <li className="">
                             <img src="assets/stats.svg" className="list__img" />
                             <a href="/Dashboard" className="nav__link">Estadisticas</a>
 
                         </li>
 
-                        <li className="list__item">
-                            <div className="list__button--click">
+                        {/* Gestion Usuario */}
+                        <li className="list__item" onClick={() => toggleSection('userManagement')}>
+                         
                                 <img src="assets/contacto.svg" className="list__img" />
-                                <a href="#" className="nav__link">Gestion Usuario</a>
+                                <span className="item">Gestión Usuario</span>
                                 <img src="assets/arrow.svg" className="list__arrow" />
-                            </div>
-
+                        
                         </li>
+                        {expandedSections.userManagement && (
+                            <>
+                                <li className="list__inside">
+                                    <a href="/VerUsuario" className="nav__link nav__link--inside">Ver Usuario</a>
+                                </li>
+                                <li className="list__inside">
+                                    <a href="/CrearUsuario" className="nav__link nav__link--inside">Crear Usuario</a>
+                                </li>
+                            </>
+                        )}
 
-                        <li className="list__inside">
-                            <a href="/VerUsuario" className="nav__link nav__link--inside">Ver Usuario</a>
-                        </li>
-
-                        <li className="list__inside">
-                            <a href="/CrearUsuario" className="nav__link nav__link--inside">Crear Usuario</a>
-                        </li>
-
-                        <li className="list__item">
-                            <div className="list__button list__button--click">
+                        {/* Gestion Categorias */}
+                        <li className="list__item" >
+                            
                                 <img src="assets/dasboard.svg" className="list__img" />
-                                <a href="#" className="nav__link">Gestion Categorias</a>
-                                <img src="assets/arrow.svg" className="list__arrow" />
-                            </div>
+                                <span className="item" onClick={() => toggleSection('categoryManagement')}>Gestión Categorías</span>
+                                <img src="assets/arrow.svg" className="list__arrow" onClick={() => toggleSection('categoryManagement')} />
+                            
+                        </li>
+                        {expandedSections.categoryManagement && (
+                            <>
+                                <li className="list__inside">
+                                    <a href="/VerCategoria" className="nav__link nav__link--inside">Ver Categorías</a>
+                                </li>
+                                <li className="list__inside">
+                                    <a href="/CrearCategoria" className="nav__link nav__link--inside">Crear Categorías</a>
+                                </li>
+                            </>
+                        )}
+
+                        {/* Gestion Dependencias */}
+                        <li className="list__item" >
+                            <img src="assets/casa.svg" className="list__img" />
+                            <span className="item" onClick={() => toggleSection('dependencyManagement')}>Gestión Dependencias</span>
+                            <img src="assets/arrow.svg" className="list__arrow" onClick={() => toggleSection('dependencyManagement')} />
+
 
                         </li>
+                        {expandedSections.dependencyManagement && (
+                            <>
+                                <li className="list__inside">
+                                    <a href="/VerDependencia" className="nav__link nav__link--inside">Ver Dependencias</a>
+                                </li>
+                                <li className="list__inside">
+                                    <a href="/CrearDependencias" className="nav__link nav__link--inside">Crear Dependencias</a>
+                                </li>
+                            </>
+                        )}
 
-                        <li className="list__inside">
-                            <a href="/VerCategoria" className="nav__link nav__link--inside">Ver Categorias</a>
-                        </li>
-
-                        <li className="list__inside">
-                            <a href="/CrearCategoria" className="nav__link nav__link--inside">Crear Categorias</a>
-                        </li>
-
-                        <li className="list__item list__item--click">
-                            <div className="list__button list__button--click">
-                                <img src="assets/casa.svg" className="list__img" />
-                                <a href="#" className="nav__link">Gestion Dependencias</a>
-                                <img src="assets/arrow.svg" className="list__arrow" />
-                            </div>
-
-                        </li>
-
-                        <li className="list__inside">
-                            <a href="/VerDependencia" className="nav__link nav__link--inside">Ver Dependencias</a>
-                        </li>
-
-                        <li className="list__inside">
-                            <a href="/CrearDependencias" className="nav__link nav__link--inside">Crear Dependencias</a>
-                        </li>
 
                         <li className="list__item">
                             <img src="assets/salir.svg" className="list__img" onClick={handleLogout} />
