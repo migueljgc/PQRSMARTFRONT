@@ -37,7 +37,7 @@ export function HeaderUser() {
         localStorage.setItem('loggetPQRSMART', 'false');
         localStorage.setItem('tokenPQRSMART', '');
         localStorage.setItem('userPQRSMART', JSON.stringify(''));
-        navigate('/Login');
+        navigate('/');
     };
 
     const toggleSidebar = () => {
@@ -88,7 +88,7 @@ export function HeaderUser() {
 
                         <li className="list__item">
                             <img src="assets/salir.svg" className="list__img" onClick={handleLogout} />
-                            <a href="/Login" className="nav__link" onClick={handleLogout}>Salir</a>
+                            <a href="/" className="nav__link" onClick={handleLogout}>Salir</a>
                         </li>
 
                     </ul>
