@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../User/Consultar.css'
-import { Menu } from '../../componentes/Menu';
 import axios from 'axios';
 import { UserinfoUser } from '../../componentes/Userinfo'
 import Popup from '../../componentes/Popup';

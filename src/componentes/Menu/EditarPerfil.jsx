@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { UserinfoUser } from '../Userinfo';
-import { Menu } from '../Menu';
 import Popup from '../Popup'
 import axios from 'axios';
 import './EditarPerfil.css'

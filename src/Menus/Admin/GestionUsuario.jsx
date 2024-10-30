@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Admin/GestionUsuario.css';
-import { MenuAdmin } from '../../componentes/Menu';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { UserinfoAmin } from '../../componentes/Userinfo';
 import Popup from '../../componentes/Popup';
 import ModificarUsuario from "../TablasCuadroVerModi/ModificarUsuario.jsx";
 import { HeaderAdmin } from '../../componentes/Inicio/Header.jsx';

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './HomePage.css';
-import { Menu, MenuAdmin, MenuSecre } from '../Menu.jsx';
 import { HeaderAdmin, HeaderSecre, HeaderUser } from '../Inicio/Header.jsx';
 
 export const HomePage = () => {

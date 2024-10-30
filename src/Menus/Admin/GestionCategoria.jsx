@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Admin/GestionCategoria.css'
 import axios from 'axios';
-import { MenuAdmin } from '../../componentes/Menu';
-import DataTable from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom';
-import { UserinfoAmin } from '../../componentes/Userinfo';
-import { FaSearch } from "react-icons/fa";
-import { MdOutlineCancel } from "react-icons/md";
 import Popup from '../../componentes/Popup'
 import { HeaderAdmin } from '../../componentes/Inicio/Header';
 

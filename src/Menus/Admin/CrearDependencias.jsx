@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Admin/CrearDependencias.css'
 import axios from 'axios';
-import { MenuAdmin } from '../../componentes/Menu';
-import { UserinfoAmin } from '../../componentes/Userinfo';
 import Popup from '../../componentes/Popup'
 import { HeaderAdmin } from '../../componentes/Inicio/Header';
 

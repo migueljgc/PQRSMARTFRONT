@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Admin/CrearUsuario.css'
 import axios from 'axios';
-import { MenuAdmin } from '../../componentes/Menu';
-import { UserinfoAmin } from '../../componentes/Userinfo';
 import { HeaderAdmin } from '../../componentes/Inicio/Header';
 
 const CrearUsuario = () => {
