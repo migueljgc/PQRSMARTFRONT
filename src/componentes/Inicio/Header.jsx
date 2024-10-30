@@ -114,12 +114,7 @@ export function HeaderAdmin() {
     };
     
 
-        // Cleanup function to remove event listeners when the component unmounts
-        return () => {
-            listElements.forEach((listElement) => {
-                listElement.removeEventListener('click', () => { });
-            });
-        };
+    
     return (
         <div className="HeaderUser">
             <header className='headerUser'>
