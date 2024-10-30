@@ -79,7 +79,7 @@ const Consultar = () => {
 
             <HeaderUser />
             
-            <div className="cuerpo">
+            <div className="cuerpoconsultarPqrs">
                 <div className="tabla-usuario">
                     <h1 className="titleConsultar">CONSULTAR SOLICITUD</h1>
                     <div className="busqueda">

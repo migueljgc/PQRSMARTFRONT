@@ -19,8 +19,7 @@
 
 /* Estilos generales para el contenedor de la tabla */
 .tabla-usuario {
-    width: 110%;
-    margin-left: 30vh;
+    width: 90%;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
@@ -134,6 +133,6 @@
 
 @media (max-width: 1366px) and (max-height: 768px) {
     .tabla-usuario {
-        margin-left: 8vh;
+        margin-left: 13vh;
     }
 }
