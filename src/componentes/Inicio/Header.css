@@ -141,7 +141,7 @@ body {
     
 }
 
-.sideBar a, span{
+.sideBar a{
     color: #000;
     text-decoration: none;
     display: flex;
@@ -152,6 +152,17 @@ body {
     border-radius: 0.5rem;
     transition: width 0.3s ease;
     
+}
+.item{
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 1.3rem 0.7rem;
+    gap: 1.3rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    transition: width 0.3s ease;
 }
 .sideBar li{
     width: 100%;
