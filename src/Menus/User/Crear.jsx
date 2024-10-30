@@ -5,6 +5,7 @@ import {UserinfoUser} from '../../componentes/Userinfo'
 import axios from 'axios';
 import Popup from '../../componentes/Popup'
 import { HeaderUser } from '../../componentes/Inicio/Header';
+import '../../componentes/style.css'
 
 const Crear = () => {
 
@@ -91,22 +92,7 @@ const Crear = () => {
 
     }, []);
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = '/Gradient.js'; // Ruta directa al archivo en public
-        script.async = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            // Inicializar el gradiente una vez que el script haya cargado
-            const gradient = new Gradient();
-            gradient.initGradient('#gradient-canvas');
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []); // Solo se ejecuta una vez al montar el componente
+   
     const handleFileChange = (e) => {
         setArchivo(e.target.files[0])
     }
@@ -206,14 +192,13 @@ const Crear = () => {
     };
     return (
         <div className="Crear">
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '90vh', position: 'absolute', zIndex: -1 }}></canvas>
             <HeaderUser />
 
             <div className="cuerpo-crear">
                     
                 <div className="formcrear">
                     <form className="solicitud-form-crear" onSubmit={handleSubmit}>
-                    <h1 className="title">CREA TU SOLICITUD</h1>
+                    <h1 className="title-crear">CREA TU SOLICITUD</h1>
                         <input type='hidden' name="date" value={date} />
                         <div className="form-group">
                             <label>Tipo De Solicitud</label>

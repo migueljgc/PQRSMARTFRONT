@@ -60,8 +60,8 @@ body {
 }
 
 select option {
-    background-color: #4A81D1; /* Azul oscuro para las opciones de select */
-    color: #E0E0E0;
+    background-color: #ffffff; /* Azul oscuro para las opciones de select */
+    color: #000000;
 }
 
 .Selects:focus,

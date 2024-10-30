@@ -21,9 +21,11 @@ export const Script = () => {
 
         </div>
         <div className="abajo">
-          <a href="/EditarPerfilAdmin">
-            Editar usuario
-          </a>
+        <li>
+            <img src="assets/perfil.svg" className="list__img" onClick={() => navigate('/perfil-user')} />
+            <a href="/perfil-user" className="nav__link">Perfil</a>
+
+          </li>
 
         </div>
       </div>
@@ -85,9 +87,11 @@ export const ScriptSecre = () => {
           {user && <p>Bienvenido, {user}!</p>}
         </div>
         <div className="abajo">
-          <a href="/EditarPerfilSecre">
-            Editar usuario
-          </a>
+        <li>
+            <img src="assets/perfil.svg" className="list__img" onClick={() => navigate('/perfil-user')} />
+            <a href="/perfil-user" className="nav__link">Perfil</a>
+
+          </li>
 
         </div>
       </div>

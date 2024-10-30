@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './HomePage.css';
 import { Menu, MenuAdmin, MenuSecre } from '../Menu.jsx';
 import { UserinfoAmin, UserinfoSecre, UserinfoUser } from '../Userinfo.jsx';
-import { HeaderUser } from '../Inicio/Header.jsx';
+import { HeaderAdmin, HeaderUser } from '../Inicio/Header.jsx';
 
 export const HomePage = () => {
     const name = localStorage.getItem('users');
@@ -64,9 +64,9 @@ export const HomePageAdmin = () => {
     return (
         <div className="HomePage">
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus">
-                <MenuAdmin />
-            </div>
+            
+            <HeaderAdmin />
+
             <div className="cuerpos">
                 <div className="headers">
                     <title className='titulo'>Bienvenido {name}</title>
