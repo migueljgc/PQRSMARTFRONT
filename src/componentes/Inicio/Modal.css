@@ -21,6 +21,7 @@
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     z-index: 10000; /* Coloca el contenido sobre la superposición */
+    color: #000000;
 }
 
 .modal-content h2 {

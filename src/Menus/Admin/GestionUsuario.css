@@ -75,6 +75,7 @@
 .tabla-minimalista-usuario {
     width: 100%;
     border-collapse: collapse;
+    color: #000000;
 }
 
 .tabla-minimalista-usuario th, .tabla-minimalista-usuario td {

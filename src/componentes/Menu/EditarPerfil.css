@@ -20,7 +20,7 @@
 }
 
 .title-editar {
-    color: #FFFFFF;
+    color: #000000;
     font-size: 2rem;
     text-align: center;
 }
@@ -34,7 +34,7 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
     width: 100%;
     max-width: 600px;
-    color: #FFFFFF;
+    color: #000000;
     box-sizing: border-box;
     overflow: auto; /* Si hay mucho contenido, permitir scroll interno */
 }
@@ -53,16 +53,16 @@
 
 .input-box-editar label {
     font-weight: 600;
-    color: #CADAE5;
+    color: #000000;
     font-size: 14px;
 }
 
 .input-box-editar input{
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
     background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    color: #000000;
     border-radius: 8px;
     outline: none;
     transition: all 0.3s ease;
@@ -70,9 +70,9 @@
 .input-box-editar-A input{
     width: 88%;
     padding: 12px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
     background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    color: #000000;
     border-radius: 8px;
     outline: none;
     transition: all 0.3s ease;
@@ -80,4 +80,5 @@
 }
 .input-box-editar-A a{
     cursor: pointer;
+    color: #000000;
 }

@@ -21,12 +21,14 @@
     text-align: center;
     margin-bottom: 20px;
     font-size: 2rem;
+    color: #000000;
 }
 
 .busqueda {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    color: #000000;
 }
 
 .busqueda input {

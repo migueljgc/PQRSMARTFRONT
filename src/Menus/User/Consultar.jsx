@@ -17,22 +17,7 @@ const Consultar = () => {
     const [pqrs, setPqrs] = useState(false);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = '/Gradient.js'; // Ruta directa al archivo en public
-        script.async = true;
-        document.body.appendChild(script);
 
-        script.onload = () => {
-            // Inicializar el gradiente una vez que el script haya cargado
-            const gradient = new Gradient();
-            gradient.initGradient('#gradient-canvas');
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []); // Solo se ejecuta una vez al montar el componente
 
     const fetchData = async () => {
         try {
@@ -92,8 +77,7 @@ const Consultar = () => {
     };
     return (
         <div className='consultarPqrs'>
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            
+
             <HeaderUser />
             
             <div className="cuerpo">
@@ -136,7 +120,7 @@ const Consultar = () => {
                                             <span>
                                                 {pqrs.archivo ? (
                                                     <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
-                                                        <button>Descargar</button>
+                                                        <button className="btn-descargar">Descargar</button>
                                                     </a>
                                                 ) : (
                                                     <div>
@@ -167,6 +151,7 @@ const Consultar = () => {
                                                     </a>
                                                 ) : (
                                                     <div>
+                                                        <span>No disponible</span>
                                                         <span>No disponible</span>
                                                     </div>
                                                 )

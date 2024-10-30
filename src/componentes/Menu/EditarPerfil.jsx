@@ -44,22 +44,6 @@ export const EditarPerfil = () => {
         fetchUserAndOptions();
     }, []);
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = '/Gradient.js'; // Ruta directa al archivo en public
-        script.async = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            // Inicializar el gradiente una vez que el script haya cargado
-            const gradient = new Gradient();
-            gradient.initGradient('#gradient-canvas');
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []); // Solo se ejecuta una vez al montar el componente
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -112,8 +96,7 @@ export const EditarPerfil = () => {
     return (
         <div className='EditarPerfil'>
 
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            
+
             <HeaderUser />
             
 
