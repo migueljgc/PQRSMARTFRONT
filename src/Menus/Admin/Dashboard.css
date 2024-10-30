@@ -1,29 +1,23 @@
 .Dashboard {
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 0.25fr 1.75fr; /* Ajuste del tamaño de las columnas */
-    grid-template-rows: auto;
-    grid-gap: 20px;
-    grid-template-areas: "menus cuerpos";
-    position: relative; /* Para el canvas de fondo */
+    display: flex;
+    
 }
 
-.cuerpos {
-    grid-area: cuerpos;
+.cuerpos-Dashboard {
+    width: 80%;
+    margin-top: 10vh;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-    overflow-y: auto;
-    position: relative; /* Para que el contenido se superponga al fondo */
+    justify-content: center;
+    margin-left: 30vh;
     z-index: 1; /* Asegura que el contenido esté por encima del fondo */
 }
 
 .dashform {
     width: 100%;
     padding: 30px;
+    
 }
 
 .formdash {
@@ -31,6 +25,7 @@
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
+    
 }
 
 .card {
@@ -43,6 +38,7 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.2s, box-shadow 0.2s; /* Transición para el efecto hover */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
 }
 
 .card:hover {

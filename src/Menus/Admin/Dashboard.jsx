@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../Admin/Dashboard.css';
-import { MenuAdmin } from '../../componentes/Menu';
-import { UserinfoAmin } from '../../componentes/Userinfo';
 import axios from 'axios';
 import { Bar, Line } from 'react-chartjs-2';
 import {
@@ -16,6 +14,7 @@ import {
     Legend,
     Filler,
 } from 'chart.js';
+import { HeaderAdmin } from '../../componentes/Inicio/Header';
 
 // Registrar las escalas y componentes necesarios para los gráficos
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, Title, Tooltip, Legend, Filler, PointElement);
@@ -113,37 +112,10 @@ const Dashboard = () => {
         ],
     };
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = '/Gradient.js'; // Ruta directa al archivo en public
-        script.async = true;
-
-        const handleLoad = () => {
-            // Inicializar el gradiente una vez que el script haya cargado
-            const gradient = new Gradient();
-            gradient.initGradient('#gradient-canvas');
-        };
-
-        script.onload = handleLoad;
-
-        document.body.appendChild(script);
-
-        return () => {
-            // Limpiar el script al desmontar
-            document.body.removeChild(script);
-        };
-    }, []);
-
     return (
         <div className='Dashboard'>
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus">
-                <MenuAdmin />
-            </div>
-            <div className="user-menu">
-                <UserinfoAmin />
-            </div>
-            <div className="cuerpos">
+            <HeaderAdmin />
+            <div className="cuerpos-Dashboard">
                 <div className="dashform">
                     <h1 className="titledash">DASHBOARD</h1>
                     <div className="total">
