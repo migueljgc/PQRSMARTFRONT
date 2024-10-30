@@ -5,6 +5,7 @@ import Popup from '../Popup'
 import axios from 'axios';
 import './EditarPerfil.css'
 import CambiarCorreo from '../../Menus/TablasCuadroVerModi/CambiarCorreo';
+import { HeaderUser } from '../Inicio/Header';
 
 export const EditarPerfil = () => {
     const [show, setShow] = useState(false);
@@ -113,7 +114,7 @@ export const EditarPerfil = () => {
 
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             
-                <Menu />
+            <HeaderUser />
             
 
             <div className="cuerpo-editar">

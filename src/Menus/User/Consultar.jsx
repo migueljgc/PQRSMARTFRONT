@@ -5,6 +5,7 @@ import axios from 'axios';
 import { UserinfoUser } from '../../componentes/Userinfo'
 import Popup from '../../componentes/Popup';
 import VerPqrs from '../TablasCuadroVerModi/VerPqrs';
+import { HeaderUser } from '../../componentes/Inicio/Header';
 
 const Consultar = () => {
     const [data, setData] = useState([]);
@@ -93,7 +94,7 @@ const Consultar = () => {
         <div className='consultarPqrs'>
             <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
             
-                <Menu />
+            <HeaderUser />
             
             <div className="cuerpo">
                 <div className="tabla-usuario">

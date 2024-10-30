@@ -4,6 +4,7 @@ import { Menu } from '../../componentes/Menu';
 import {UserinfoUser} from '../../componentes/Userinfo'
 import axios from 'axios';
 import Popup from '../../componentes/Popup'
+import { HeaderUser } from '../../componentes/Inicio/Header';
 
 const Crear = () => {
 
@@ -205,16 +206,10 @@ const Crear = () => {
     };
     return (
         <div className="Crear">
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus">
-                <Menu />
-            </div>
-            <div className="user-menu">
-                        <UserinfoUser />
+            <canvas id="gradient-canvas" style={{ width: '100vw', height: '90vh', position: 'absolute', zIndex: -1 }}></canvas>
+            <HeaderUser />
 
-                    </div>
-
-            <div className="cuerpo">
+            <div className="cuerpo-crear">
                     
                 <div className="formcrear">
                     <form className="solicitud-form-crear" onSubmit={handleSubmit}>

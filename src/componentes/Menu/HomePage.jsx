@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './HomePage.css';
 import { Menu, MenuAdmin, MenuSecre } from '../Menu.jsx';
 import { UserinfoAmin, UserinfoSecre, UserinfoUser } from '../Userinfo.jsx';
+import { HeaderUser } from '../Inicio/Header.jsx';
 
 export const HomePage = () => {
     const name = localStorage.getItem('users');
@@ -23,10 +24,10 @@ export const HomePage = () => {
     }, []); // Solo se ejecuta una vez al montar el componente
     return (
         <div className="HomePage">
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus">
-                <Menu />
-            </div>
+            <canvas id="gradient-canvas" style={{ width: '100vw', height: '90vh', position: 'absolute', zIndex: -1 }}></canvas>
+
+            <HeaderUser />
+
             <div className="cuerpos">
                 <div className="headers">
                     <title className='titulo'>Bienvenido {name}</title>

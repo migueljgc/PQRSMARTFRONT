@@ -1,7 +1,11 @@
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+    overflow: auto;
+    /* Evita el scroll */
 }
 
 /* Para navegadores basados en WebKit (Chrome, Safari, Edge basado en Chromium) */

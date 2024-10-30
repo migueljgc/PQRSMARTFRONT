@@ -1,29 +1,14 @@
-.Crear {
-    display: grid;
-    height: 100vh;
-    font-family: 'Montserrat', sans-serif;
-    display: grid;
-    grid-template-columns: 0.4fr 1.5fr;
-    grid-template-rows: 0.3fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 2px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "menus cuerpo";
-}
 
-.menus {
-    grid-area: menus;
-}
 
-.cuerpo {
-    grid-area: cuerpo;
+.cuerpo-crear {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     padding: 20px;
-    overflow-y: auto;
+    margin-top: 10vh;
+    margin-left: 10vh;
+    
 }
 
 .title {
@@ -33,7 +18,7 @@
 }
 
 .formcrear {
-    margin-top: 10vh;
+    margin-top: 20vh;
     background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
     backdrop-filter: blur(10px); /* Efecto de desenfoque */
     padding: 40px;
@@ -43,7 +28,6 @@
     max-width: 600px;
     color: #FFFFFF;
     box-sizing: border-box;
-    overflow: auto; /* Si hay mucho contenido, permitir scroll interno */
 }
 
 .solicitud-form-crear {

@@ -4,7 +4,7 @@ import './Steps.css';
 
 function Steps() {
     return (
-        <section className="steps" id='como-funciona'>
+        <section id="como-funciona" className="steps">
             <h2>¿Cómo Funciona?</h2>
             <div className="step-cards">
                 <div className="step-card">
@@ -18,10 +18,6 @@ function Steps() {
                 <div className="step-card">
                     <h3>Paso 3</h3>
                     <p>Recibir Respuesta</p>
-                </div>
-                <div className="step-card">
-                    <h3>Paso 4</h3>
-                    <p>Evaluar el Servicio</p>
                 </div>
             </div>
         </section>

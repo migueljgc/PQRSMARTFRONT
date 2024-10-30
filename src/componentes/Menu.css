@@ -21,6 +21,8 @@ header{
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    display: flex;
     
 }
 
@@ -29,17 +31,10 @@ header{
     height: 40px;
     
 }
-.Menu-container{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    
+.navBar{
+    width: 100%;
 }
-.Menus{    
-    font-size: 30px;
-    
-}
+
 
 
 .logo {
@@ -65,24 +60,7 @@ header{
 }
 
 
-.sideBar a{
-    color: #000;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    padding: 1.3rem 0.7rem;
-    gap: 1.3rem;
-    margin: 0 0.5rem;
-    border-radius: 0.5rem;
-    
-}
-.sideBar li{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    cursor: pointer;
-    
-}
+
 
 .logo {
     display: flex;
@@ -92,10 +70,7 @@ header{
     
 }
 
-.list__img{
-    width: 1.8rem;
-    display: block;
-}
+
 
 .list__show {
     width: 80%;

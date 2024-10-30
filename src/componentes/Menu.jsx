@@ -258,18 +258,15 @@ export const Menu = () => {
             </div>
           </div>
         </div>
+        <div className="navBar">
+          
+        </div>
       </header>
       <div className="sideBar" style={{ width: sidebarWidth }}>
         <nav className="nav">
 
           <ul className="list">
-          {sidebarWidth === '300px' && ( // Mostrar el logo solo si el ancho es 300px
-              <li className="logo">
-                <Logo />
-              </li>
-            )}
-
-
+          
             <li className="list__item">
               <img src="assets/dashboard.svg" className="list__img" onClick={() => navigate('/HomePage')}/>
               <a href="/HomePage" className="nav__link">Inicio</a>

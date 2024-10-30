@@ -2,7 +2,8 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 3rem;
+    align-items: center; /* Alinea verticalmente */
+    padding: 1.5rem 3rem;
     background: rgba(255, 255, 255, 0.8);
     position: sticky;
     top: 0;
@@ -11,52 +12,129 @@
     animation: slideDown 1s ease-in;
 }
 
-
-
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .logo {
+
     font-size: 1.5rem;
     color: #03072B;
-    
 }
 
-.navs {
+.logo img{
+    width: 20vh;
+    height: auto;
+}
+
+.nav {
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
+    align-items: center; /* Centra los elementos verticalmente */
+    gap: 1.5rem; /* Espacio entre enlaces y botón */
 }
 
-.navs-link, .login-btn {
+.nav-link, .header-login-btn {
     color: #333;
     font-weight: 500;
     text-decoration: none;
     transition: color 0.3s, transform 0.3s;
 }
 
-.navs-links:hover, .login-btn:hover {
+.nav-link:hover, .login-btn:hover {
     color: #0078d7;
     transform: scale(1.05);
 }
-
 
 .header-login-btn {
     background-color: transparent;
     border: 2px solid #00c7ff;
     color: #00c7ff;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
     font-size: 1rem;
     font-weight: 500;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.4s, box-shadow 0.4s;
+    margin-left: 1rem; /* Espacio adicional entre enlaces y botón */
 }
 
 .header-login-btn:hover {
     background: linear-gradient(90deg, #00c7ff, #0078d7);
     color: #ffffff;
     box-shadow: 0px 4px 15px rgba(0, 199, 255, 0.3);
+}
+
+.headerUser{
+    z-index: 200;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.45rem 2rem 0.45rem 1.27rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid beige;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10vh;
+}
+.left{
+    width: 100px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.4rem;
+}
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Menu-container{
+    height: 100%;
+    cursor: pointer;
+    
+}
+.Menus{    
+    font-size: 30px;
+    
+}
+.sideBar {
+    display: flex;
+    margin-top: 4rem;
+    background-color: #fff;
+    border-radius: 0 16px 16px 0;
+    height: 100%;
+    padding: 1.1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 100;
+    transition: width 0.3s ease;
+}
+
+.sideBar a{
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 1.3rem 0.7rem;
+    gap: 1.3rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    transition: width 0.3s ease;
+    
+}
+.sideBar li{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    cursor: pointer;
+    
+}
+.list__img{
+    width: 1.8rem;
+    display: block;
 }

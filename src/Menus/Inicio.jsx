@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Inicio.css'
 import { useNavigate } from 'react-router-dom';
-import Header from '../componentes/Inicio/Header';
+import {Header} from '../componentes/Inicio/Header';
 import Intro from '../componentes/Inicio/Intro';
 import Steps from '../componentes/Inicio/Steps';
 import Footer from '../componentes/Inicio/Footer';

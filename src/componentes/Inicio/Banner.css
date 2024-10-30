@@ -11,19 +11,13 @@
     position: relative;
     overflow: hidden;
     animation: fadeIn 2s ease-out;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .banner-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    background: linear-gradient(90deg, #0078d7, #00c7ff);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.banner-description {
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #00c7ff;
 }
 
 .primary-btn {
@@ -34,12 +28,13 @@
     margin-top: 1.5rem;
     border-radius: 8px;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: box-shadow 0.5s, transform 0.5s;
+    transition: all 0.3s ease;
 }
 
 .primary-btn:hover {
-    box-shadow: 0px 0px 15px 4px rgba(0, 199, 255, 0.7);
-    transform: scale(1.05);
+    background: #0078d7;
+    color: white;
+    box-shadow: 0px 4px 15px rgba(0, 199, 255, 0.5);
 }
