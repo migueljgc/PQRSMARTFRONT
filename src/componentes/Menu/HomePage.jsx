@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './HomePage.css';
 import { Menu, MenuAdmin, MenuSecre } from '../Menu.jsx';
-import { HeaderAdmin, HeaderUser } from '../Inicio/Header.jsx';
+import { HeaderAdmin, HeaderSecre, HeaderUser } from '../Inicio/Header.jsx';
 
 export const HomePage = () => {
     const name = localStorage.getItem('users');
@@ -57,9 +57,7 @@ export const HomePageSecre = () => {
     const name = localStorage.getItem('users');
     return (
         <div className="HomePage">
-            <div className="menus">
-                <MenuSecre />
-            </div>
+              <HeaderSecre />
             <div className="cuerpos">
                 <div className="headers">
                     <title className='titulo'>Bienvenido {name}</title>

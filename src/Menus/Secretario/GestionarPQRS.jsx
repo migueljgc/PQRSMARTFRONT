@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../Secretario/GestionarPQRS.css'
-import { MenuSecre } from '../../componentes/Menu';
-import { UserinfoSecre } from '../../componentes/Userinfo';
 import axios from 'axios';
 import Popup from '../../componentes/Popup'
 import Responder from './Responder';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { HeaderAdmin, HeaderSecre } from '../../componentes/Inicio/Header';
 
 
 
@@ -198,10 +197,7 @@ const GestionarPQRS = () => {
 
     return (
         <div className='GestionarPQRS'>
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus">
-                <MenuSecre />
-            </div>
+             <HeaderSecre/>
             <div className="cuerposgestionarpqrs">
 
                 <div className="tabla-usuario">

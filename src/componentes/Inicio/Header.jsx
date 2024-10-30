@@ -4,7 +4,7 @@ import './Header.css';
 import { useNavigate } from 'react-router-dom';
 import Modal from './Modal.jsx';
 import { LuMenu } from 'react-icons/lu';
-import { UserinfoUser } from '../Userinfo.jsx';
+import { UserinfoAmin, UserinfoSecre, UserinfoUser } from '../Userinfo.jsx';
 
 export function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,7 +60,7 @@ export function HeaderUser() {
 
                 </div>
                 <div className="right">
-                    <UserinfoUser />
+                    <UserinfoAmin />
                 </div>
             </header>
             <div className="sideBar" style={{ width: sidebarWidth }}>
@@ -145,24 +145,24 @@ export function HeaderAdmin() {
                     <ul className="list">
 
                         <li className="">
-                            <img src="assets/dashboard.svg" className="list__img" />
+                            <img src="assets/dashboard.svg" className="list__img" onClick={() => navigate('/HomePagesAdmin')}/>
                             <a href="/HomePagesAdmin" className="nav__link">Inicio</a>
 
                         </li>
 
                         <li className="">
-                            <img src="assets/stats.svg" className="list__img" />
+                            <img src="assets/stats.svg" className="list__img" onClick={() => navigate('/Dashboard')}/>
                             <a href="/Dashboard" className="nav__link">Estadisticas</a>
 
                         </li>
 
                         {/* Gestion Usuario */}
                         <li className="list__item" onClick={() => toggleSection('userManagement')}>
-                         
-                                <img src="assets/contacto.svg" className="list__img" />
-                                <span className="item">Gestión Usuario</span>
-                                <img src="assets/arrow.svg" className="list__arrow" />
-                        
+
+                            <img src="assets/contacto.svg" className="list__img"  />
+                            <span className="item">Gestión Usuario</span>
+                            <img src="assets/arrow.svg" className="list__arrow" />
+
                         </li>
                         {expandedSections.userManagement && (
                             <>
@@ -177,11 +177,11 @@ export function HeaderAdmin() {
 
                         {/* Gestion Categorias */}
                         <li className="list__item" >
-                            
-                                <img src="assets/dasboard.svg" className="list__img" />
-                                <span className="item" onClick={() => toggleSection('categoryManagement')}>Gestión Categorías</span>
-                                <img src="assets/arrow.svg" className="list__arrow" onClick={() => toggleSection('categoryManagement')} />
-                            
+
+                            <img src="assets/dasboard.svg" className="list__img" />
+                            <span className="item" onClick={() => toggleSection('categoryManagement')}>Gestión Categorías</span>
+                            <img src="assets/arrow.svg" className="list__arrow" onClick={() => toggleSection('categoryManagement')} />
+
                         </li>
                         {expandedSections.categoryManagement && (
                             <>
@@ -228,4 +228,64 @@ export function HeaderAdmin() {
 }
 
 
+export function HeaderSecre() {
+    const [sidebarWidth, setSidebarWidth] = useState('4rem');
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.setItem('loggetPQRSMART', 'false');
+        localStorage.setItem('tokenPQRSMART', '');
+        localStorage.setItem('userPQRSMART', JSON.stringify(''));
+        navigate('/');
+    };
 
+    const toggleSidebar = () => {
+        setSidebarWidth(sidebarWidth === '4rem' ? '300px' : '4rem');
+    };
+
+    return (
+        <div className="HeaderUser">
+            <header className='headerUser'>
+                <div className="left">
+                    <div className="Menu-container" onClick={toggleSidebar}>
+                        <div className="Menus">
+                            <LuMenu />
+
+                        </div>
+                    </div>
+                    <div className="logomenu">
+                        <img src="/images/PQRSmart-Logo.png" alt="PQRSmart Logo" />
+                    </div>
+
+                </div>
+                <div className="right">
+                    <UserinfoSecre />
+                </div>
+            </header>
+            <div className="sideBar" style={{ width: sidebarWidth }}>
+                <nav>
+                    <ul className="list">
+
+                        <li className="">
+                            <img src="assets/dashboard.svg" className="list__img" onClick={() => navigate('/HomePageSecre')} />
+                            <a href="/HomePageSecre" className="nav__link">Inicio</a>
+
+                        </li>
+
+                        <li className="">
+                            <img src="assets/pencil.svg" className="list__img" onClick={() => navigate('/GestionarPQRS')} />
+                            <a href="/GestionarPQRS" className="nav__link">Gestionar PQRS</a>
+
+                        </li>
+
+                        <li className="list__item">
+                            <img src="assets/salir.svg" className="list__img" onClick={handleLogout} />
+                            <a href="/" className="nav__link" onClick={handleLogout}>Salir</a>
+                        </li>
+
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+    )
+}

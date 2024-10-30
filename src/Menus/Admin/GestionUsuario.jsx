@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserinfoAmin } from '../../componentes/Userinfo';
 import Popup from '../../componentes/Popup';
 import ModificarUsuario from "../TablasCuadroVerModi/ModificarUsuario.jsx";
+import { HeaderAdmin } from '../../componentes/Inicio/Header.jsx';
 
 const GestionUsuario = () => {
     const [data, setData] = useState([]);
@@ -18,21 +19,7 @@ const GestionUsuario = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const usuariosPorPagina = 12;
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = '/Gradient.js';
-        script.async = true;
-        document.body.appendChild(script);
 
-        script.onload = () => {
-            const gradient = new Gradient();
-            gradient.initGradient('#gradient-canvas');
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
 
     const fetchData = async () => {
         try {
@@ -127,14 +114,8 @@ const GestionUsuario = () => {
     };
     return (
         <div className='GestionUsuario'>
-            <canvas id="gradient-canvas" style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: -1 }}></canvas>
-            <div className="menus">
-                <MenuAdmin />
-            </div>
-            <div className="user-menu">
-                <UserinfoAmin />
-            </div>
-            <div className="cuerpos">
+             <HeaderAdmin />
+            <div className="cuerpos-GestionUsuario">
                 <div className="tabla-usuario">
                     <h2>Lista de Usuarios</h2>
 
