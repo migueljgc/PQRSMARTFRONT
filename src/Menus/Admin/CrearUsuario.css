@@ -10,10 +10,11 @@
 .cuerpos-usu {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 100vh;
-    overflow-y: auto;
-    align-items: flex-start; /* Para alinear el formulario más hacia arriba */
-    padding-top: 50px; /* Opcional: añade un pequeño margen superior */
+    padding: 20px;
+    margin-top: 10vh;
+    margin-left: 10vh;
 }
 
 .title {
@@ -23,16 +24,15 @@
 }
 
 .form-Usuario {
-    background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
-    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
     width: 100%;
-    max-width: 800px; /* Ancho máximo más grande */
-    color: #FFFFFF;
+    max-width: 600px;
+    color: #000000;
     box-sizing: border-box;
-    overflow: auto; /* Si hay mucho contenido, permitir scroll interno */
 }
 
 .crear-usu {
@@ -50,47 +50,55 @@
 
 .input-label-creausu label {
     font-weight: 600;
-    color: #CADAE5;
+    color: #000000;
     font-size: 14px;
 }
 
 .input-label-creausu input, select{
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: rgb(255, 255, 255);
+    color: #000000;
     border-radius: 8px;
     outline: none;
     transition: all 0.3s ease;
 }
+.input-label-creausu select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23FFFFFF' d='M5.293 6.293a1 1 0 011.414 0L8 7.586l1.293-1.293a1 1 0 011.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+}
 .Buton-creausu{
-    background-color: transparent;
-    padding: 6px 12px;
-    border-radius: 4px;
+    background-color: #ffffff;
+    border: none;
+    color: #000;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
-    width: 100%;
-    margin-right: 10px;
-    display: flex;
-    justify-content: center;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.3);
 
 }
 .Buton-creausu button{
-    background-color: #5E76FF;
-    color: white;
+    background-color: #ffffff;
     border: none;
-    padding: 12px 20px;
-    font-size: 16px;
+    color: #000;
+    padding: 10px;
+    border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 
 .Buton-creausu button:hover {
-    background-color: #4753c8;
-    transform: translateY(-2px);
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .Buton-creausu button:active {
