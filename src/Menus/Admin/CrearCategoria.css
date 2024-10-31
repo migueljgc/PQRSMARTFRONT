@@ -1,26 +1,23 @@
-.CrearCategoria{
+.CrearCategoria {
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
     display: flex;
-    
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
 }
-
 
 .cuerpos-crearcat {
     display: flex;
     justify-content: center;
-    height: 50vh;
     padding: 20px;
-    margin-top: 10vh;
-    margin-left: 10vh;
-    width: 130%;
-
+    width: 100%;
 }
 
 .title-crearcat {
     color: #000000;
     font-size: 2rem;
     text-align: center;
+    margin-bottom: 20px; /* Espacio entre título y formulario */
 }
 
 .form-crearcat {
@@ -33,26 +30,26 @@
     max-width: 900px;
     color: #000000;
     box-sizing: border-box;
-    
 }
 
-
-.input-box-crearcat{
-    display: flex; /* Cambiar a flexbox */
-    align-items: center; /* Alinear verticalmente */
-    margin-bottom: 20px; /* Espacio entre los inputs */
-    justify-content: space-between;
-    
+.input-box-crearcat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separar los elementos en la fila */
+    margin-bottom: 20px;
+    gap: 20px; /* Espacio entre los elementos */
 }
 
 .input-box-crearcat label {
     font-weight: 600;
     color: #000000;
     font-size: 14px;
+    min-width: 150px; /* Tamaño mínimo para las etiquetas */
 }
 
-.input-box-crearcat input, select{
-    width: 80%;
+.input-box-crearcat input,
+.input-box-crearcat select {
+    width: 100%; /* Asegurar que ambos campos ocupen el mismo ancho */
     padding: 12px 15px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     background: rgb(255, 255, 255);
@@ -62,23 +59,22 @@
     transition: all 0.3s ease;
 }
 
-.btnCrearCate{
-    display: flex; /* Habilitar flexbox */
-    justify-content: center; /* Centrar horizontalmente */
-    margin-top: 10px; /* Espacio superior para separación */
-    
+.btnCrearCate {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
-.btnCrearCate button{
-    background-color: #ffffff; /* Color de fondo inicial (naranja) */
-    color: rgb(0, 0, 0); /* Color del texto */
-    border: none; /* Sin borde */
-    padding: 6px 12px; /* Espaciado interno más pequeño */
-    font-weight: bold; /* Negrita */
-    cursor: pointer; /* Cambiar cursor al pasar por encima */
-    border-radius: 6px; /* Bordes redondeados más sutiles */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
-    width: 50%; /* Ancho relativo */
-    font-size: 1rem; /* Cambiado a unidad relativa */
+
+.btnCrearCate button {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 50%; /* Tamaño relativo */
+    font-size: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -90,4 +86,10 @@
 
 .btnCrearCate button:active {
     transform: translateY(0);
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+    .form-crearcat {
+        margin-left: 18vh;
+    }
 }
