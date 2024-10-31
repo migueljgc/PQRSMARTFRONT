@@ -22,7 +22,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     /* Color de la barra, transparente */
     border-radius: 10px;
     /* Bordes redondeados */
@@ -31,7 +31,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     /* Color más visible al pasar el mouse */
 }
 
@@ -39,7 +39,7 @@ body {
 * {
     scrollbar-width: thin;
     /* Define el ancho de la barra de desplazamiento */
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
     /* Color de la barra y del fondo */
 }
 
