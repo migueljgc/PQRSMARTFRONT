@@ -113,7 +113,7 @@ const GestionUsuario = () => {
         <div className='GestionUsuario'>
              <HeaderAdmin />
             <div className="cuerpos-GestionUsuario">
-                <div className="tabla-usuario">
+                <div className="tabla-usuario-admin">
                     <h2>Lista de Usuarios</h2>
 
                     <div className="buscador-usuario">

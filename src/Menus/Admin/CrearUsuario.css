@@ -3,7 +3,7 @@
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
     display: flex;
-    
+
 }
 
 
@@ -17,7 +17,7 @@
 }
 
 .title {
-    color: #FFFFFF;
+    color: #000000;
     font-size: 2rem;
     text-align: center;
 }
@@ -45,7 +45,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    
+
 }
 
 .input-label-creausu label {
