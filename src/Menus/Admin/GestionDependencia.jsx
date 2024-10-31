@@ -80,7 +80,7 @@ const GestionDependencia = () => {
         <div className='GestionDependencia'>
              <HeaderAdmin />
             <div className="cuerpos-GestionDependencia">
-            <div className="tabla-usuario">
+            <div className="tabla-dependencia">
                     <h2>Lista de Categoria</h2>
 
                     <div className="buscador-usuario">

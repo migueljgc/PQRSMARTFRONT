@@ -11,7 +11,7 @@ const GestionCategoria = () => {
     const [error, setError] = useState('');
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
     const [currentPage, setCurrentPage] = useState(0);
-    const usuariosPorPagina = 12; // Cambia esto para ajustar cuántos usuarios mostrar por página
+    const usuariosPorPagina = 6; // Cambia esto para ajustar cuántos usuarios mostrar por página
 
 
     const fetchData = async () => {
@@ -81,7 +81,7 @@ const GestionCategoria = () => {
              <HeaderAdmin />
 
             <div className="cuerpos-GestionCategoria">
-                <div className="tabla-usuario">
+                <div className="tabla-categoria">
                     <h2>Lista de Categoria</h2>
 
                     <div className="buscador-usuario">
