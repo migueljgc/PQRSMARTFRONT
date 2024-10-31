@@ -14,7 +14,7 @@ const CrearDependencias = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get')
+            const response = await axios.get('/api/dependence/get')
             setData(response.data);
             console.log(response.data)
         } catch (error) {

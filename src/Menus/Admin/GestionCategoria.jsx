@@ -48,7 +48,7 @@ const GestionCategoria = () => {
     };
     const handleActivate = async (idCategory) => {
         try {
-            await axios.patch(`https://pqrsmartback-production-307d.up.railway.app/api/category/activate/${idCategory}`);
+            await axios.patch(`/api/category/activate/${idCategory}`);
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
             setError('Categoria Activada.');

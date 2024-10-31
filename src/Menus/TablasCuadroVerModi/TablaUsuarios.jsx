@@ -22,7 +22,7 @@ const TablaUsuarios = () => {
     };
     const handleCancel = async (id) => {
         try {
-            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/cancel/${id}`);
+            await axios.patch(`/api/Usuario/cancel/${id}`);
             fetchData();
             
         } catch (error) {
@@ -32,7 +32,7 @@ const TablaUsuarios = () => {
     };
     const handleActivate = async (id) => {
         try {
-            await axios.patch(`https://pqrsmartback-production.up.railway.app/api/Usuario/activate/${id}`);
+            await axios.patch(`/api/Usuario/activate/${id}`);
             fetchData();
             
         } catch (error) {
