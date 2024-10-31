@@ -15,7 +15,7 @@ const CrearCategoria = () => {
 
     const fetchDependence = async () => {
         try {
-            const response = await axios.get('https://pqrsmartback-production.up.railway.app/api/dependence/get')
+            const response = await axios.get('/api/dependence/get')
             setData(response.data);
             console.log(response.data)
         } catch (error) {
@@ -47,7 +47,7 @@ const CrearCategoria = () => {
         try {
             console.log('Datos del formulario a enviar:', formData);
             const selectedDependencia = data.find(type => type.idDependence === parseInt(formData.dependence));
-            const categoryResponse = await axios.post('https://pqrsmartback-production.up.railway.app/api/category/save', {
+            const categoryResponse = await axios.post('/api/category/save', {
                 nameCategory: formData.category,
                 dependence: { idDependence: selectedDependencia ? selectedDependencia.idDependence : null },
                 state: { id: 1 }
