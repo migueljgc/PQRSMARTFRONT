@@ -1,20 +1,16 @@
 .GestionarPQRS {
-    font-family: 'Montserrat', sans-serif;
-    height: 100vh;
     display: flex;
-}
-
-.menus {
-    grid-area: menus;
+    height: 100vh;
 }
 
 
 .cuerposgestionarpqrs {
     display: flex;
-    margin-top: 30vh;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     padding: 20px;
+    overflow-y: auto;
 
 }
 
