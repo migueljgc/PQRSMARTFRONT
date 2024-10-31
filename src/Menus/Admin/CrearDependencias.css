@@ -2,24 +2,23 @@
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
     display: flex;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
     
 }
 
 .cuerpos-creardepe {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
     padding: 20px;
-    overflow-y: auto;
+    width: 100%;
 
 }
 
 .title-creardepe {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
+    color: #000000;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .form-creardepe {
@@ -28,65 +27,64 @@
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    width: 100%; /* Cambiado a porcentaje para ser más flexible */
-    max-width: 700px;
-    color: #FFFFFF;
+    width: 100%;
+    max-width: 600px;
+    color: #000000;
     box-sizing: border-box;
     
 }
 
 .input-box-creardepe{
-    display: flex; /* Cambiar a flexbox */
-    align-items: center; /* Alinear verticalmente */
-    margin-bottom: 20px; /* Espacio entre los inputs */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separar los elementos en la fila */
+    margin-bottom: 20px;
+    gap: 20px; /* Espacio entre los elementos */
     
     
 }
 
 .input-box-creardepe label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    margin-right: 0.8rem; /* Espacio a la derecha de la etiqueta */
+    font-weight: 600;
+    color: #000000;
+    font-size: 14px;
 
 }
 
 .input-box-creardepe input{
-    border: none;
-    color: #FFFFFF;
-    font-size: 1rem; /* Cambiado a unidad relativa */
-    border-bottom: 2px solid #fff;
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: rgb(255, 255, 255);
+    color: #000000;
+    border-radius: 8px;
     outline: none;
-    background: transparent;
-    width: 100%; /* Ancho completo */
-    padding: 10px 0; /* Espaciado vertical */
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
 }
-.input-box-creardepe input, select{
-    border-bottom: 2px solid #5E76FF; /* Cambiar el color de la línea al enfocar */
-}
+
 .btnCreardepe{
-    display: flex; /* Habilitar flexbox */
-    justify-content: center; /* Centrar horizontalmente */
-    margin-top: 10px; /* Espacio superior para separación */
+    background-color: #ffffff;
+    color: #000;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 
 }
 .btnCreardepe button{
-    background-color: #5E76FF; /* Color de fondo inicial (naranja) */
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    padding: 6px 12px; /* Espaciado interno más pequeño */
-    font-weight: bold; /* Negrita */
-    cursor: pointer; /* Cambiar cursor al pasar por encima */
-    border-radius: 6px; /* Bordes redondeados más sutiles */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
-    width: 50%; /* Ancho relativo */
-    font-size: 1rem; /* Cambiado a unidad relativa */
+    background-color: #ffffff;
+    color: #000;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 .btnCreardepe button:hover {
-    background-color: #4753c8;
-    transform: translateY(-2px);}
+    background-color: #000000;
+    color: #ffffff;
+}
 
 .btnCreardepe button:active {
     transform: translateY(0);
