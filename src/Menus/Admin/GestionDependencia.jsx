@@ -81,7 +81,7 @@ const GestionDependencia = () => {
              <HeaderAdmin />
             <div className="cuerpos-GestionDependencia">
             <div className="tabla-dependencia">
-                    <h2>Lista de Categoria</h2>
+                    <h2>Lista de Dependencias</h2>
 
                     <div className="buscador-usuario">
                         <input

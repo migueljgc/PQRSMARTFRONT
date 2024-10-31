@@ -196,7 +196,7 @@ export function HeaderAdmin() {
 
                         {/* Gestion Dependencias */}
                         <li className="list__item" >
-                            <img src="assets/casa.svg" className="list__img" />
+                            <img src="assets/engranaje.svg" className="list__img" />
                             <span className="item" onClick={() => toggleSection('dependencyManagement')}>Gestión Dependencias</span>
                             <img src="assets/arrow.svg" className="list__arrow" onClick={() => toggleSection('dependencyManagement')} />
 
