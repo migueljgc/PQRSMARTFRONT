@@ -9,17 +9,18 @@
 .cuerpos-crearcat {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    height: 50vh;
     padding: 20px;
+    margin-top: 10vh;
+    margin-left: 10vh;
+    width: 130%;
 
 }
 
 .title-crearcat {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
+    color: #000000;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .form-crearcat {
@@ -28,9 +29,9 @@
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    width: 100%; /* Cambiado a porcentaje para ser más flexible */
-    max-width: 700px;
-    color: #FFFFFF;
+    width: 100%;
+    max-width: 900px;
+    color: #000000;
     box-sizing: border-box;
     
 }
@@ -40,39 +41,36 @@
     display: flex; /* Cambiar a flexbox */
     align-items: center; /* Alinear verticalmente */
     margin-bottom: 20px; /* Espacio entre los inputs */
+    justify-content: space-between;
     
 }
 
 .input-box-crearcat label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    margin-right: 0.8rem; /* Espacio a la derecha de la etiqueta */
+    font-weight: 600;
+    color: #000000;
+    font-size: 14px;
 }
 
 .input-box-crearcat input, select{
-    border: none;
-    color: #FFFFFF;
-    font-size: 1rem; /* Cambiado a unidad relativa */
-    border-bottom: 2px solid #fff;
+    width: 80%;
+    padding: 12px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: rgb(255, 255, 255);
+    color: #000000;
+    border-radius: 8px;
     outline: none;
-    background: transparent;
-    width: 100%; /* Ancho completo */
-    padding: 10px 0; /* Espaciado vertical */
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
 }
-.input-box-crearcat input, select{
-    border-bottom: 2px solid #5E76FF; /* Cambiar el color de la línea al enfocar */
-}
+
 .btnCrearCate{
     display: flex; /* Habilitar flexbox */
     justify-content: center; /* Centrar horizontalmente */
     margin-top: 10px; /* Espacio superior para separación */
+    
 }
 .btnCrearCate button{
-    background-color: #5E76FF; /* Color de fondo inicial (naranja) */
-    color: white; /* Color del texto */
+    background-color: #ffffff; /* Color de fondo inicial (naranja) */
+    color: rgb(0, 0, 0); /* Color del texto */
     border: none; /* Sin borde */
     padding: 6px 12px; /* Espaciado interno más pequeño */
     font-weight: bold; /* Negrita */
@@ -81,11 +79,13 @@
     transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
     width: 50%; /* Ancho relativo */
     font-size: 1rem; /* Cambiado a unidad relativa */
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .btnCrearCate button:hover {
-    background-color: #4753c8;
+    background-color: #000000;
     transform: translateY(-2px);
+    color: #ffffff;
 }
 
 .btnCrearCate button:active {
