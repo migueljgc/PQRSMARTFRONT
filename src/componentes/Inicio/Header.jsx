@@ -31,9 +31,11 @@ export function Header() {
     );
 }
 
+
 export function HeaderUser() {
-    const [sidebarWidth, setSidebarWidth] = useState('4rem');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const navigate = useNavigate();
+
     const handleLogout = () => {
         localStorage.setItem('loggetPQRSMART', 'false');
         localStorage.setItem('tokenPQRSMART', '');
@@ -42,7 +44,7 @@ export function HeaderUser() {
     };
 
     const toggleSidebar = () => {
-        setSidebarWidth(sidebarWidth === '4rem' ? '300px' : '4rem');
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
@@ -52,52 +54,40 @@ export function HeaderUser() {
                     <div className="Menu-container" onClick={toggleSidebar}>
                         <div className="Menus">
                             <LuMenu />
-
                         </div>
                     </div>
                     <div className="logomenu">
-                        <img src="/images/PQRSmart-Logo.png" alt="PQRSmart Logo" />
+                        <img src="/images/PQRSmart-Logo.png" alt="PQRSmart Logo" className='logo-menu' />
                     </div>
-
                 </div>
                 <div className="right">
                     <UserinfoAmin />
                 </div>
             </header>
-            <div className="sideBar" style={{ width: sidebarWidth }}>
+            <div className={`sideBar ${isSidebarOpen ? 'open' : ''}`}>
                 <nav>
                     <ul className="list">
-
-                        <li className="list__item">
+                        <li className="list__item" onClick={toggleSidebar}>
                             <img src="assets/dashboard.svg" className="list__img" onClick={() => navigate('/HomePage')} />
                             <a href="/HomePage" className="nav__link">Inicio</a>
-
                         </li>
-
-
-                        <li className="list__item">
+                        <li className="list__item" onClick={toggleSidebar}>
                             <img src="assets/pencil.svg" className="list__img" onClick={() => navigate('/Crear')} />
                             <a href="/Crear" className="nav__link">Crear PQRS</a>
                         </li>
-
-
-                        <li className="list__item">
+                        <li className="list__item" onClick={toggleSidebar}>
                             <img src="assets/lupa.svg" className="list__img" onClick={() => navigate('/Consultar')} />
                             <a href="/Consultar" className="nav__link">Consultar PQRS</a>
-
                         </li>
-
-                        <li className="list__item">
+                        <li className="list__item" onClick={toggleSidebar}>
                             <img src="assets/salir.svg" className="list__img" onClick={handleLogout} />
                             <a href="/" className="nav__link" onClick={handleLogout}>Salir</a>
                         </li>
-
                     </ul>
-
                 </nav>
             </div>
         </div>
-    )
+    );
 }
 
 export function HeaderAdmin() {
