@@ -30,7 +30,7 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
     useEffect(() => {
         const fetchDependencias = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/dependence/get', {
+                const response = await axios.get('/api/dependence/get', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

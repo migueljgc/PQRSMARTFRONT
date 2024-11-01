@@ -20,7 +20,7 @@ const GestionUsuario = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/Usuario/get', {
+            const response = await axios.get('/api/Usuario/get', {
                 'Authorization': `Bearer ${token}`
             });
             setData(response.data);
@@ -31,7 +31,7 @@ const GestionUsuario = () => {
 
     const handleCancel = async (id) => {
         try {
-            await axios.patch(`http://localhost:8080/api/Usuario/cancel/${id}`);
+            await axios.patch(`/api/Usuario/cancel/${id}`);
             fetchData();
             setError('Usuario Bloqueado.');
             setShow(true);
@@ -44,7 +44,7 @@ const GestionUsuario = () => {
 
     const handleActivate = async (id) => {
         try {
-            const response = await axios.patch(`http://localhost:8080/api/Usuario/activate/${id}`, {}, {
+            const response = await axios.patch(`/api/Usuario/activate/${id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -72,7 +72,7 @@ const GestionUsuario = () => {
         const update=updatedUser;
         console.log('Usuario guardado:', update);
         try {
-            await axios.put(`http://localhost:8080/api/Usuario/Update`,update);
+            await axios.put(`/api/Usuario/Update`,update);
             fetchData();
             setShowPopup(false)
             console.log('Usuario guardado:', updatedUser);

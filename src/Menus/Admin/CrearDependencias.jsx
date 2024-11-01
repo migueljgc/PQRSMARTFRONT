@@ -45,7 +45,7 @@ const CrearDependencias = () => {
         e.preventDefault();
         try {
             console.log('Datos del formulario a enviar:', formData);
-            const dependenceResponse = await axios.post('https://pqrsmartback-production.up.railway.app/api/dependence/save', {
+            const dependenceResponse = await axios.post('/api/dependence/save', {
                 nameDependence: formData.dependence,
                 state: { id: 1 }
 

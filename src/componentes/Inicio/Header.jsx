@@ -30,6 +30,7 @@ export function Header() {
         </header>
     );
 }
+
 export function HeaderUser() {
     const [sidebarWidth, setSidebarWidth] = useState('4rem');
     const navigate = useNavigate();
