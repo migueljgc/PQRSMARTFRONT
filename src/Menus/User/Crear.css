@@ -96,7 +96,10 @@
 }
 
 @media (max-width: 1366px) and (max-height: 768px) {
-
+    .cuerpo-crear {
+        margin-left: 4vh;
+        overflow: hidden;
+    }
     .formcrear{
         margin-top: 20vh;
     }
@@ -128,7 +131,7 @@
 
 @media (max-width: 480px) {
     .cuerpo-crear {
-        margin-top: 0;
+        margin-top: 10vh;
         padding: 10px;
     }
 
