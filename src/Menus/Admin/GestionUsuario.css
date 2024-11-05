@@ -1,8 +1,8 @@
-.GestionUsuario{
+.GestionUsuario {
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
     display: flex;
-    
+
 }
 
 
@@ -15,6 +15,7 @@
     overflow-y: auto;
 
 }
+
 /* TablaUsuarios.css */
 
 /* Estilos generales para el contenedor de la tabla */
@@ -27,7 +28,7 @@
 
 }
 
-.tabla-usuario-admin{
+.tabla-usuario-admin {
     width: 90%;
     padding: 20px;
     background-color: #ffffff;
@@ -55,11 +56,13 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
-    transition: box-shadow 0.3s; /* Añadido para el efecto de hover */
+    transition: box-shadow 0.3s;
+    /* Añadido para el efecto de hover */
 }
 
 .buscador:hover {
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Efecto de hover moderno */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    /* Efecto de hover moderno */
 }
 
 .icono-busqueda {
@@ -75,7 +78,8 @@
     color: #000000;
 }
 
-.tabla-minimalista-usuario th, .tabla-minimalista-usuario td {
+.tabla-minimalista-usuario th,
+.tabla-minimalista-usuario td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -87,17 +91,20 @@
 }
 
 .tabla-minimalista-usuario td {
-    cursor: pointer; /* Cursor pointer en el contenido de las celdas */
+    cursor: pointer;
+    /* Cursor pointer en el contenido de las celdas */
 }
 
 /* No aplicar hover a las columnas */
 .tabla-minimalista-usuario th:hover {
-    background-color: #f2f2f2; /* Sin efecto hover para columnas */
+    background-color: #f2f2f2;
+    /* Sin efecto hover para columnas */
 }
 
 /* Estilos para las filas de la tabla */
 .tabla-minimalista-usuario tr:hover {
-    background-color: #f9f9f9; /* Color de fondo al pasar el mouse sobre una fila */
+    background-color: #f9f9f9;
+    /* Color de fondo al pasar el mouse sobre una fila */
 }
 
 /* Estilos para el estado del usuario */
@@ -124,7 +131,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s; /* Añadido para efecto de hover */
+    transition: background-color 0.3s, transform 0.2s;
+    /* Añadido para efecto de hover */
 }
 
 .paginacion button:disabled {
@@ -134,9 +142,11 @@
 
 .paginacion button:hover:not(:disabled) {
     background-color: #357ab8;
-    transform: translateY(-2px); /* Efecto de elevar el botón */
+    transform: translateY(-2px);
+    /* Efecto de elevar el botón */
 }
-.activar{
+
+.activar {
     margin-right: 20px;
 }
 
@@ -146,8 +156,76 @@
         width: 110%;
     }
 
-    .tabla-usuario-admin{
+    .tabla-usuario-admin {
         color: #000000;
         margin-left: 40vh;
     }
+}
+
+@media (max-width: 480px) {
+    .tabla-usuario {
+        margin-left: 25vh;
+        margin-top: 10vh;
+        width: 150%;
+        padding: 10px;
+    }
+
+    .tabla-usuario-admin {
+        color: #000000;
+        margin-left: 40vh;
+        width: 90%;
+        padding: 20px;
+
+    }
+
+    /* Estilos para el título de la tabla */
+    .tabla-usuario h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+
+    .icono-busqueda {
+        width: 7px;
+        height: 7px;
+    }
+
+    /* Estilos para la tabla */
+    .tabla-minimalista-usuario {
+        width: 50%;
+        border-collapse: collapse;
+        color: #000000;
+        font-size: 0.4rem;
+    }
+   
+    .busqueda label {
+        font-size: 0.5rem;
+    }
+
+    .nota {
+        font-size: 0.6rem;
+    }
+
+    .busqueda input {
+        width: 20%;
+        height: 10px;
+    }
+
+
+    /* Estilos para la paginación */
+    .paginacion {
+        margin-top: 10px;
+        font-size: 0.5rem;
+    }
+
+    .paginacion button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        font-size: 0.5rem;
+    }
+
+    .activar {
+        margin-right: 10px;
+    }
+
 }

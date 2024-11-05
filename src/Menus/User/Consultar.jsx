@@ -116,9 +116,9 @@ const Consultar = () => {
                                             </div>
                                         </td>
                                         <td>
-                                            <span>
+                                            <span className='span-descargar'>
                                                 {pqrs.archivo ? (
-                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className="btn-descargar">Descargar</button>
                                                     </a>
                                                 ) : (
@@ -143,14 +143,13 @@ const Consultar = () => {
                                                     ? `${pqrs.answer.slice(0, 50)}...`
                                                     : pqrs.answer || ''}  {/* Si row.answer es null o undefined, mostramos 'No disponible' */}
                                             {/*</div>*/}
-                                            <span>
+                                            <span  className='span-descargar'>
                                                 {pqrs.archivoAnswer ? (
-                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
                                                     <div>
-                                                        <span>No disponible</span>
                                                         <span>No disponible</span>
                                                     </div>
                                                 )
@@ -158,9 +157,9 @@ const Consultar = () => {
                                             </span>
                                         </td>
                                         <td>
-                                            <span>
+                                            <span  className='span-descargar'>
                                                 {pqrs.evidenceAnswer ? (
-                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
