@@ -91,7 +91,8 @@ export function HeaderUser() {
 }
 
 export function HeaderAdmin() {
-    const [sidebarWidth, setSidebarWidth] = useState('4rem');
+    const [sidebarWidth, setSidebarWidth] = useState('0rem');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState({});
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -102,7 +103,7 @@ export function HeaderAdmin() {
     };
 
     const toggleSidebar = () => {
-        setSidebarWidth(sidebarWidth === '4rem' ? '300px' : '4rem');
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     const toggleSection = (section) => {
@@ -111,6 +112,7 @@ export function HeaderAdmin() {
             [section]: !prevState[section]
         }));
     };
+
 
     return (
         <div className="HeaderUser">
@@ -131,11 +133,11 @@ export function HeaderAdmin() {
                     <UserinfoUser />
                 </div>
             </header>
-            <div className="sideBar" style={{ width: sidebarWidth }}>
+            <div className={`sideBar ${isSidebarOpen ? 'open' : ''}`}>
                 <nav>
                     <ul className="list">
 
-                        <li className="">
+                    <li className="">
                             <img src="assets/dashboard.svg" className="list__img" onClick={() => navigate('/HomePagesAdmin')}/>
                             <a href="/HomePagesAdmin" className="nav__link">Inicio</a>
 

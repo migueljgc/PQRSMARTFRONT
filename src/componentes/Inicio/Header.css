@@ -238,11 +238,15 @@ body {
 }
 
 @media (max-width: 768px) {
-    .logo img {
-        width: 25vh;
+    .logomenu{
+        margin-left: 4vh;
     }
+
     .nav {
         display: none; /* Oculta el menú de navegación para pantallas más pequeñas */
+    }
+    .Menus{
+        margin-top: 2.5vh;
     }
     .Menu-container {
         display: block; /* Mostrar menú hamburguesa */

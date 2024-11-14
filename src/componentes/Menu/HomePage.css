@@ -1,41 +1,90 @@
 .HomePage {
     font-family: 'Montserrat', sans-serif;
-    height: 100vh;
-    overflow: none; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 
-.cuerpos{
-    margin-top: 10vh;
-    margin-left: 10vh;
-   
-}
-.titulo {
-    justify-content: center;
-    font-size: 27px;
+.cuerpos {
+    width: 80%;
+    margin-top: 5vh;
     padding: 10px;
-    margin-bottom: 10px;
     display: flex;
-    color: #000000;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headers {
+    width: 100%;
+    text-align: center;
+}
+
+.titulo {
+    font-size: 2rem;
+    color: #000;
+    margin: 1rem 0;
 }
 
 .mision {
+    width: 100%;
     display: flex;
-    justify-content: space-around;
-    color: #000000;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
 }
 
 .p1 {
-    margin-left: 30px;
-    font-size: 30px;
-    padding-right: 30px;
+    font-size: 1.8rem;
     font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .p2 {
-    font-size: 20px;
+    font-size: 1rem;
     text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin-right: 30px;
-    padding-right: 30px;
+    padding: 0 1rem;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .cuerpos {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 90%;
+    }
+
+    .mision {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .p1 {
+        font-size: 2rem;
+    }
+
+    .p2 {
+        font-size: 1.2rem;
+        max-width: 60%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .cuerpos {
+        width: 70%;
+    }
+
+    .titulo {
+        font-size: 2.5rem;
+    }
+
+    .p1 {
+        font-size: 2.5rem;
+    }
+
+    .p2 {
+        font-size: 1.3rem;
+    }
 }
