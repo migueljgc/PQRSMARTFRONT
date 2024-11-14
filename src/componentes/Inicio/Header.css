@@ -119,11 +119,11 @@ body {
 .Menu-container{
     height: 100%;
     cursor: pointer;
-    
+
 }
-.Menus{    
+.Menus{
     font-size: 30px;
-    
+
 }
 .sideBar {
     display: flex;
@@ -140,7 +140,7 @@ body {
     z-index: 100;
     transition: width 0.3s ease;
     border-right: 2px solid rgb(214, 214, 214);
-    
+
 }
 .sideBar.open {
     width: 300px;
@@ -157,7 +157,7 @@ body {
     margin: 0 0.5rem;
     border-radius: 0.5rem;
     transition: width 0.3s ease;
-    
+
 }
 .item{
     color: #000;
