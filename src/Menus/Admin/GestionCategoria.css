@@ -25,3 +25,12 @@
         margin-top: 15vh;
     }
 }
+
+@media (max-width: 480px) {
+    .tabla-categoria{
+        color: #000000;
+        margin-left: 3vh;
+        margin-top: 15vh;
+    }
+}
+

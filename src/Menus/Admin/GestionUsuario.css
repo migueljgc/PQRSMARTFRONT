@@ -163,6 +163,7 @@
 }
 
 @media (max-width: 480px) {
+
     .tabla-usuario {
         margin-top: 10vh;
         width: 150%;
@@ -171,7 +172,7 @@
 
     .tabla-usuario-admin {
         color: #000000;
-        width: 120%;
+        width: 110%;
         padding: 20px;
         margin-left: 0vh;
 

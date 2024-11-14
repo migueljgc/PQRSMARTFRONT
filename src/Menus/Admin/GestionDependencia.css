@@ -30,3 +30,11 @@
         margin-top: 15vh;
     }
 }
+
+@media (max-width: 480px) {
+    .tabla-dependencia{
+        color: #000000;
+        margin-left: 5vh;
+        margin-top: 15vh;
+    }
+}
