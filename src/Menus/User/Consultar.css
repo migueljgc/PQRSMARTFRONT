@@ -8,11 +8,10 @@
 
 .cuerpoconsultarPqrs {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-    overflow-y: auto;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente */
+    height: 100vh;          /* Asegura que ocupe toda la altura de la página */
+    padding: 0;             /* Opcional: elimina el padding si no es necesario */
 
 }
 
