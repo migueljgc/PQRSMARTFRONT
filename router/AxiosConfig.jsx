@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Configurar la URL base si es necesario
-axios.defaults.baseURL = 'https://pqrsmartback-production-73f4.up.railway.app'; // Ajusta esto según tu configuración
+axios.defaults.baseURL = 'https://pqrsmartback-production-86b1.up.railway.app'; // Ajusta esto según tu configuración
 
 // Interceptor de solicitudes para agregar el token JWT
 axios.interceptors.request.use(

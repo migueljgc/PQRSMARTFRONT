@@ -88,7 +88,7 @@ const Consultar = () => {
                             value={filterText}
                             onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
                         />
-                        <img src="src/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                        <img src="/images/search.svg" alt="Buscar" className="icono-busqueda" />
                     </div>
                     <label className='nota' >Nota: Con La X Puede Cancelar Su Solicitud</label>
                     <table className="tabla-minimalista-usuario">
@@ -118,7 +118,7 @@ const Consultar = () => {
                                         <td>
                                             <span className='span-descargar'>
                                                 {pqrs.archivo ? (
-                                                    <a href={`/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className="btn-descargar">Descargar</button>
                                                     </a>
                                                 ) : (
@@ -145,7 +145,7 @@ const Consultar = () => {
                                             {/*</div>*/}
                                             <span  className='span-descargar'>
                                                 {pqrs.archivoAnswer ? (
-                                                    <a href={`/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
@@ -159,7 +159,7 @@ const Consultar = () => {
                                         <td>
                                             <span  className='span-descargar'>
                                                 {pqrs.evidenceAnswer ? (
-                                                    <a href={`/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`http://localhost:8080/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
