@@ -1,3 +1,10 @@
+body {
+    text-align: start;
+    background: url("") repeat 0 0 !important;
+    
+  }
+
+
 /* Recovery.css */
 .reco {
     background: rgba(255, 255, 255, 0.1);
