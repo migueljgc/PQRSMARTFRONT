@@ -119,6 +119,7 @@ body {
 .Menu-container{
     height: 100%;
     cursor: pointer;
+    margin-top: 5vh;
 
 }
 .Menus{
@@ -224,6 +225,9 @@ body {
         margin-top: 5vh;
         width: 20vh;
         height: auto;
+    }
+    .Menu-container{
+        margin-top: 2vh;
     }
 }
 

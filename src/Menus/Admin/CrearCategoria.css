@@ -2,8 +2,8 @@
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
     display: flex;
-    align-items: center; /* Centrar verticalmente */
-    justify-content: center; /* Centrar horizontalmente */
+    align-items: center;
+    justify-content: center;
 }
 
 .cuerpos-crearcat {
@@ -17,7 +17,7 @@
     color: #000000;
     font-size: 2rem;
     text-align: center;
-    margin-bottom: 20px; /* Espacio entre título y formulario */
+    margin-bottom: 20px;
 }
 
 .form-crearcat {
@@ -35,21 +35,21 @@
 .input-box-crearcat {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Separar los elementos en la fila */
+    justify-content: space-between;
     margin-bottom: 20px;
-    gap: 20px; /* Espacio entre los elementos */
+    gap: 20px;
 }
 
 .input-box-crearcat label {
     font-weight: 600;
     color: #000000;
     font-size: 14px;
-    min-width: 150px; /* Tamaño mínimo para las etiquetas */
+    min-width: 150px;
 }
 
 .input-box-crearcat input,
 .input-box-crearcat select {
-    width: 100%; /* Asegurar que ambos campos ocupen el mismo ancho */
+    width: 100%;
     padding: 12px 15px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     background: rgb(255, 255, 255);
@@ -73,7 +73,7 @@
     cursor: pointer;
     border-radius: 6px;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 50%; /* Tamaño relativo */
+    width: 50%;
     font-size: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.3);
 }
@@ -88,8 +88,39 @@
     transform: translateY(0);
 }
 
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .form-crearcat {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .input-box-crearcat {
+        flex-direction: column; /* Coloca los elementos en columna en pantallas pequeñas */
+        align-items: flex-start; /* Alinea los elementos al principio */
+    }
+
+    .input-box-crearcat label {
+        min-width: auto; /* Elimina el tamaño mínimo de las etiquetas */
+        margin-bottom: 8px; /* Espacio entre etiqueta y campo */
+    }
+
+    .input-box-crearcat input,
+    .input-box-crearcat select {
+        width: 100%; /* Asegura que los inputs y selects ocupen todo el ancho */
+        margin-bottom: 15px; /* Espacio entre los campos */
+    }
+
+    .btnCrearCate button {
+        width: 100%; /* Hace que el botón ocupe todo el ancho en pantallas pequeñas */
+        padding: 12px; /* Ajusta el padding */
+        font-size: 1.1rem; /* Ajusta el tamaño de la fuente */
+    }
+}
+
+/* Media Query para pantallas de escritorio grandes */
 @media (max-width: 1366px) and (max-height: 768px) {
     .form-crearcat {
-        margin-left: 18vh;
+        margin-left: 0; /* Elimina el margen en pantallas grandes */
     }
 }

@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Esto centra el contenido verticalmente */
     overflow: hidden;
 }
 
@@ -14,11 +15,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centrado del contenido */
+    text-align: center;
 }
 
 .headers {
     width: 100%;
-    text-align: center;
 }
 
 .titulo {
@@ -28,11 +30,13 @@
 }
 
 .mision {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centrado vertical */
     color: #000;
+    text-align: center; /* Alineación centrada del texto */
+    padding: 2rem 0;
 }
 
 .p1 {
@@ -43,22 +47,23 @@
 
 .p2 {
     font-size: 1rem;
-    text-align: center;
+    max-width: 800px; /* Para evitar que el texto se alargue demasiado */
     padding: 0 1rem;
+    line-height: 1.5;
 }
 
 /* Media Queries */
 @media (min-width: 768px) {
     .cuerpos {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        width: 90%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
     }
 
     .mision {
-        flex-direction: row;
-        justify-content: space-around;
+        width: 70%; /* Aumentar el ancho en pantallas más grandes */
+        text-align: center;
     }
 
     .p1 {
@@ -67,7 +72,7 @@
 
     .p2 {
         font-size: 1.2rem;
-        max-width: 60%;
+        max-width: 70%;
     }
 }
 
