@@ -222,7 +222,7 @@ export function HeaderAdmin() {
 
 
 export function HeaderSecre() {
-    const [sidebarWidth, setSidebarWidth] = useState('4rem');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.setItem('loggetPQRSMART', 'false');
@@ -232,7 +232,7 @@ export function HeaderSecre() {
     };
 
     const toggleSidebar = () => {
-        setSidebarWidth(sidebarWidth === '4rem' ? '300px' : '4rem');
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
@@ -254,23 +254,23 @@ export function HeaderSecre() {
                     <UserinfoSecre />
                 </div>
             </header>
-            <div className="sideBar" style={{ width: sidebarWidth }}>
+            <div className={`sideBar ${isSidebarOpen ? 'open' : ''}`}>
                 <nav>
                     <ul className="list">
 
-                        <li className="">
+                        <li className="list__item" onClick={toggleSidebar}>
                             <img src="assets/dashboard.svg" className="list__img" onClick={() => navigate('/HomePageSecre')} />
                             <a href="/HomePageSecre" className="nav__link">Inicio</a>
 
                         </li>
 
-                        <li className="">
+                        <li className="list__item" onClick={toggleSidebar}>
                             <img src="assets/pencil.svg" className="list__img" onClick={() => navigate('/GestionarPQRS')} />
                             <a href="/GestionarPQRS" className="nav__link">Gestionar PQRS</a>
 
                         </li>
 
-                        <li className="list__item">
+                        <li className="list__item" onClick={toggleSidebar}>
                             <img src="assets/salir.svg" className="list__img" onClick={handleLogout} />
                             <a href="/" className="nav__link" onClick={handleLogout}>Salir</a>
                         </li>
