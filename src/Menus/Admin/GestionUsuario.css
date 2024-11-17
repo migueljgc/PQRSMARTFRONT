@@ -25,6 +25,7 @@
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    margin-left: 50vh;
 
 }
 
@@ -165,6 +166,7 @@
 @media (max-width: 480px) {
 
     .tabla-usuario {
+        margin-left: 0vh;
         margin-top: 10vh;
         width: 150%;
         padding: 10px;
