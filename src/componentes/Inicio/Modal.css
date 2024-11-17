@@ -33,6 +33,7 @@
     color: #00c7ff;
     font-size: 1rem;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .modal-content p {
