@@ -23,7 +23,7 @@ export const Script = () => {
         <div className="abajo">
         <li>
             <img src="assets/perfil.svg" className="list__img" onClick={() => navigate('/perfil-user')} />
-            <a href="/perfil-user" className="nav__link">Perfil</a>
+            <a href="/perfil-admin" className="nav__link">Perfil</a>
 
           </li>
 
@@ -89,7 +89,7 @@ export const ScriptSecre = () => {
         <div className="abajo">
         <li>
             <img src="assets/perfil.svg" className="list__img" onClick={() => navigate('/perfil-user')} />
-            <a href="/perfil-user" className="nav__link">Perfil</a>
+            <a href="/perfil-secre" className="nav__link">Perfil</a>
 
           </li>
 

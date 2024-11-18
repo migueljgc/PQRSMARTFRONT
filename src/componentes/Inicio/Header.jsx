@@ -61,7 +61,7 @@ export function HeaderUser() {
                     </div>
                 </div>
                 <div className="right">
-                    <UserinfoAmin />
+                    <UserinfoUser />
                 </div>
             </header>
             <div className={`sideBar ${isSidebarOpen ? 'open' : ''}`}>
@@ -130,7 +130,7 @@ export function HeaderAdmin() {
 
                 </div>
                 <div className="right">
-                    <UserinfoUser />
+                    <UserinfoAmin />
                 </div>
             </header>
             <div className={`sideBar ${isSidebarOpen ? 'open' : ''}`}>

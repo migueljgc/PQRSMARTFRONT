@@ -3,7 +3,7 @@ import Popup from '../Popup'
 import axios from 'axios';
 import './EditarPerfil.css'
 import CambiarCorreo from '../../Menus/TablasCuadroVerModi/CambiarCorreo';
-import { HeaderUser } from '../Inicio/Header';
+import { HeaderAdmin, HeaderSecre, HeaderUser } from '../Inicio/Header';
 
 export const EditarPerfil = () => {
     const [show, setShow] = useState(false);
@@ -81,6 +81,16 @@ export const EditarPerfil = () => {
 
 
     };
+    const renderHeader = () => {
+        if (user.role === 'ADMIN') {
+            return <HeaderAdmin />;
+        } else if (user.role === 'SECRE') {
+            return <HeaderSecre />;
+        } else {
+            <HeaderUser />
+            
+        }
+    };
 
 
     const handleEditUser = (user) => {
@@ -93,10 +103,7 @@ export const EditarPerfil = () => {
     };
     return (
         <div className='EditarPerfil'>
-
-
-            <HeaderUser />
-            
+            {renderHeader()}
 
             <div className="cuerpo-editar">
                 <div className="form-editar">
