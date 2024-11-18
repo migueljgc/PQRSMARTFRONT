@@ -9,7 +9,7 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
     const [password, setPassword] = useState('');
     const [rol, setRol] = useState(usuario?.role || '');
     const [estado, setEstado] = useState(usuario?.stateUser?.state || 'No tiene estado');
-    const [dependencia, setDependencia] = useState(usuario?.dependence?.nameDependence || '');
+    const [dependencia, setDependencia] = useState(usuario?.dependence?.idDependence || '');
     const [dependencias, setDependencias] = useState([]);
 
     const handleSave = () => {
@@ -21,7 +21,7 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
             password: password || usuario.password,
             role: rol,
             stateUser: { id:usuario.stateUser.id, state: estado },
-            dependencia: dependencia
+            dependence: {idDependence: dependencia}
         };
         onSave(updatedUser);
     };
@@ -106,7 +106,7 @@ const ModificarUsuario = ({ isOpen, onClose, usuario, onSave, token }) => {
                             <select value={dependencia} onChange={(e) => setDependencia(e.target.value)}>
                                 
                                 {dependenciasActivas.map(dep => (
-                                    <option key={dep.idDependence} value={dep.nameDependence}>
+                                    <option key={dep.idDependence} value={dep.idDependence}>
                                         {dep.nameDependence}
                                     </option>
                                 ))}

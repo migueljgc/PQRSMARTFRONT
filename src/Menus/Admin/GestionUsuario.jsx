@@ -71,6 +71,7 @@ const GestionUsuario = () => {
         
         const update=updatedUser;
         console.log('Usuario guardado:', update);
+        
         try {
             await axios.put(`/api/Usuario/Update`,update);
             fetchData();
