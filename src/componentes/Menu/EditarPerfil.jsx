@@ -87,7 +87,7 @@ export const EditarPerfil = () => {
         } else if (user.role === 'SECRE') {
             return <HeaderSecre />;
         } else {
-            <HeaderUser />
+           return <HeaderUser />
             
         }
     };
@@ -103,6 +103,7 @@ export const EditarPerfil = () => {
     };
     return (
         <div className='EditarPerfil'>
+
             {renderHeader()}
 
             <div className="cuerpo-editar">
