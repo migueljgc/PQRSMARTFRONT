@@ -2,30 +2,50 @@
 import React, { useEffect, useState } from 'react';
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import Modal from './Modal.jsx';
 import { LuMenu } from 'react-icons/lu';
 import { UserinfoAmin, UserinfoSecre, UserinfoUser } from '../Userinfo.jsx';
 
 export function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
-    const navigate = useNavigate();
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     return (
         <header className="header">
             <div className="logo">
                 <img src="/images/PQRSmart-Logo.png" alt="PQRSmart Logo" />
             </div>
-            <nav className="nav">
-                <a href="#inicio" className="nav-link">Inicio</a>
-                <a href="#que-es" className="nav-link">¿Que es?</a>
-                <a href="#como-funciona" className="nav-link">Cómo Funciona</a>
-                <a href="#crear-solicitud" className="nav-link" onClick={handleOpenModal}>Crear Solicitud</a>
-                <a href="#contacto" className="nav-link">Contacto</a>
-                <button className="header-login-btn" onClick={() => { navigate('/Login') }}>Iniciar Sesión</button>
-            </nav>
+
+            <button
+                className="mobile-menu-btn"
+                onClick={toggleMenu}
+                aria-label="Toggle menu"
+            >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            <div className={`nav-container ${isMenuOpen ? 'open' : ''}`}>
+                <nav className="nav">
+                    <a href="#inicio" className="nav-link" onClick={() => setIsMenuOpen(false)}>Inicio</a>
+                    <a href="#que-es" className="nav-link" onClick={() => setIsMenuOpen(false)}>¿Que es?</a>
+                    <a href="#como-funciona" className="nav-link" onClick={() => setIsMenuOpen(false)}>Cómo Funciona</a>
+                    <a href="#crear-solicitud" className="nav-link" onClick={() => {
+                        handleOpenModal();
+                        setIsMenuOpen(false);
+                    }}>Crear Solicitud</a>
+                    <a href="#contacto" className="nav-link" onClick={() => setIsMenuOpen(false)}>Contacto</a>
+                    <button className="header-login-btn" onClick={() => {
+                        navigate('/Login');
+                        setIsMenuOpen(false);
+                    }}>Iniciar Sesión</button>
+                </nav>
+            </div>
             <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
         </header>
     );
