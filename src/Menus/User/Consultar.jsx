@@ -176,7 +176,7 @@ const Consultar = () => {
                                         <span className='activar' onClick={() => handleView(pqrs)}>
                                                 {'🔎'}
                                             </span>
-                                            <span className='activar' onClick={() => handleCancel(pqrs.user.idRequest)}>
+                                            <span className='activar' onClick={() => handleCancel(pqrs.idRequest)}>
                                                 {'❌'}
                                             </span>
 
