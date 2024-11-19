@@ -50,8 +50,11 @@ const Consultar = () => {
     const handleCancel = async (idRequest) => {
         try {
             await axios.put(`/api/request/cancel/${idRequest}`);
+            setError('Cancelacion Exitosa')
+            setShowPopup(true)
             // Actualizar la tabla después de cancelar la solicitud
             fetchData();
+            return
         } catch (error) {
             console.error('Error al cancelar la solicitud: ', error);
         }
