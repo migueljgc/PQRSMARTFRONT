@@ -11,7 +11,7 @@ import { HeaderAdmin, HeaderSecre } from '../../componentes/Inicio/Header';
 
 const GestionarPQRS = () => {
     const [currentPage, setCurrentPage] = useState(0);
-    const usuariosPorPagina = 12;
+    const usuariosPorPagina = 4;
     const [data, setData] = useState([]);
     const [selectedRow, setSelectedRow] = useState(null); // Cambiado para que sea null en lugar de un array
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda

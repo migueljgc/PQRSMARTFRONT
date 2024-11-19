@@ -8,15 +8,13 @@ import { HeaderUser } from '../../componentes/Inicio/Header';
 
 const Consultar = () => {
     const [data, setData] = useState([]);
-    const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
+    const [filterText, setFilterText] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const usuariosPorPagina = 12;
+    const usuariosPorPagina = 6;
     const [showPopup, setShowPopup] = useState(false);
     const [show, setShow] = useState(false);
     const [pqrs, setPqrs] = useState(false);
     const [error, setError] = useState('');
-
-
 
     const fetchData = async () => {
         try {
@@ -25,10 +23,9 @@ const Consultar = () => {
             const usuario = localStorage.getItem('users');
             console.log(usuario)
             if (usuario) {
-                const filteredData = response.data.filter(item => item.user && item.user.user === usuario); // Filtrar los datos por el usuario
+                const filteredData = response.data.filter(item => item.user && item.user.user === usuario);
                 filteredData.forEach(item => {
                     item.date = new Date(item.date).toDateString();
-
                 });
                 setData(filteredData);
                 console.log("filteredData  ", filteredData)
@@ -40,8 +37,8 @@ const Consultar = () => {
         } catch (error) {
             console.error('Error en la data: ', error);
         }
-
     };
+
     useEffect(() => {
         document.title = "Consultar PQRS"
         fetchData();
@@ -52,7 +49,6 @@ const Consultar = () => {
             await axios.put(`/api/request/cancel/${idRequest}`);
             setError('Cancelacion Exitosa')
             setShowPopup(true)
-            // Actualizar la tabla después de cancelar la solicitud
             fetchData();
             return
         } catch (error) {
@@ -60,7 +56,6 @@ const Consultar = () => {
         }
     };
 
-    // Filtrar datos cuando cambie el texto de búsqueda
     const filtered = data.filter(item =>
         String(item.radicado).toLowerCase().includes(filterText.toLowerCase())
     );
@@ -71,54 +66,57 @@ const Consultar = () => {
     const closePopup = () => {
         setShowPopup(false);
     };
-    
+
     const handleView = (pqrs) => {
-        setPqrs(pqrs); // Establece el usuario seleccionado
+        setPqrs(pqrs);
         console.log(pqrs)
-        setShow(true);    // Abre el popup
+        setShow(true);
     };
+
     return (
         <div className='consultarPqrs'>
-
             <HeaderUser />
-            
             <div className="cuerpoconsultarPqrs">
                 <div className="tabla-usuario">
                     <h1 className="titleConsultar">CONSULTAR SOLICITUD</h1>
                     <div className="busqueda">
                         <label>Introduce Tu Numero De Radicado</label>
-                        <input type="text"
-                            value={filterText}
-                            onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
-                        />
-                        <img src="/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                value={filterText}
+                                onChange={(e) => setFilterText(e.target.value)}
+                                placeholder="Buscar por número de radicado..."
+                            />
+                            <img src="/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                        </div>
                     </div>
-                    <label className='nota' >Nota: Con La X Puede Cancelar Su Solicitud</label>
+                    <label className='nota'>Nota: Con La X Puede Cancelar Su Solicitud</label>
                     <table className="tabla-minimalista-usuario">
                         <thead>
-                            <tr>
-                                <th>Tipo de Solicitud</th>
-                                <th>Fecha</th>
-                                <th>Descripcion</th>
-                                <th>Evidencia</th>
-                                <th>Estado</th>
-                                <th>Respuesta</th>
-                                <th>Evidencia Respuesta</th>
-                                <th>Accion</th>
-                            </tr>
+                        <tr>
+                            <th>Tipo de Solicitud</th>
+                            <th>Fecha</th>
+                            <th>Descripcion</th>
+                            <th>Evidencia</th>
+                            <th>Estado</th>
+                            <th>Respuesta</th>
+                            <th>Evidencia Respuesta</th>
+                            <th>Accion</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {paginacion.length > 0 ? (
-                                paginacion.map((pqrs, index) => (
-                                    <tr key={index} >
-                                        <td>{pqrs.requestType.nameRequestType}</td>
-                                        <td>{pqrs.date}</td>
-                                        <td>
-                                            <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
-                                                {pqrs.description.length > 50 ? `${pqrs.description.slice(0, 50)}...` : pqrs.description}
-                                            </div>
-                                        </td>
-                                        <td>
+                        {paginacion.length > 0 ? (
+                            paginacion.map((pqrs, index) => (
+                                <tr key={index}>
+                                    <td>{pqrs.requestType.nameRequestType}</td>
+                                    <td>{pqrs.date}</td>
+                                    <td>
+                                        <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
+                                            {pqrs.description.length > 50 ? `${pqrs.description.slice(0, 50)}...` : pqrs.description}
+                                        </div>
+                                    </td>
+                                    <td>
                                             <span className='span-descargar'>
                                                 {pqrs.archivo ? (
                                                     <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
@@ -128,25 +126,17 @@ const Consultar = () => {
                                                     <div>
                                                         <span>No disponible</span>
                                                     </div>
-                                                )
-                                                }
+                                                )}
                                             </span>
-
-                                        </td>
-                                        <td>
+                                    </td>
+                                    <td>
                                             <span className={`estado ${pqrs.requestState?.nameRequestState?.toLowerCase()}`}>
                                                 {pqrs.requestState?.nameRequestState === 'Finalizado' ? '✔️' : pqrs.requestState?.nameRequestState === 'Pendiente' ? '🔎' : '❌'}
-
                                             </span>
-                                            {pqrs.requestState?.nameRequestState}
-                                        </td>
-                                        <td>
-                                            {/*<div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
-                                                {pqrs.answer && pqrs.answer.length > 50
-                                                    ? `${pqrs.answer.slice(0, 50)}...`
-                                                    : pqrs.answer || ''}  {/* Si row.answer es null o undefined, mostramos 'No disponible' */}
-                                            {/*</div>*/}
-                                            <span  className='span-descargar'>
+                                        {pqrs.requestState?.nameRequestState}
+                                    </td>
+                                    <td>
+                                            <span className='span-descargar'>
                                                 {pqrs.archivoAnswer ? (
                                                     <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
@@ -155,12 +145,11 @@ const Consultar = () => {
                                                     <div>
                                                         <span>No disponible</span>
                                                     </div>
-                                                )
-                                                }
+                                                )}
                                             </span>
-                                        </td>
-                                        <td>
-                                            <span  className='span-descargar'>
+                                    </td>
+                                    <td>
+                                            <span className='span-descargar'>
                                                 {pqrs.evidenceAnswer ? (
                                                     <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
@@ -169,28 +158,24 @@ const Consultar = () => {
                                                     <div>
                                                         <span>No disponible</span>
                                                     </div>
-                                                )
-                                                }
+                                                )}
                                             </span>
-
-                                        </td>
-
-                                        <td>
-                                        <span className='activar' onClick={() => handleView(pqrs)}>
+                                    </td>
+                                    <td>
+                                            <span className='activar' onClick={() => handleView(pqrs)}>
                                                 {'🔎'}
                                             </span>
-                                            <span className='activar' onClick={() => handleCancel(pqrs.idRequest)}>
+                                        <span className='activar' onClick={() => handleCancel(pqrs.idRequest)}>
                                                 {'❌'}
                                             </span>
-
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="6" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                                    </td>
                                 </tr>
-                            )}
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="8" style={{ textAlign: 'center' }}>No hay datos disponibles</td>
+                            </tr>
+                        )}
                         </tbody>
                     </table>
                     <div className="paginacion">
