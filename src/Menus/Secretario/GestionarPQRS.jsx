@@ -240,7 +240,7 @@ const GestionarPQRS = () => {
                                         <td>
                                             <span>
                                                 {pqrs.archivo ? (
-                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
@@ -268,7 +268,7 @@ const GestionarPQRS = () => {
 
                                             <span>
                                                 {pqrs.archivoAnswer ? (
-                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
@@ -282,7 +282,7 @@ const GestionarPQRS = () => {
                                         <td>
                                             <span>
                                                 {pqrs.evidenceAnswer ? (
-                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
