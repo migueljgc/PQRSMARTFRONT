@@ -207,7 +207,7 @@ const GestionarPQRS = () => {
                             value={filterText}
                             onChange={(e) => setFilterText(e.target.value)} // Actualiza el estado del texto de búsqueda
                         />
-                        <img src="src/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                        <img src="/images/search.svg" alt="Buscar" className="icono-busqueda" />
                     </div>
                     <label className='nota' >Nota: Con La X Puede Cancelar Su Solicitud</label>
                     <table className="tabla-minimalista-usuario">
