@@ -125,7 +125,7 @@ const GestionUsuario = () => {
                             onChange={(e) => setFilterText(e.target.value)}
                             className="buscador"
                         />
-                        <img src="src/images/search.svg" alt="Buscar" className="icono-busqueda" />
+                        <img src="/images/search.svg" alt="Buscar" className="icono-busqueda" />
                     </div>
 
                     <table className="tabla-minimalista-usuario">
