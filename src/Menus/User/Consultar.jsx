@@ -121,7 +121,7 @@ const Consultar = () => {
                                         <td>
                                             <span className='span-descargar'>
                                                 {pqrs.archivo ? (
-                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivo.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className="btn-descargar">Descargar</button>
                                                     </a>
                                                 ) : (
@@ -148,7 +148,7 @@ const Consultar = () => {
                                             {/*</div>*/}
                                             <span  className='span-descargar'>
                                                 {pqrs.archivoAnswer ? (
-                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.archivoAnswer.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
@@ -162,7 +162,7 @@ const Consultar = () => {
                                         <td>
                                             <span  className='span-descargar'>
                                                 {pqrs.evidenceAnswer ? (
-                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                                                    <a href={`https://pqrsmartback-production-86b1.up.railway.app/api/request/download/${encodeURIComponent(pqrs.evidenceAnswer.split('\\').pop().split('/').pop())}`} download target="_blank" rel="noopener noreferrer">
                                                         <button className='btn-descargar'>Descargar</button>
                                                     </a>
                                                 ) : (
