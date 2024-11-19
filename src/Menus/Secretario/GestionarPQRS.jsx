@@ -200,7 +200,7 @@ const GestionarPQRS = () => {
              <HeaderSecre/>
             <div className="cuerposgestionarpqrs">
 
-                <div className="tabla-usuario">
+                <div className="tabla-gestion-PQRS">
                     <h1 className="titleConsultar">GESTIONAR PQRS</h1>
                     <div className="busqueda">
                         <input type="text"
