@@ -12,6 +12,36 @@
     overflow-y: auto;
 }
 
+/* Actualización del estilo de búsqueda */
+.busqueda {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.busqueda input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; /* Espacio para el ícono */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: box-shadow 0.3s;
+}
+
+.busqueda input:hover {
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.icono-busqueda {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
 .fila-seleccionada {
     background-color: #5A93D9 !important;
     color: white !important;
@@ -105,6 +135,10 @@
 
     .Btngestionarpqrs button {
         width: 80%;
+    }
+
+    .busqueda input {
+        font-size: 14px;
     }
 }
 

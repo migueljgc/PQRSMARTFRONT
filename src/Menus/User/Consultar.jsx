@@ -10,7 +10,7 @@ const Consultar = () => {
     const [data, setData] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const usuariosPorPagina = 6;
+    const usuariosPorPagina = 4;
     const [showPopup, setShowPopup] = useState(false);
     const [show, setShow] = useState(false);
     const [pqrs, setPqrs] = useState(false);
